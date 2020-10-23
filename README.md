@@ -4,6 +4,11 @@
 * Banco de dados: H2
 * API de persistência: JDBC
 
+### Informações do DB
+* jdbc-url = jdbc:h2:mem:mjvmangahq
+* username = mjv
+* password = 123
+
 ### Modelo de notícia
 Uma notícia deve ter:
 * Titulo
