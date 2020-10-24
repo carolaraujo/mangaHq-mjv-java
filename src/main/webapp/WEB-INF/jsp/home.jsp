@@ -11,7 +11,8 @@
 </head>
 <body>
 	<c:forEach var="noticia" items="${ noticias }">
-		<p>Teste</p>
+		<p><c:out value="${ noticia.titulo }"></c:out></p>
+		<img src="${ noticia.urlImagem }" width="200px"/> <span><c:out value="${ noticia.acessos }"></c:out></span>
 	</c:forEach>
 </body>
 </html>
