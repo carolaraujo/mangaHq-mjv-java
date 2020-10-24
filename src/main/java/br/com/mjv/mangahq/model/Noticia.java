@@ -16,7 +16,14 @@ public class Noticia {
 	private String urlImagem;
 	private Date dataPublicacao;
 	private String autor;
+	private Long acessos;
 	
+	public Long getAcessos() {
+		return acessos;
+	}
+	public void setAcessos(Long acessos) {
+		this.acessos = acessos;
+	}
 	public Long getId() {
 		return id;
 	}
