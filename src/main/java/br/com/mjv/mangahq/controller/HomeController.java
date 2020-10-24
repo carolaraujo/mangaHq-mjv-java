@@ -15,7 +15,6 @@ public class HomeController {
 	@Autowired
 	private NoticiaService service;
 	
-	
 	@GetMapping
 	public ModelAndView home() {
 		ModelAndView mv = new ModelAndView("home");
