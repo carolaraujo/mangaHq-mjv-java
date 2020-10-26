@@ -13,107 +13,7 @@ pageEncoding="UTF-8"%>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 	<script src="https://kit.fontawesome.com/c2a97b9eb3.js" crossorigin="anonymous"></script>
-
-	<style type="text/css">
-		* {
-			box-sizing: border-box;
-			margin: 0;
-			padding: 0;
-		}
-
-		a {
-			color: black;
-			text-decoration: none;
-			justify-content: center;
-			align-items: center;
-		}
-		a:hover {
-			color: black;
-			text-decoration: none;
-		}
-
-		/* Main */
-
-		.carousel-indicators li{
-			width: 20px;
-			height: 20px;
-			border: none;
-			margin: 0 .6rem;
-			border-radius: 10px;
-		}
-
-		.carousel-control-prev-icon,
-		.carousel-control-next-icon{
-			width: 25px;
-			height: 25px;
-		}
-
-		.carousel-category-container-color{
-			position: absolute;
-			top:20px;
-			left: 20px;
-			padding-right: 15px;
-			border-radius: 10px;
-			background-color: blue;
-		}
-
-		.carousel-category-container{
-			background-color: black;
-			border-radius: 10px 0 0 10px;
-			justify-content: center;
-			align-items: center;
-			display: flex;
-		}
-
-		.carousel-category{
-			font-size: 22px;
-			color: white;
-		}
-
-		.acessos{
-			position: absolute;
-			top: 10px;
-			right: 10px;
-			background-color: white;
-			border-radius: 5px;
-			border: 1px black solid;
-			height: fit-content;
-		}
-
-		/* Footer */
-
-		footer {
-			background-color: black;
-		}
-
-		.instagram, .facebook, .whatsapp{
-			transition: .4s;
-			-webkit-transition: .4s;
-			-o-transition: .4s;
-			-moz-transition: .4s;
-			padding-top: 15px;
-			width: 58px;
-			height: 60px;
-			border-radius: 30px;
-		}
-		.instagram{
-			background: linear-gradient(45deg,rgb(224,224,240),rgb(244,243,242)49%,#f09433 50%, #e6683c 62.5%, #dc2743 75%, #cc2366 87.5%, #bc1888 100%);
-			background-size:250%;
-		}
-		.instagram:hover , .facebook:hover, .whatsapp:hover{
-			background-position: right;
-		}
-		.facebook{
-			background: linear-gradient(45deg, rgb(224,224,240),rgb(244,243,242)49%,rgb(25,175,255) 50%, rgba(0, 7, 224, 0.8) 100%);
-			background-size:250%;
-		}
-		.whatsapp{
-			background: linear-gradient(45deg, rgb(224,224,240),rgb(244,243,242)49%,rgb(97,253,125) 50%, rgba(37, 207, 67, 0.8) 100%);
-			background-size:250%;
-		}
-		
-	</style>
-	
+	<link rel="stylesheet" type="text/css" href="styles/style.css">
 </head>
 <body>
 	<!-- Navbar  -->
@@ -142,6 +42,17 @@ pageEncoding="UTF-8"%>
 			</ul>
 		</div>
 	</nav>
+	<!-- Mais Lidas -->
+	<section class="container border mt-3 pt-3 pb-3">
+		<div class="h2 border bg-success pl-2 pr-2 d-inline">Mais lidas da semana</div>
+		<div class="d-flex mt-3 flex-wrap align-items-center justify-content-around align-content-between">
+			<c:forEach var="noticia" items="${ maisLidas }">
+				<div class="section-maislidas-content mt-1 mb-1">
+					<img class="" src="${ noticia.urlImagem }" width="120px" height="80px"/>
+				</div>
+			</c:forEach>
+		</div>
+	</section>
 	<!-- Main -->
 	<main class="container">
 

@@ -18,7 +18,8 @@ public class HomeController {
 	@GetMapping
 	public ModelAndView home() {
 		ModelAndView mv = new ModelAndView("home");
-		mv.addObject("noticias", service.buscarTodasNoticias());
+		mv.addObject("noticias", service.buscarNoticias(2));
+		mv.addObject("maisLidas", service.buscarNoticias(8));
 		return mv;
 	}
 }
