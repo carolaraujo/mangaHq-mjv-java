@@ -6,5 +6,6 @@ import br.com.mjv.mangahq.model.Noticia;
 
 public interface NoticiaService {
 	List<Noticia> buscarTodasNoticias();
-	List<Noticia> buscarNoticias(Integer quantidade);
+	List<Noticia> buscarNoticias(Integer quantidadeNoticias);
+	List<Noticia> buscarNoticias(Integer quantidadeNoticias, Integer quantidadePalavras);
 }

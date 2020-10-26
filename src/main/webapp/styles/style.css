@@ -76,6 +76,13 @@ a:hover {
 	height: fit-content;
 }
 
+/*Custom Card*/
+.card-custom img{
+	max-height: 170px;
+	min-height: 170px;
+	object-fit: cover;
+}
+
 /* Footer */
 footer {
 	background-color: black;
