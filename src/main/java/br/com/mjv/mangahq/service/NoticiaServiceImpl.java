@@ -21,15 +21,35 @@ public class NoticiaServiceImpl implements NoticiaService{
 	}
 
 	@Override
-	public List<Noticia> buscarNoticias(Integer quantidade) {
+	public List<Noticia> buscarNoticias(Integer quantidadeNoticias) {
 		List<Noticia> noticias = buscarTodasNoticias();
-		Noticia noticiasMaisLidas[] = new Noticia[quantidade];
+		Noticia noticiasMaisLidas[] = new Noticia[quantidadeNoticias];
 		
-		for(int i = 0; i < quantidade; i++) {
+		for(int i = 0; i < quantidadeNoticias; i++) {
 			noticiasMaisLidas[i] = noticias.get(i);
 		}
 		noticias = Arrays.asList(noticiasMaisLidas);
 		return noticias;
 	}
 
+	@Override
+	public List<Noticia> buscarNoticias(Integer quantidadeNoticias, Integer quantidadePalavras) {
+		List<Noticia> noticias = buscarTodasNoticias();
+		Noticia noticiasMaisLidas[] = new Noticia[quantidadeNoticias];
+		
+		for(int i = 0; i < quantidadeNoticias; i++) {
+			noticiasMaisLidas[i] = noticias.get(i);
+		}
+		noticias = Arrays.asList(noticiasMaisLidas);
+		
+		for(Noticia n : noticias) {
+			String texto[] = n.getTextoConteudo().split(" ");
+			String textoResumido = "";
+			for(int i = 0; i < quantidadePalavras; i++) {
+				textoResumido += texto[i] + " ";
+			}
+			n.setTextoConteudo(textoResumido + "...");
+		}
+		return noticias;
+	}
 }

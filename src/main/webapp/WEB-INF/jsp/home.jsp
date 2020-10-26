@@ -99,16 +99,17 @@ pageEncoding="UTF-8"%>
 			  <span class="sr-only">Next</span>
 			</a>
 		</div>
-		<div class="row">
-			<c:forEach var="noticia" items="${ noticias }">
+		<div class="row card-custom">
+			<c:forEach var="noticia" items="${ principaisNoticias }">
 				<div class="col-4 p-3">
 					<div class="card h-100">
 						<div class="acessos">
 							<p class="mb-0 mr-1 ml-1"><i class="fas fa-eye mr-2"></i><c:out value="${ noticia.acessos }"></c:out></p>
 						</div>
-						<img src="${ noticia.urlImagem }" width="100%"/> 
+						<img class="card-img-top" src="${ noticia.urlImagem }" width="100%"/> 
 						<div class="card-body d-flex flex-column justify-content-between">
 						  <h5 class="card-title"><c:out value="${ noticia.titulo }"></c:out></h5>
+						  <p class="card-text"><c:out value="${ noticia.textoConteudo }" ></c:out></p>
 						  <a href="" class="btn btn-dark w-100">Saiba mais</a>
 						</div>
 					</div>
