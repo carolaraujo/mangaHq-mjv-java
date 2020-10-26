@@ -3,9 +3,6 @@
 	margin: 0;
 	padding: 0;
 }
-body{
-	overflow-x: hidden;
-}
 
 a {
 	color: black;
@@ -18,19 +15,21 @@ a:hover {
 	color: black;
 	text-decoration: none;
 }
+
+/* Main */
+
+
 /*Section Mais Lidas*/
 
 .section-maislidas-content{
-	min-width: 120px;
-	max-width: 120px;
-	min-height: 80px;
-	max-height: 80px;
+	height: 220px;
 }
+
 .section-maislidas-content img{
 	object-fit: cover;
 }
 
-/* Main */
+/* Carousel */
 .carousel-indicators li {
 	width: 20px;
 	height: 20px;
@@ -66,6 +65,7 @@ a:hover {
 	color: white;
 }
 
+/* Cards */ 
 .acessos {
 	position: absolute;
 	top: 10px;
@@ -78,14 +78,14 @@ a:hover {
 
 /*Custom Card*/
 .card-custom img{
-	max-height: 170px;
-	min-height: 170px;
+	height: 170px;
 	object-fit: cover;
 }
 
 /* Footer */
 footer {
 	background-color: black;
+	padding-left: 0;
 }
 
 .instagram, .facebook, .whatsapp {
@@ -94,7 +94,7 @@ footer {
 	-o-transition: .4s;
 	-moz-transition: .4s;
 	padding-top: 15px;
-	width: 58px;
+	width: 60px;
 	height: 60px;
 	border-radius: 30px;
 }

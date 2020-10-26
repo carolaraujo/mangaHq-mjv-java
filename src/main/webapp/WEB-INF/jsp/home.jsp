@@ -42,83 +42,85 @@ pageEncoding="UTF-8"%>
 			</ul>
 		</div>
 	</nav>
-	<!-- Mais Lidas -->
-	<section class="container border mt-3 pt-3 pb-3">
-		<div class="h2 border bg-success pl-2 pr-2 d-inline">Mais lidas da semana</div>
-		<div class="d-flex mt-3 flex-wrap align-items-center justify-content-around align-content-between">
-			<c:forEach var="noticia" items="${ maisLidas }">
-				<div class="section-maislidas-content mt-1 mb-1">
-					<img class="" src="${ noticia.urlImagem }" width="120px" height="80px"/>
-				</div>
-			</c:forEach>
-		</div>
-	</section>
 	<!-- Main -->
-	<main class="container">
-
-		<h1 class="text-center mt-2">Destaques</h1>
-		<div id="carouselPrincipal" class="carousel slide mt-2" data-ride="carousel">
-			<ol class="carousel-indicators">
-			  <li data-target="#carouselPrincipal" data-slide-to="0" class="active"></li>
-			  <li data-target="#carouselPrincipal" data-slide-to="1"></li>
-			  <li data-target="#carouselPrincipal" data-slide-to="2"></li>
-			</ol>
-			<div class="carousel-inner">
-			  <div class="carousel-item active">
-				<div class="carousel-category-container-color">
-					<div class="carousel-category-container">
-						<p class="carousel-category m-1 mr-4 ml-4">Categoria</p>
-					</div>
+	<main>
+		<div class="container">
+			<section class="shadow mt-3 p-3">
+				<div class="h2 bg-primary pl-2 pr-2 d-inline rounded text-light">Mais lidas da semana</div>
+				<div class="row">
+					<c:forEach var="noticia" items="${ maisLidas }">
+						<div class="section-maislidas-content col-xl-2 col-md-4 col-12 mt-1 mb-1 justify-content-around">
+							<img class="mt-1" src="${ noticia.urlImagem }" width="100%" height="100%"/>
+						</div>
+					</c:forEach>
 				</div>
-				<img src="https://i0.wp.com/sindicatonerd.com.br/wp-content/uploads/2016/04/Superman-BG-versions.jpg" class="d-block w-100" alt="...">
-			  </div>
-			  <div class="carousel-item">
-				<div class="carousel-category-container-color">
-					<div class="carousel-category-container">
-						<p class="carousel-category m-1 mr-4 ml-4">Categoria</p>
+			</section>
+	
+			<h1 class="text-center mt-2">Destaques</h1>
+			<div id="carouselPrincipal" class="carousel slide mt-2" data-ride="carousel">
+				<ol class="carousel-indicators">
+				  <li data-target="#carouselPrincipal" data-slide-to="0" class="active"></li>
+				  <li data-target="#carouselPrincipal" data-slide-to="1"></li>
+				  <li data-target="#carouselPrincipal" data-slide-to="2"></li>
+				</ol>
+				<div class="carousel-inner">
+				  <div class="carousel-item active">
+					<div class="carousel-category-container-color">
+						<div class="carousel-category-container">
+							<p class="carousel-category m-1 mr-4 ml-4">Categoria</p>
+						</div>
 					</div>
-				</div>
-				<img src="https://vingadoresbrasilcom.files.wordpress.com/2020/03/header.jpg?w=1000&h=400&crop=1" class="d-block w-100" alt="...">
-			  </div>
-			  <div class="carousel-item">
-				<div class="carousel-category-container-color">
-					<div class="carousel-category-container">
-						<p class="carousel-category m-1 mr-4 ml-4">Categoria</p>
+					<img src="https://i0.wp.com/sindicatonerd.com.br/wp-content/uploads/2016/04/Superman-BG-versions.jpg" class="d-block w-100" alt="...">
+				  </div>
+				  <div class="carousel-item">
+					<div class="carousel-category-container-color">
+						<div class="carousel-category-container">
+							<p class="carousel-category m-1 mr-4 ml-4">Categoria</p>
+						</div>
 					</div>
+					<img src="https://vingadoresbrasilcom.files.wordpress.com/2020/03/header.jpg?w=1000&h=400&crop=1" class="d-block w-100" alt="...">
+				  </div>
+				  <div class="carousel-item">
+					<div class="carousel-category-container-color">
+						<div class="carousel-category-container">
+							<p class="carousel-category m-1 mr-4 ml-4">Categoria</p>
+						</div>
+					</div>
+					<img src="https://i.pinimg.com/originals/42/d0/aa/42d0aa9293357e3850a50c654c75491f.png" class="d-block w-100" alt="...">
+				  </div>
 				</div>
-				<img src="https://i.pinimg.com/originals/42/d0/aa/42d0aa9293357e3850a50c654c75491f.png" class="d-block w-100" alt="...">
-			  </div>
+				<a class="carousel-control-prev" href="#carouselPrincipal" role="button" data-slide="prev">
+				  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				  <span class="sr-only">Previous</span>
+				</a>
+				<a class="carousel-control-next" href="#carouselPrincipal" role="button" data-slide="next">
+				  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+				  <span class="sr-only">Next</span>
+				</a>
 			</div>
-			<a class="carousel-control-prev" href="#carouselPrincipal" role="button" data-slide="prev">
-			  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-			  <span class="sr-only">Previous</span>
-			</a>
-			<a class="carousel-control-next" href="#carouselPrincipal" role="button" data-slide="next">
-			  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-			  <span class="sr-only">Next</span>
-			</a>
-		</div>
-		<div class="row card-custom">
-			<c:forEach var="noticia" items="${ principaisNoticias }">
-				<div class="col-4 p-3">
-					<div class="card h-100">
-						<div class="acessos">
-							<p class="mb-0 mr-1 ml-1"><i class="fas fa-eye mr-2"></i><c:out value="${ noticia.acessos }"></c:out></p>
-						</div>
-						<img class="card-img-top" src="${ noticia.urlImagem }" width="100%"/> 
-						<div class="card-body d-flex flex-column justify-content-between">
-						  <h5 class="card-title"><c:out value="${ noticia.titulo }"></c:out></h5>
-						  <p class="card-text"><c:out value="${ noticia.textoConteudo }" ></c:out></p>
-						  <a href="" class="btn btn-dark w-100">Saiba mais</a>
+			<div class="row card-custom">
+				<c:forEach var="noticia" items="${ principaisNoticias }">
+					<div class="col-4 p-3">
+						<div class="card h-100">
+							<div class="acessos">
+								<p class="mb-0 mr-1 ml-1"><i class="fas fa-eye mr-2"></i><c:out value="${ noticia.acessos }"></c:out></p>
+							</div>
+							<img class="card-img-top" src="${ noticia.urlImagem }" width="100%"/> 
+							<div class="card-body d-flex flex-column justify-content-between">
+							  <h5 class="card-title"><c:out value="${ noticia.titulo }"></c:out></h5>
+							  <p class="card-text"><c:out value="${ noticia.textoConteudo }" ></c:out></p>
+							  <a href="" class="btn btn-dark w-100">Saiba mais</a>
+							</div>
 						</div>
 					</div>
-				</div>
-			</c:forEach>
+				</c:forEach>
+			</div>
 		</div>
+		
 	</main>
 <!-- Footer -->
 	<footer>
-		<div class="row">
+		<div class="row ml-0 mr-0">
 			<div class="col-12 mt-4">
 				<h3 class="text-center text-white"><strong>Conheça Nossas Redes Sociais</strong></h3>
 				<ul class="list-unstyled list-inline text-center mt-4">
@@ -129,7 +131,7 @@ pageEncoding="UTF-8"%>
 			</div>
 			<hr>
 		</div>
-		<div class="row mt-2">
+		<div class="row mt-2 ml-0 mr-0">
 			<div class="col-12 text-center text-light">
 				<p>Todos os direitos reservados MangáHQ!</p>
 			</div>
