@@ -42,19 +42,20 @@ pageEncoding="UTF-8"%>
 			</ul>
 		</div>
 	</nav>
-	<!-- Mais Lidas -->
-	<section class="container border mt-3 pt-3 pb-3">
-		<div class="h2 border bg-success pl-2 pr-2 d-inline">Mais lidas da semana</div>
-		<div class="d-flex mt-3 flex-wrap align-items-center justify-content-around align-content-between">
-			<c:forEach var="noticia" items="${ maisLidas }">
-				<div class="section-maislidas-content mt-1 mb-1">
-					<img class="" src="${ noticia.urlImagem }" width="120px" height="80px"/>
-				</div>
-			</c:forEach>
-		</div>
-	</section>
 	<!-- Main -->
 	<main class="container">
+
+		<!-- Mais Lidas -->
+		<section class="container border mt-3 pt-3 pb-3">
+			<div class="h2 border bg-success pl-2 pr-2 d-inline">Mais lidas da semana</div>
+			<div class="d-flex mt-3 flex-wrap align-items-center justify-content-around align-content-between">
+				<c:forEach var="noticia" items="${ maisLidas }">
+					<div class="section-maislidas-content mt-1 mb-1">
+						<img class="" src="${ noticia.urlImagem }" width="120px" height="220px"/>
+					</div>
+				</c:forEach>
+			</div>
+		</section>
 
 		<h1 class="text-center mt-2">Destaques</h1>
 		<div id="carouselPrincipal" class="carousel slide mt-2" data-ride="carousel">

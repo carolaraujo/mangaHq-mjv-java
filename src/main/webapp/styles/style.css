@@ -18,19 +18,23 @@ a:hover {
 	color: black;
 	text-decoration: none;
 }
+
+/* Main */
+
+
 /*Section Mais Lidas*/
 
 .section-maislidas-content{
 	min-width: 120px;
 	max-width: 120px;
-	min-height: 80px;
-	max-height: 80px;
+	min-height: 220px;
+	max-height: 220px;
 }
 .section-maislidas-content img{
 	object-fit: cover;
 }
 
-/* Main */
+/* Carousel */
 .carousel-indicators li {
 	width: 20px;
 	height: 20px;
@@ -66,6 +70,7 @@ a:hover {
 	color: white;
 }
 
+/* Cards */ 
 .acessos {
 	position: absolute;
 	top: 10px;
