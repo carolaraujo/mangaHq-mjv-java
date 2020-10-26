@@ -8,6 +8,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.mjv.mangahq.service.NoticiaService;
 
+/**
+ * Classe controller para rotas relativas a home
+ * @author kaique
+ *
+ */
+
 @Controller
 @RequestMapping("/")
 public class HomeController {

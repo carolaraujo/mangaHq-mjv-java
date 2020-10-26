@@ -9,6 +9,12 @@ import org.springframework.stereotype.Service;
 import br.com.mjv.mangahq.dao.NoticiaDao;
 import br.com.mjv.mangahq.model.Noticia;
 
+/**
+ * Implementação da interface de serviço referente a notícias
+ * @author kaique
+ *
+ */
+
 @Service
 public class NoticiaServiceImpl implements NoticiaService{
 

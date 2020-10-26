@@ -7,6 +7,12 @@ import org.springframework.jdbc.core.RowMapper;
 
 import br.com.mjv.mangahq.model.Noticia;
 
+/**
+ * Classe rowMapper para resultados do banco de dados
+ * @author kaique
+ *
+ */
+
 public class NoticiaRowMapper implements RowMapper<Noticia>{
 
 	@Override
