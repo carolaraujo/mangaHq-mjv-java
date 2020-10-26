@@ -9,6 +9,12 @@ import org.springframework.stereotype.Repository;
 
 import br.com.mjv.mangahq.model.Noticia;
 
+/**
+ * Implementação da interface DAO usando H2
+ * @author kaique
+ *
+ */
+
 @Repository
 public class NoticiaDaoImpl implements NoticiaDao {
 
