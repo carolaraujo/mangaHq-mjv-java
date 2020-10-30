@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.com.mjv.mangahq.service.NoticiaService;
+import br.com.mjv.mangahq.noticia.service.NoticiaService;
 
 /**
  * Classe controller para rotas relativas a home

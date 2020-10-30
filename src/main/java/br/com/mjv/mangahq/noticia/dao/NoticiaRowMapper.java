@@ -1,11 +1,12 @@
-package br.com.mjv.mangahq.dao;
+package br.com.mjv.mangahq.noticia.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import br.com.mjv.mangahq.model.Noticia;
+import br.com.mjv.mangahq.enums.Categoria;
+import br.com.mjv.mangahq.noticia.model.Noticia;
 
 /**
  * Classe rowMapper para resultados do banco de dados
@@ -25,6 +26,7 @@ public class NoticiaRowMapper implements RowMapper<Noticia>{
 		noticia.setDataPublicacao(rs.getDate("dataPublicacao"));
 		noticia.setAutor(rs.getString("autor"));
 		noticia.setAcessos(rs.getLong("acessos"));
+		noticia.setCategoria(Categoria.valueOf(rs.getString("categoria")));
 		return noticia;
 	}
 

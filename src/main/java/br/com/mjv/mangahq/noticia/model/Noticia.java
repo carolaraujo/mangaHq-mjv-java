@@ -1,6 +1,8 @@
-package br.com.mjv.mangahq.model;
+package br.com.mjv.mangahq.noticia.model;
 
 import java.util.Date;
+
+import br.com.mjv.mangahq.enums.Categoria;
 
 /**
  * Classe representando a tabela TB_NOTICIAS
@@ -17,6 +19,7 @@ public class Noticia {
 	private Date dataPublicacao;
 	private String autor;
 	private Long acessos;
+	private Categoria categoria;
 	
 	public Long getAcessos() {
 		return acessos;
@@ -59,6 +62,12 @@ public class Noticia {
 	}
 	public void setAutor(String autor) {
 		this.autor = autor;
+	}
+	public Categoria getCategoria() {
+		return categoria;
+	}
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
 	}
 	
 }

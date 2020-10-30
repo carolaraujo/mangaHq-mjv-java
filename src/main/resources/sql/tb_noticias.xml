@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<comment>SQL TABELA NOTICIAS</comment>
+	<entry key="sql.findAll.descBy.acessos">
+		SELECT * FROM TB_NOTICIAS ORDER BY acessos DESC
+	</entry>
+	
+</properties>
