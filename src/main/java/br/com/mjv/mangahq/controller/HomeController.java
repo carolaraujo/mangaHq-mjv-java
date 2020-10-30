@@ -25,7 +25,7 @@ public class HomeController {
 	public ModelAndView home() {
 		ModelAndView mv = new ModelAndView("home");
 		mv.addObject("maisLidas", service.buscarNoticias(6));
-		mv.addObject("principaisNoticias", service.buscarNoticias(3, 20));
+		mv.addObject("principaisNoticias", service.buscarNoticias(6, 20));
 		return mv;
 	}
 }

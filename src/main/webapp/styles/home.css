@@ -29,6 +29,22 @@ a:hover {
 	object-fit: cover;
 }
 
+.hover-titulo{
+	position: absolute;
+	width: calc(100% - 30px);
+	top: 0;
+	right: 0;
+	color: white;
+	display: none;
+	background: rgba(0,0,0,0.6);
+	-webkit-transition: .5s ease-out;
+    -moz-transition: .5s ease-out;
+    -o-transition: .5s ease-out;
+    transition: .5s ease-out;
+    margin: 0 15px;
+    padding: 15px;
+}
+
 /* Carousel */
 .carousel-indicators li {
 	width: 20px;

@@ -54,7 +54,10 @@ VALUES
 'Faleceu, no último dia 20 de outubro, aos 81 anos, o quadrinhista Alex Varenne. Varenne nasceu no dia 29 de agosto de 1939 em Saint-Germain-au-Mont-dor, na França. Ele foi cartunista, pintor, quadrinhista e professor de artes plásticas. Teve seus primeiros trabalhos de ficção cientifica publicados na revista francesa Charlie Mensuel, e de erotismo na Écho des Savanes, no final da década de 1970. Nessa época os roteiros eram de seu irmão, Daniel.',
 'http://images.universohq.com/2020/10/alex_1170_400-1024x350.jpg',
 '2020-10-21', 'Marcelo Naranjo', '415', 'HQ');
+<<<<<<< HEAD
 
+=======
+>>>>>>> responsividade
 
 
 
