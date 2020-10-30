@@ -1,4 +1,4 @@
-package br.com.mjv.mangahq.service;
+package br.com.mjv.mangahq.noticia.service;
 
 import java.util.Arrays;
 import java.util.List;
@@ -6,9 +6,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.mjv.mangahq.dao.NoticiaDao;
-import br.com.mjv.mangahq.model.Noticia;
+import br.com.mjv.mangahq.noticia.dao.NoticiaDao;
+import br.com.mjv.mangahq.noticia.model.Noticia;
 
+/**
+ * Implementação da interface de serviço referente a notícias
+ * @author kaique
+ *
+ */
 @Service
 public class NoticiaServiceImpl implements NoticiaService{
 
