@@ -54,12 +54,50 @@ VALUES
 'Faleceu, no último dia 20 de outubro, aos 81 anos, o quadrinhista Alex Varenne. Varenne nasceu no dia 29 de agosto de 1939 em Saint-Germain-au-Mont-dor, na França. Ele foi cartunista, pintor, quadrinhista e professor de artes plásticas. Teve seus primeiros trabalhos de ficção cientifica publicados na revista francesa Charlie Mensuel, e de erotismo na Écho des Savanes, no final da década de 1970. Nessa época os roteiros eram de seu irmão, Daniel.',
 'http://images.universohq.com/2020/10/alex_1170_400-1024x350.jpg',
 '2020-10-21', 'Marcelo Naranjo', '415', 'HQ');
-<<<<<<< HEAD
 
-=======
->>>>>>> responsividade
+--MANGAS_HQS--
+DROP TABLE IF EXISTS TB_MANGAS_HQS;
+CREATE TABLE TB_MANGAS_HQS
+(
+   id INT AUTO_INCREMENT PRIMARY KEY,
+   titulo VARCHAR (100) NOT NULL,
+   autor VARCHAR (100) NOT NULL,
+   urlCapa VARCHAR (800) NOT NULL,
+   dataAdicao DATE NOT NULL,
+   categoria VARCHAR (50) NOT NULL,
+   volumes BIGINT NOT NULL,
+   resumo VARCHAR(900) NOT NULL
+);
 
-
-
-
+INSERT INTO TB_MANGAS_HQS
+(
+	titulo,
+	autor,
+ 	urlCapa,
+ 	dataAdicao,
+ 	categoria,
+ 	volumes,
+ 	resumo
+)
+VALUES
+('Demon Slayer - Kimetsu No Yaiba', 'Koyoharu Gotouge', 
+'https://upload.wikimedia.org/wikipedia/pt/thumb/4/45/Kimetsu_no_Yaiba_%28capa_do_volume_1%29.png/210px-Kimetsu_no_Yaiba_%28capa_do_volume_1%29.png',
+'2020-10-30', 'MANGA', 18, 
+'Ambientada no Japão durante o Período Taishō (1912-1926), a história gira ao entorno de Tanjirō Kamado, um garoto bondoso e inteligente que vive junto com sua mãe e seus irmãos, ganhando dinheiro vendendo carvão, assim como seu falecido pai.'),
+('Berserk', 'Kentaro Miura', 
+'https://upload.wikimedia.org/wikipedia/pt/thumb/4/45/Berserk_vol01.jpg/200px-Berserk_vol01.jpg',
+'2020-10-30', 'MANGA', 40, 
+'Guts é um guerreiro errante e antigo Comandante da Tropa de Assalto da renomada unidade mercenária conhecida como o "Bando do Falcão" (鷹の団 Taka no Dan?). Ele, agora, caça criaturas demoníacas chamadas Apóstolos, humanos que fizeram um pacto com um grupo de arquidemônios conhecidos como "A Mão de Deus" que exige o sacrifício de qualquer coisa ou pessoa que for mais achegado a eles em troca de um poder sobrenatural incrível.'),
+('Gantz', 'Hiroya Oku',
+'https://m.media-amazon.com/images/I/81PTql2cU1L._AC_UY218_.jpg',
+'2020-10-30', 'MANGA', 37, 
+'Kei Kurono é um jovem, inseguro e pervertido. Nunca se importou com nada e com ninguém. Um dia após voltar da escola encontra no metrô um antigo conhecido seu, que não vê desde quando era uma criança, Masaru Katou. De início o ignora mas este observa um mendigo bêbado caindo nos trilhos.'),
+('Batman - A queda do morcego', 'Alan Grant', 
+'https://images-na.ssl-images-amazon.com/images/I/51+NxT3h5zL._SX334_BO1,204,203,200_.jpg',
+'2020-10-30', 'HQ', 3,
+'Publicada ao longo dos anos de 1993 e 1994 nos Estados Unidos, a saga foi dividida em 3 partes: A Queda (KnightFall); A Cruzada/A Busca (Knightquest); e O Fim (KnightsEnd). Abarcou todos os bat-títulos da época como Detectives Comics, Batman, Batman: Shadow of the Bat, Robin, Catwoman, Batman Annual, Batman: Legends of the Dark Knight e outras séries como Showcase e Justice League Task Force.'),
+('Sandman', 'Neil Gaiman', 
+'https://images-na.ssl-images-amazon.com/images/I/41BL4glqIFL._SX325_BO1,204,203,200_.jpg',
+'2020-10-30', 'HQ', 75,
+'A história é vista do ponto de vista de Sonho, um dentre os sete perpétuos, a representação antropomórfica do sonho, inicialmente preso por um grupo de humanos que almejava prender sua irmã mais velha Morte para que se tornassem imortais, mas falham e capturam sonho.');
 
