@@ -19,7 +19,7 @@ public class NoticiaRowMapper implements RowMapper<Noticia>{
 	@Override
 	public Noticia mapRow(ResultSet rs, int rowNum) throws SQLException {
 		Noticia noticia = new Noticia();
-		noticia.setId(rs.getLong("id"));
+		noticia.setId_noticia(rs.getLong("id_noticia"));
 		noticia.setTitulo(rs.getString("titulo"));
 		noticia.setTextoConteudo(rs.getString("textoConteudo"));
 		noticia.setUrlImagem(rs.getString("urlImagem"));

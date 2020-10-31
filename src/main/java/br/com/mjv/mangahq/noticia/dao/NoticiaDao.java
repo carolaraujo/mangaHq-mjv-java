@@ -9,8 +9,12 @@ import br.com.mjv.mangahq.noticia.model.Noticia;
  * @author kaique
  *
  */
-
 public interface NoticiaDao {
+	
+	/**
+	 * Busca todas as notícias no banco de dados, em ordem de acessos descendente.
+	 * @return um objeto do tipo {@link List<Noticia>} devidamente populado.
+	 */
 	List<Noticia> buscarTodasNoticias();
 	
 	
