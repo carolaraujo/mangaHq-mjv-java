@@ -52,8 +52,8 @@ pageEncoding="UTF-8"%>
 				<div class="row">
 					<c:forEach var="noticia" items="${ maisLidas }">
 						<div class="section-maislidas-content col-xl-2 col-md-4 col-sm-6 col-12 mt-1 mb-1">
-							<img id="${ noticia.id }" onmouseenter="showTitle(this)" class="mt-1" src="${ noticia.urlImagem }" width="100%" height="100%"/>
-							<div id="title-${ noticia.id }" onmouseleave="hideTitle(this)" class="hover-titulo align-middle justify-content-center mt-1 h-100">
+							<img id="${ noticia.id_noticia }" onmouseenter="showTitle(this)" class="mt-1" src="${ noticia.urlImagem }" width="100%" height="100%"/>
+							<div id="title-${ noticia.id_noticia }" onmouseleave="hideTitle(this)" class="hover-titulo align-middle justify-content-center mt-1 h-100">
 								 <div class="m-auto text-center">
 								 	${ noticia.titulo }
 								 </div>

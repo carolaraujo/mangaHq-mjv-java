@@ -12,7 +12,6 @@ import br.com.mjv.mangahq.noticia.model.Noticia;
 /**
  * Implementação da interface de serviço referente a notícias
  * @author kaique
- *
  */
 @Service
 public class NoticiaServiceImpl implements NoticiaService{
@@ -20,11 +19,13 @@ public class NoticiaServiceImpl implements NoticiaService{
 	@Autowired
 	private NoticiaDao dao;
 	
+	
 	@Override
 	public List<Noticia> buscarTodasNoticias() {
 		return dao.buscarTodasNoticias();
 	}
 
+	
 	@Override
 	public List<Noticia> buscarNoticias(Integer quantidadeNoticias) {
 		List<Noticia> noticias = buscarTodasNoticias();
