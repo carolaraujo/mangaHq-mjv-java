@@ -1,8 +1,10 @@
+DROP TABLE IF EXISTS TB_USUARIO;
+DROP TABLE IF EXISTS TB_MANGAS_HQS;
 DROP TABLE IF EXISTS TB_NOTICIAS;
 -- NOTICIAS --
 CREATE TABLE TB_NOTICIAS
 (
-   id INT AUTO_INCREMENT PRIMARY KEY,
+   id_noticia INT AUTO_INCREMENT PRIMARY KEY,
    titulo VARCHAR (100) NOT NULL,
    textoConteudo VARCHAR (800) NOT NULL,
    urlImagem VARCHAR (500) NOT NULL,
@@ -11,6 +13,33 @@ CREATE TABLE TB_NOTICIAS
    acessos BIGINT NOT NULL,
    categoria VARCHAR(30) NOT NULL
 );
+
+--MANGAS_HQS--
+CREATE TABLE TB_MANGAS_HQS
+(
+   id_mangahq INT AUTO_INCREMENT PRIMARY KEY,
+   titulo VARCHAR (100) NOT NULL,
+   autor VARCHAR (100) NOT NULL,
+   urlCapa VARCHAR (800) NOT NULL,
+   dataAdicao DATE NOT NULL,
+   categoria VARCHAR (50) NOT NULL,
+   volumes BIGINT NOT NULL,
+   resumo VARCHAR(900) NOT NULL
+);
+
+--USUARIO--
+CREATE TABLE TB_USUARIO(
+	id_usuario INT AUTO_INCREMENT PRIMARY KEY,
+	nome VARCHAR(80) NOT NULL,
+	login VARCHAR(20) NOT NULL,
+	tipoUsuario VARCHAR(10) NOT NULL,
+	dataCriacao DATE NOT NULL,
+	fk_id_mangahq INT,
+	FOREIGN KEY (fk_id_mangahq) REFERENCES TB_MANGAS_HQS(id_mangahq)
+);
+
+-----------------------------------------------------------------------------------------------------------	
+--INSERT TB_NOTICIAS--
 INSERT INTO TB_NOTICIAS
 (
    titulo,
@@ -55,20 +84,7 @@ VALUES
 'http://images.universohq.com/2020/10/alex_1170_400-1024x350.jpg',
 '2020-10-21', 'Marcelo Naranjo', '415', 'HQ');
 
---MANGAS_HQS--
-DROP TABLE IF EXISTS TB_MANGAS_HQS;
-CREATE TABLE TB_MANGAS_HQS
-(
-   id INT AUTO_INCREMENT PRIMARY KEY,
-   titulo VARCHAR (100) NOT NULL,
-   autor VARCHAR (100) NOT NULL,
-   urlCapa VARCHAR (800) NOT NULL,
-   dataAdicao DATE NOT NULL,
-   categoria VARCHAR (50) NOT NULL,
-   volumes BIGINT NOT NULL,
-   resumo VARCHAR(900) NOT NULL
-);
-
+--INSERT TB_MANGAS_HQS--
 INSERT INTO TB_MANGAS_HQS
 (
 	titulo,
@@ -100,4 +116,39 @@ VALUES
 'https://images-na.ssl-images-amazon.com/images/I/41BL4glqIFL._SX325_BO1,204,203,200_.jpg',
 '2020-10-30', 'HQ', 75,
 'A história é vista do ponto de vista de Sonho, um dentre os sete perpétuos, a representação antropomórfica do sonho, inicialmente preso por um grupo de humanos que almejava prender sua irmã mais velha Morte para que se tornassem imortais, mas falham e capturam sonho.');
+
+--INSERT TB_USUARIO--
+INSERT INTO TB_USUARIO (
+	nome,
+	login,
+	tipoUsuario,
+	dataCriacao,
+	fk_id_mangahq 
+) VALUES 
+('João', 'jonjon', 'NORMAL', '2020-10-31', 1),
+('João', 'jonjon', 'NORMAL', '2020-10-31', 2),
+('João', 'jonjon', 'NORMAL', '2020-10-31', 3),
+('João', 'jonjon', 'NORMAL', '2020-10-31', 5),
+('Maria', 'mari22', 'NORMAL', '2020-10-31', 1),
+('Maria', 'mari22', 'NORMAL', '2020-10-31', 2),
+('Maria', 'mari22', 'NORMAL', '2020-10-31', 3),
+('Maria', 'mari22', 'NORMAL', '2020-10-31', 4),
+('Maria', 'mari22', 'NORMAL', '2020-10-31', 5),
+('Jose', 'joseali', 'ADMIN', '2020-10-31', 1),
+('Jose', 'joseali', 'ADMIN', '2020-10-31', 3),
+('Jose', 'joseali', 'ADMIN', '2020-10-31', 4),
+('Rafaela', 'rafa2000', 'ADMIN', '2020-10-31', 5),
+('Jorge', 'jorge', 'NORMAL', '2020-10-31', 2),
+('Jorge', 'jorge', 'NORMAL', '2020-10-31', 3),
+('Manuel', 'manuca', 'NORMAL', '2020-10-31', 4),
+('Manuel', 'manuca', 'NORMAL', '2020-10-31', 5),
+('Renato', 'qwe', 'ADMIN', '2020-10-31', 1),
+('Renato', 'qwe', 'ADMIN', '2020-10-31', 2),
+('Renato', 'qwe', 'ADMIN', '2020-10-31', 3),
+('Renato', 'qwe', 'ADMIN', '2020-10-31', 4),
+('Renato', 'qwe', 'ADMIN', '2020-10-31', 5),
+('Flora', 'asd', 'NORMAL', '2020-10-31', null);
+
+
+
 
