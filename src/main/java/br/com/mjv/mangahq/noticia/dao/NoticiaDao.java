@@ -7,7 +7,6 @@ import br.com.mjv.mangahq.noticia.model.Noticia;
 /**
  * Interface com métodos padrão para acesso a dados
  * @author kaique
- *
  */
 public interface NoticiaDao {
 	
@@ -16,6 +15,4 @@ public interface NoticiaDao {
 	 * @return um objeto do tipo {@link List<Noticia>} devidamente populado.
 	 */
 	List<Noticia> buscarTodasNoticias();
-	
-	
 }
