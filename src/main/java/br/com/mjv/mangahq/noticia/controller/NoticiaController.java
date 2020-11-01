@@ -1,4 +1,4 @@
-package br.com.mjv.mangahq.controller;
+package br.com.mjv.mangahq.noticia.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,7 +16,7 @@ import br.com.mjv.mangahq.noticia.service.NoticiaService;
  */
 @Controller
 @RequestMapping("/")
-public class HomeController {
+public class NoticiaController {
 	
 	@Autowired
 	private NoticiaService service;

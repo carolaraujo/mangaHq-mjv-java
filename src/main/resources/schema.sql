@@ -1,6 +1,3 @@
---
---
---
 /**
 * O DROP DEVE OCORRER NA SEGUINTE ORDEM POR CONTA DE DEPENDENCIA ENTRE AS TABELAS.
 * TOTAL DE 8 NOTICIAS E 6 MANGAS CADASTRADOS.
@@ -157,7 +154,6 @@ INSERT INTO TB_USUARIO (
 ('Renato', 'qwe', 'ADMIN', '2020-10-31', 4),
 ('Renato', 'qwe', 'ADMIN', '2020-10-31', 5),
 ('Flora', 'asd', 'NORMAL', '2020-10-31', null);
-
 
 
 

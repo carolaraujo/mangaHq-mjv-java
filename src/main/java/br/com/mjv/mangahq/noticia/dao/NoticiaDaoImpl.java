@@ -16,7 +16,6 @@ import br.com.mjv.mangahq.noticia.model.Noticia;
  * @author kaique
  *
  */
-
 @Repository
 @PropertySource("classpath:sql/tb_noticias.xml")
 public class NoticiaDaoImpl implements NoticiaDao {
@@ -36,5 +35,4 @@ public class NoticiaDaoImpl implements NoticiaDao {
 			return null;
 		}
 	}
-
 }
