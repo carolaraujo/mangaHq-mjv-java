@@ -26,21 +26,19 @@ public class LoginController {
 	@GetMapping()
 	public String login() {
 		LOGGER.info("Método Controller de acesso a página Login");
-		return "login";
+		return "login/login";
 	}
 	
-	@PostMapping("/login")
+	@PostMapping("/validarlogin")
 	public String validarLogin(Usuario usuario, RedirectAttributes atributos) {
 		LOGGER.info("incio do método Controller de validação de login");
 		String msg = null;
-		
 		
 		if(StringUtils.isEmpty(usuario.getLogin())) {
 			msg = "Login ou senha inválidos";
 			atributos.addFlashAttribute("mensagem", msg);
 			return "redirect:/mangahq";
 		}
-		
 		Usuario usuarioService = service.buscarPorLogin(usuario.getLogin());
 		
 		if(usuarioService == null){
@@ -50,6 +48,6 @@ public class LoginController {
 		}
 		
 		LOGGER.info("fim do método Controller de validação de login");
-		return "/user/" + usuarioService.getId_usuario() + "/home";
+		return "redirect:/mangahq/user/" + usuarioService.getId_usuario() + "/home";
 	}
 }

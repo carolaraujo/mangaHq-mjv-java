@@ -21,11 +21,18 @@ public class UsuarioServiceImpl implements UsuarioService {
 		Usuario usuario = dao.buscarPorLogin(login);
 		return usuario;
 	}
+	
+	@Override
+	public Usuario buscarPorId(Integer id) {
+		Usuario usuario = dao.buscarPorId(id);
+		return usuario;
+	}
 
 	@Override
 	public Integer cadastrarUsuario(Usuario usuario) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 }

@@ -26,4 +26,11 @@ public interface UsuarioService {
 	 */
 	Integer cadastrarUsuario(Usuario usuario);
 	
+
+	/**
+	 * Busca um usuario baseado no ID
+	 * @param id
+	 * @return um objeto do tipo Usuario
+	 */
+	Usuario buscarPorId(Integer id);
 }

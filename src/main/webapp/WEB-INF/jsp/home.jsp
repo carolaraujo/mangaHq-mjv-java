@@ -36,23 +36,28 @@ prefix = "c" %> <%@ taglib uri = "http://java.sun.com/jsp/jstl/fmt" prefix =
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
-            <li class="nav-item active">
-              <a class="nav-link" href="#"
-                >Home <span class="sr-only">(current)</span></a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Sobre</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Noticias</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Login</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Contato</a>
-            </li>
+       
+	            <li class="nav-item active">
+	              <a class="nav-link" href="home">
+	              	Home<span class="sr-only">(current)</span>
+	              </a>
+	            </li>
+	            <li class="nav-item">
+	              <a class="nav-link" href="noticias">Noticias</a>
+	            </li>
+	            <li class="nav-item">
+	              <a class="nav-link" href="mangashqs">Gerenciar Meus Mangas e HQs</a>
+	            </li>
+	            
+            
+            <c:if test="${ usuario.tipoUsuario == 'ADMIN' }">
+	            <li class="nav-item">
+	              <a class="nav-link" href="noticias/cadastro">Nova Notícia</a>
+	            </li>
+	            <li class="nav-item">
+	              <a class="nav-link" href="mangashqs/cadastro">Novo Manga/HQ</a>
+	            </li>
+            </c:if>
           </ul>
         </div>
       </nav>

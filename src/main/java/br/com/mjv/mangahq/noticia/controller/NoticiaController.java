@@ -26,7 +26,7 @@ public class NoticiaController {
 	
 	@GetMapping("mangahq/user/{id}/noticias/cadastro")
 	public ModelAndView cadastroNoticias(@PathVariable(value="id") Integer id) {
-		ModelAndView mv = new ModelAndView("noticias/cadastro");
+		ModelAndView mv = new ModelAndView("noticias/cadastrarnoticia");
 		mv.addObject("id", id);
 		return mv;
 	}

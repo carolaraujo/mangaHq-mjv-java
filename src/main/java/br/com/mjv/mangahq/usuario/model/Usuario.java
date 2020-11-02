@@ -39,8 +39,8 @@ public class Usuario {
 	public void setLogin(String login) {
 		this.login = login;
 	}
-	public TipoUsuario getTipoUsuario() {
-		return tipoUsuario;
+	public String getTipoUsuario() {
+		return tipoUsuario.name();
 	}
 	public void setTipoUsuario(TipoUsuario tipoUsuario) {
 		this.tipoUsuario = tipoUsuario;
