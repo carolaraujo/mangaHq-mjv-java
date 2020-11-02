@@ -9,8 +9,9 @@ import br.com.mjv.mangahq.enums.Categoria;
  * @author kaique
  *
  */
-
 public class Noticia {
+	
+
 	
 	private Long id_noticia;
 	private String titulo;
@@ -71,4 +72,10 @@ public class Noticia {
 		this.id_noticia = id_noticia;
 	}
 	
+	@Override
+	public String toString() {
+		return "Noticia [id_noticia=" + id_noticia + ", titulo=" + titulo + ", textoConteudo=" + textoConteudo
+				+ ", urlImagem=" + urlImagem + ", dataPublicacao=" + dataPublicacao + ", autor=" + autor + ", acessos="
+				+ acessos + ", categoria=" + categoria + "]";
+	}
 }

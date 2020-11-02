@@ -15,4 +15,11 @@ public interface NoticiaDao {
 	 * @return um objeto do tipo {@link List<Noticia>} devidamente populado.
 	 */
 	List<Noticia> buscarTodasNoticias();
+	
+	/**
+	 * Cadastra uma notícia no banco de dados.
+	 * @param noticia
+	 * @return o id da notícia cadastrada.
+	 */
+	Integer cadastrarNoticia(Noticia noticia);
 }

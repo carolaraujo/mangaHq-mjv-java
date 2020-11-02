@@ -1,4 +1,4 @@
-package br.com.mjv.mangahq.noticia.controller;
+package br.com.mjv.mangahq.home.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +18,7 @@ import br.com.mjv.mangahq.noticia.service.NoticiaService;
  *
  */
 @Controller
-@RequestMapping()
+@RequestMapping
 public class HomeController {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(HomeController.class);
