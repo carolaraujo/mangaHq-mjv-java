@@ -86,7 +86,7 @@ public class NoticiaServiceImpl implements NoticiaService{
 
 	@Override
 	public Integer cadastrarNoticia(Noticia noticia) {
-		dao.cadastrarNoticia(noticia);
-		return null;
+		Integer id = dao.cadastrarNoticia(noticia);
+		return id;
 	}
 }

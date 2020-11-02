@@ -16,31 +16,49 @@ pageEncoding="UTF-8"%>
 </head>
 <body>
 <!-- Navbar  -->
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<a class="navbar-brand" href="#">MangáHQ!</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="collapse navbar-collapse" id="navbarNav">
-			<ul class="navbar-nav">
-				<li class="nav-item active">
-					<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">Sobre</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">Noticias</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">Login</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">Contato</a>
-				</li>
-			</ul>
-		</div>
-	</nav>	
+	<header>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">MangáHQ!</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+       
+	            <li class="nav-item active">
+	              <a class="nav-link" href="home">
+	              	Home<span class="sr-only">(current)</span>
+	              </a>
+	            </li>
+	            <li class="nav-item">
+	              <a class="nav-link" href="../noticias">Noticias</a>
+	            </li>
+	            <li class="nav-item">
+	              <a class="nav-link" href="mangashqs">Gerenciar Meus Mangas e HQs</a>
+	            </li>
+	            
+            
+            <c:if test="${ usuario.tipoUsuario == 'ADMIN' }">
+	            <li class="nav-item">
+	              <a class="nav-link" href="noticias/cadastro">Nova Notícia</a>
+	            </li>
+	            <li class="nav-item">
+	              <a class="nav-link" href="mangashqs/cadastro">Novo Manga/HQ</a>
+	            </li>
+            </c:if>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <!-- MAIN -->	
 	<main class="container mb-5">
 		<h1 class="jumbotron text-center">Cadastrar Noticia</h1>
 		<c:if test="${ msg != null }">
