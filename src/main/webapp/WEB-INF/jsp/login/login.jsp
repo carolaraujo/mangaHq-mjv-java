@@ -48,7 +48,7 @@
 	 	 		<c:out value="${ mensagem }" />
 			</div>
 		</c:if>
-		<form action="mangahq/login" method="post">
+		<form action="mangahq/validarlogin" method="post">
 		  <div class="form-group">
 		    <label for="login">Login</label>
 		    <input type="login" class="form-control" id="login" name="login">
