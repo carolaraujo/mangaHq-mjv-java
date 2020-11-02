@@ -1,6 +1,6 @@
 package br.com.mjv.mangahq.enums;
 
-public enum UserTipos {
+public enum TipoUsuario {
 	NORMAL,
 	ADMIN
 }

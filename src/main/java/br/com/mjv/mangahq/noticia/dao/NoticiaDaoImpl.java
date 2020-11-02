@@ -23,7 +23,7 @@ import br.com.mjv.mangahq.noticia.model.Noticia;
 @PropertySource("classpath:sql/tb_noticias.xml")
 public class NoticiaDaoImpl implements NoticiaDao {
 	
-	private static final Logger LOGGER = LoggerFactory.getLogger(HomeController.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(NoticiaDaoImpl.class);
 
 	@Value("${sql.findAll.descBy.acessos}")
 	private String SQL_FIND_ALL_DESC_BY_ACESSOS;

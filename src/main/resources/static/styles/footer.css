@@ -1,0 +1,41 @@
+/* Footer */
+footer {
+	background-color: black;
+	padding-left: 0;
+}
+
+.instagram, .facebook, .whatsapp {
+	transition: .4s;
+	-webkit-transition: .4s;
+	-o-transition: .4s;
+	-moz-transition: .4s;
+	padding-top: 15px;
+	width: 60px;
+	height: 60px;
+	border-radius: 30px;
+}
+
+.instagram {
+	background: linear-gradient(45deg, rgb(224, 224, 240),
+		rgb(244, 243, 242) 49%, #f09433 50%, #e6683c 62.5%, #dc2743 75%,
+		#cc2366 87.5%, #bc1888 100%);
+	background-size: 250%;
+}
+
+.instagram:hover, .facebook:hover, .whatsapp:hover {
+	background-position: right;
+}
+
+.facebook {
+	background: linear-gradient(45deg, rgb(224, 224, 240),
+		rgb(244, 243, 242) 49%, rgb(25, 175, 255) 50%, rgba(0, 7, 224, 0.8)
+		100%);
+	background-size: 250%;
+}
+
+.whatsapp {
+	background: linear-gradient(45deg, rgb(224, 224, 240),
+		rgb(244, 243, 242) 49%, rgb(97, 253, 125) 50%, rgba(37, 207, 67, 0.8)
+		100%);
+	background-size: 250%;
+}
