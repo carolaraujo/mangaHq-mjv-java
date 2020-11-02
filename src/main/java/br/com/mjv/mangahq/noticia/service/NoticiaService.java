@@ -33,5 +33,6 @@ public interface NoticiaService {
 	 */
 	List<Noticia> buscarNoticias(Integer quantidadeNoticias, Integer quantidadePalavras);
 	
+	Integer cadastrarNoticia(Noticia noticia);
 	
 }

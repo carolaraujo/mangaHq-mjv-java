@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.mjv.mangahq.noticia.controller.HomeController;
+import br.com.mjv.mangahq.home.controller.HomeController;
 import br.com.mjv.mangahq.noticia.dao.NoticiaDao;
 import br.com.mjv.mangahq.noticia.model.Noticia;
 
@@ -81,5 +81,12 @@ public class NoticiaServiceImpl implements NoticiaService{
 		}finally {
 			LOGGER.info("Fim do método buscarTodasNoticias por quantidadeNoticias e quantidadePalavras em NoticiaServiceImpl");
 		}
+	}
+
+
+	@Override
+	public Integer cadastrarNoticia(Noticia noticia) {
+		dao.cadastrarNoticia(noticia);
+		return null;
 	}
 }
