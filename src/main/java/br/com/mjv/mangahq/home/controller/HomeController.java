@@ -39,6 +39,7 @@ public class HomeController {
 	 */
 	@GetMapping("mangahq/user/{id}/home")
 	public ModelAndView home(@PathVariable(value="id") Integer id) {
+		
 		LOGGER.info("Inicio do método Controller de acesso a página Home");
 		Usuario usuario = usuarioService.buscarPorId(id);
 				

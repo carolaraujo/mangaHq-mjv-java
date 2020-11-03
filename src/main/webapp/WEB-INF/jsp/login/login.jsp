@@ -6,7 +6,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Login MangaHQ</title>
+	<title>Login</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="/styles/login.css">
 	<link rel="stylesheet" type="text/css" href="/styles/navbar.css">
@@ -43,22 +43,25 @@
 	</header>
 	<!-- Main  -->
 	<main>
-		<c:if test="${ mensagem != null }">
-			<div class="alert alert-danger" role="alert">
-	 	 		<c:out value="${ mensagem }" />
-			</div>
-		</c:if>
-		<form action="mangahq/validarlogin" method="post">
-		  <div class="form-group">
-		    <label for="login">Login</label>
-		    <input type="login" class="form-control" id="login" name="login">
-		  </div>
-		  <div class="form-group">
-		    <label for="senha">Senha</label>
-		    <input type="password" class="form-control" id="senha" name="senha">
-		  </div>
-		  <button type="submit" class="btn btn-primary">Logar</button>
-		</form>
+		<div class="container">
+			<c:if test="${ mensagem != null }">
+				<div class="alert alert-danger" role="alert">
+		 	 		<c:out value="${ mensagem }" />
+				</div>
+			</c:if>
+			<form action="mangahq/validarlogin" method="post">
+			  <div class="form-group">
+			    <label for="login">Login</label>
+			    <input type="login" class="form-control" id="login" name="login">
+			  </div>
+			  <div class="form-group">
+			    <label for="senha">Senha</label>
+			    <input type="password" class="form-control" id="senha" name="senha">
+			  </div>
+			  <button type="submit" class="btn btn-primary">Logar</button>
+			  <a href="mangahq/cadastrarusuario" class="btn btn-secondary">Cadastrar novo usuário</a>
+			</form>
+		</div>
 	</main>
 	<!-- Footer -->
 	<footer>

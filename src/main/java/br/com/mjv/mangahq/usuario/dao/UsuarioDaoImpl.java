@@ -1,7 +1,11 @@
 package br.com.mjv.mangahq.usuario.dao;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.sql.DataSource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,9 +15,13 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
+import br.com.mjv.mangahq.enums.TipoUsuario;
 import br.com.mjv.mangahq.home.controller.HomeController;
+import br.com.mjv.mangahq.mangahq.dao.MangaHQRowMapper;
+import br.com.mjv.mangahq.mangahq.model.MangaHQ;
 import br.com.mjv.mangahq.noticia.dao.NoticiaRowMapper;
 import br.com.mjv.mangahq.noticia.model.Noticia;
 import br.com.mjv.mangahq.usuario.model.Usuario;
@@ -26,6 +34,10 @@ public class UsuarioDaoImpl implements UsuarioDao {
 	
 	@Autowired
 	private NamedParameterJdbcTemplate template;
+	
+	@Autowired
+	private DataSource ds;
+
 	
 	@Override
 	public Usuario buscarPorLogin(String login) {
@@ -47,8 +59,22 @@ public class UsuarioDaoImpl implements UsuarioDao {
 
 	@Override
 	public Integer cadastrarUsuario(Usuario usuario) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		SimpleJdbcInsert insert = new SimpleJdbcInsert(ds);
+		insert.withTableName("TB_USUARIO").usingGeneratedKeyColumns("id_usuario");
+		
+		LocalDate date = LocalDate.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		
+		MapSqlParameterSource params = new MapSqlParameterSource();
+		params.addValue("nome", usuario.getNome());
+		params.addValue("login", usuario.getLogin());
+		params.addValue("tipoUsuario", TipoUsuario.NORMAL.name());
+		params.addValue("dataCriacao", date.format(formatter));
+		
+		Integer id = (Integer) insert.executeAndReturnKey(params);
+		
+		return id;
 	}
 
 	@Override
@@ -68,6 +94,29 @@ public class UsuarioDaoImpl implements UsuarioDao {
 			LOGGER.info("Fim do método buscarPorId em UsuarioDaoImpl.");
 		}
 	}
+
+	@Override
+	public Integer cadastrarMangaHqParaUsuario(Usuario usuario, MangaHQ mangahq) {
+		SimpleJdbcInsert insert = new SimpleJdbcInsert(ds);
+		insert.withTableName("TB_USUARIO").usingGeneratedKeyColumns("id_usuario");
+		
+		LocalDate date = LocalDate.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		
+		MapSqlParameterSource params = new MapSqlParameterSource();
+		params.addValue("nome", usuario.getNome());
+		params.addValue("login", usuario.getLogin());
+		params.addValue("tipoUsuario", usuario.getTipoUsuario());
+		params.addValue("dataCriacao", date.format(formatter));
+		params.addValue("fk_id_mangahq", mangahq.getId_mangahq());
+		
+		Integer id = (Integer) insert.executeAndReturnKey(params);
+		
+		
+		return id;
+	}
+
+	
 
 
 

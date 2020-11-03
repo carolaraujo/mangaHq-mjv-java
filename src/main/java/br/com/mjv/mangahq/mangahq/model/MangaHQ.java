@@ -66,5 +66,31 @@ public class MangaHQ {
 	}
 	public void setResumo(String resumo) {
 		this.resumo = resumo;
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id_mangahq == null) ? 0 : id_mangahq.hashCode());
+		return result;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		MangaHQ other = (MangaHQ) obj;
+		if (id_mangahq == null) {
+			if (other.id_mangahq != null)
+				return false;
+		} else if (!id_mangahq.equals(other.id_mangahq))
+			return false;
+		return true;
 	}	
+	
 }

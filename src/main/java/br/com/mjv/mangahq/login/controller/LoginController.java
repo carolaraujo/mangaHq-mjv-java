@@ -1,5 +1,8 @@
 package br.com.mjv.mangahq.login.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +32,30 @@ public class LoginController {
 		return "login/login";
 	}
 	
+	@GetMapping("/cadastrarusuario")
+	public String cadastrarUsuario() {
+		return "/login/cadastrarusuario";
+	}
+	
+	@PostMapping("/cadastrarusuario")
+	public String validarCadastroUsuario(Usuario usuario, RedirectAttributes atributos) {
+		List<String> list = new ArrayList<>();
+		
+		if(StringUtils.isEmpty(usuario.getLogin())) {
+			list.add("O campo Login não pode estar vazio");
+		}
+		
+		if(StringUtils.isEmpty(usuario.getNome())) {
+			list.add("O campo Nome não pode estar vazio");
+		}
+		
+		Integer id = service.cadastrarUsuario(usuario);
+		
+		System.out.println(id);
+		
+		return "redirect:/mangahq";
+	}
+	
 	@PostMapping("/validarlogin")
 	public String validarLogin(Usuario usuario, RedirectAttributes atributos) {
 		LOGGER.info("incio do método Controller de validação de login");
@@ -39,15 +66,15 @@ public class LoginController {
 			atributos.addFlashAttribute("mensagem", msg);
 			return "redirect:/mangahq";
 		}
-		Usuario usuarioService = service.buscarPorLogin(usuario.getLogin());
+		Usuario usuarioValido = service.buscarPorLogin(usuario.getLogin());
 		
-		if(usuarioService == null){
+		if(usuarioValido == null){
 			msg = "Login ou senha inválidos";
 			atributos.addFlashAttribute("mensagem", msg);
 			return "redirect:/mangahq";
 		}
 		
 		LOGGER.info("fim do método Controller de validação de login");
-		return "redirect:/mangahq/user/" + usuarioService.getId_usuario() + "/home";
+		return "redirect:/mangahq/user/" + usuarioValido.getId_usuario() + "/home";
 	}
 }

@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.mjv.mangahq.mangahq.model.MangaHQ;
 import br.com.mjv.mangahq.usuario.dao.UsuarioDao;
 import br.com.mjv.mangahq.usuario.model.Usuario;
 
@@ -30,8 +31,16 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Override
 	public Integer cadastrarUsuario(Usuario usuario) {
-		// TODO Auto-generated method stub
-		return null;
+		Integer id = dao.cadastrarUsuario(usuario);
+		
+		return id;
+	}
+
+	@Override
+	public Integer cadastrarMangaHqParaUsuario(Usuario usuario, MangaHQ mangahq) {
+		Integer id = dao.cadastrarMangaHqParaUsuario(usuario, mangahq);
+		
+		return id;
 	}
 
 
