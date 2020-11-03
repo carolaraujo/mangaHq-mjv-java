@@ -64,19 +64,28 @@ prefix = "c" %> <%@ taglib uri = "http://java.sun.com/jsp/jstl/fmt" prefix =
     </header>
     <!-- Main -->
     <main>
-      <div class="container">
+      <div class="container pt-3">
         <h1>Meus Mangas</h1>
-      	<c:forEach var="mangahq" items="${ listmangahq }">
-      		<p><c:out value="${ mangahq.titulo }"></c:out></p>
-      	</c:forEach>
-      	<h1>Ainda não adquiridos:</h1>
+        <ul class="list-group list-group-flush my-3">
+	      	<c:forEach var="mangahq" items="${ listmangahq }">
+	      		<li class="list-group-item"><c:out value="${ mangahq.titulo }"></c:out></li>
+	      	</c:forEach>
+      	</ul>
+      	
+      	<c:if test="${ naoAdquiridos.size() != 0 }">
+      		<h1 >Ainda não adquiridos:</h1>
+      	</c:if>
+      	<ul class="list-group list-group-flush my-3">
       	<c:forEach var="mangahq" items="${ naoAdquiridos }">
-      		<p><c:out value="${ mangahq.id_mangahq }"></c:out></p>
-      		<form action="/mangahq/user/${ id }/mangashqs/adquirir/${ mangashq.id_mangahq }" method="get">
-      			<input type="hidden" name="id_manga_hq" value="${ mangahq.id_mangahq }">
-      			<button class="btn btn-primary" type="submit">Adquirir</button>
-      		</form>
+      		<li class="list-group-item">
+	      		<form class="row" action="/mangahq/user/${ id }/mangashqs/adquirir/${ mangashq.id_mangahq }" method="get">
+					<p class="col-4"><c:out value="${ mangahq.titulo }"></c:out></p>
+	      			<input type="hidden" name="id_manga_hq" value="${ mangahq.id_mangahq }">
+	      			<button class="btn btn-primary px-4" type="submit">Adquirir</button>
+	      		</form>
+      		</li>
       	</c:forEach>
+      	</ul>
       </div>
     </main>
     <!-- Footer -->

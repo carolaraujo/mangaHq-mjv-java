@@ -63,8 +63,7 @@ prefix = "c" %> <%@ taglib uri = "http://java.sun.com/jsp/jstl/fmt" prefix =
       </nav>
     </header>
     <!-- Main -->
-    <main>
-      <div class="container">
+    <main class="container my-5">
     	<h1 class="jumbotron text-center">Cadastrar novo Manga ou HQ</h1>
     	<c:if test="${ msg != null }">
 			<div class="alert alert-success" role="alert">
@@ -89,7 +88,7 @@ prefix = "c" %> <%@ taglib uri = "http://java.sun.com/jsp/jstl/fmt" prefix =
 			</div>
 			<fieldset class="form-group col-4 pl-5 align-self-end">
 			  <div class="row">
-			    <legend class="col-form-label col-sm-2 pt-0">Categoria</legend>
+			    <legend class="col-form-label col-sm-2 pt-0 mr-5">Categoria</legend>
 			    <div class="col-sm-10">
 			      <div class="form-check">
 			        <input class="form-check-input" type="radio" name="categoria" id="manga" value="MANGA" checked>
@@ -116,9 +115,8 @@ prefix = "c" %> <%@ taglib uri = "http://java.sun.com/jsp/jstl/fmt" prefix =
 		    <textarea maxlength="800" name="resumo" class="form-control" id="resumo" rows="10"></textarea>
 		  </div>
 		   
-		  <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+		  <button type="submit" class="btn btn-primary btn-block">Cadastrar</button>
 		</form>
-      </div>
     </main>
     <!-- Footer -->
     <footer>
@@ -170,14 +168,5 @@ prefix = "c" %> <%@ taglib uri = "http://java.sun.com/jsp/jstl/fmt" prefix =
       src="https://kit.fontawesome.com/c2a97b9eb3.js"
       crossorigin="anonymous"
     ></script>
-    <script>
-      function showTitle(img) {
-        document.getElementById("title-" + img.id).style.display = "flex";
-      }
-
-      function hideTitle(img) {
-        document.getElementById(img.id).style.display = "none";
-      }
-    </script>
   </body>
 </html>

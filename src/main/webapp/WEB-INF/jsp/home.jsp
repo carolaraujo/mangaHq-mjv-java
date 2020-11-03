@@ -111,11 +111,6 @@ prefix = "c" %> <%@ taglib uri = "http://java.sun.com/jsp/jstl/fmt" prefix =
           </ol>
           <div class="carousel-inner d-none d-md-block">
             <div class="carousel-item active">
-              <div class="carousel-category-container-color">
-                <div class="carousel-category-container">
-                  <p class="carousel-category m-1 mr-4 ml-4">Categoria</p>
-                </div>
-              </div>
               <img
                 src="https://i0.wp.com/sindicatonerd.com.br/wp-content/uploads/2016/04/Superman-BG-versions.jpg"
                 class="d-block w-100"
@@ -123,11 +118,6 @@ prefix = "c" %> <%@ taglib uri = "http://java.sun.com/jsp/jstl/fmt" prefix =
               />
             </div>
             <div class="carousel-item">
-              <div class="carousel-category-container-color">
-                <div class="carousel-category-container">
-                  <p class="carousel-category m-1 mr-4 ml-4">Categoria</p>
-                </div>
-              </div>
               <img
                 src="https://vingadoresbrasilcom.files.wordpress.com/2020/03/header.jpg?w=1000&h=400&crop=1"
                 class="d-block w-100"
@@ -135,11 +125,6 @@ prefix = "c" %> <%@ taglib uri = "http://java.sun.com/jsp/jstl/fmt" prefix =
               />
             </div>
             <div class="carousel-item">
-              <div class="carousel-category-container-color">
-                <div class="carousel-category-container">
-                  <p class="carousel-category m-1 mr-4 ml-4">Categoria</p>
-                </div>
-              </div>
               <img
                 src="https://i.pinimg.com/originals/42/d0/aa/42d0aa9293357e3850a50c654c75491f.png"
                 class="d-block w-100"

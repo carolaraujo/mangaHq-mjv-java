@@ -42,26 +42,26 @@
 		</nav>
 	</header>
 	<!-- Main  -->
-	<main>
-		<div class="container">
-			<c:if test="${ mensagem != null }">
+	<main class="container mt-5">
+		<c:if test="${ mensagem != null }">
 				<div class="alert alert-danger" role="alert">
 		 	 		<c:out value="${ mensagem }" />
 				</div>
 			</c:if>
-			<form action="mangahq/validarlogin" method="post">
+		<form class="mb-2" action="mangahq/validarlogin" method="post">
 			  <div class="form-group">
 			    <label for="login">Login</label>
-			    <input type="login" class="form-control" id="login" name="login">
+			    <input type="login" placeholder="Login" class="form-control" id="login" name="login">
 			  </div>
 			  <div class="form-group">
 			    <label for="senha">Senha</label>
-			    <input type="password" class="form-control" id="senha" name="senha">
+			    <input type="password" placeholder="Senha" class="form-control" id="senha" name="senha">
 			  </div>
-			  <button type="submit" class="btn btn-primary">Logar</button>
-			  <a href="mangahq/cadastrarusuario" class="btn btn-secondary">Cadastrar novo usuário</a>
-			</form>
-		</div>
+			  <button type="submit" class="btn btn-primary px-5">Entrar</button>
+		</form>
+		<p class="mb-2">Ainda não tem uma conta?</p>
+		<a href="mangahq/cadastrarusuario" class="btn btn-outline-secondary mt-1 px-4">Cadastre-se</a>
+		
 	</main>
 	<!-- Footer -->
 	<footer>

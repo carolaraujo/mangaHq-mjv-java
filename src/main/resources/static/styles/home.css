@@ -41,28 +41,6 @@
 	height: 25px;
 }
 
-.carousel-category-container-color {
-	position: absolute;
-	top: 20px;
-	left: 20px;
-	padding-right: 15px;
-	border-radius: 10px;
-	background-color: blue;
-}
-
-.carousel-category-container {
-	background-color: black;
-	border-radius: 10px 0 0 10px;
-	justify-content: center;
-	align-items: center;
-	display: flex;
-}
-
-.carousel-category {
-	font-size: 22px;
-	color: white;
-}
-
 /* Cards */ 
 .acessos {
 	position: absolute;
