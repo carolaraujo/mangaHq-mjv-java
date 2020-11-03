@@ -66,21 +66,23 @@ public class MangaHQController {
 	}
 	
 	@GetMapping("mangahq/user/{id}/mangashqs/cadastro")
-	public String cadastrarMangasHqs(@PathVariable(value="id") Integer id, RedirectAttributes attributes) {
-		Usuario usuario = usuarioService.buscarPorId(id);
-		attributes.addFlashAttribute("usuario", usuario);
+	public ModelAndView cadastrarMangasHqs(@PathVariable(value="id") Integer id, RedirectAttributes attributes) {
+		ModelAndView mv = new ModelAndView("mangashqs/cadastrarmangahq");
 		
-		return "/mangashqs/cadastrarmangahq";
+		Usuario usuario = usuarioService.buscarPorId(id);
+		mv.addObject("usuario", usuario);
+		System.out.println(usuario.getTipoUsuario());
+		return mv;
 	}
 	
 	@PostMapping("mangahq/user/{id}/mangashqs/cadastro")
 	public String validarCadastroMangaHq(@PathVariable(value="id") Integer id, MangaHQ mangahq, RedirectAttributes attributes) {
 		try {
-			Usuario user = usuarioService.buscarPorId(id);
-			attributes.addFlashAttribute("usuario", user);
+			Usuario usuario = usuarioService.buscarPorId(id);
+			attributes.addFlashAttribute("usuario", usuario);
+
 			List<String> errorMsg = new ArrayList<>();
-			
-			
+
 			if(StringUtils.isEmpty(mangahq.getTitulo())) {
 				errorMsg.add("O campo de Título não pode estar vazio!");
 			}
