@@ -39,8 +39,8 @@ public class HomeController {
 	public ModelAndView home(@PathVariable(value="id") Integer id) {
 		ModelAndView mv = null;
 		try {
-			mv = new ModelAndView("home");
 			LOGGER.info("Inicio do método Controller de acesso a página Home");
+			mv = new ModelAndView("home");
 			Usuario usuario = usuarioService.buscarPorId(id);
 			mv.addObject("maisLidas", noticiaService.buscarNoticias(6));
 			mv.addObject("principaisNoticias", noticiaService.buscarNoticias(6, 20));

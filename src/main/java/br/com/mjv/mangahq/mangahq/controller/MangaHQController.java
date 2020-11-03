@@ -106,8 +106,8 @@ public class MangaHQController {
 	public ModelAndView cadastrarMangasHqs(@PathVariable(value="id") Integer id, RedirectAttributes attributes) {
 		ModelAndView mv = null;
 		try {
-			mv = new ModelAndView("mangashqs/cadastrarmangahq");
 			LOGGER.info("Início do método de acesso a página de cadastro de manga/hq.");
+			mv = new ModelAndView("mangashqs/cadastrarmangahq");
 			Usuario usuario = usuarioService.buscarPorId(id);
 			mv.addObject("usuario", usuario);
 			System.out.println(usuario.getTipoUsuario());
@@ -130,8 +130,9 @@ public class MangaHQController {
 	 * @return para página de mangas/hqs caso seja cadastrado com sucesso.
 	 */
 	@PostMapping("mangahq/user/{id}/mangashqs/cadastro")
-	public String validarCadastroMangaHq(@PathVariable(value="id") Integer id, MangaHQ mangahq, RedirectAttributes attributes) {
+	public String validarCadastroMangaHq(@PathVariable(value="id") Integer id, MangaHQ mangahq, RedirectAttributes attributes, Model model) {
 		try {
+			LOGGER.info("Início do método de validação de cadastro de manga/hq.");
 			Usuario usuario = usuarioService.buscarPorId(id);
 			attributes.addFlashAttribute("usuario", usuario);
 
@@ -159,12 +160,13 @@ public class MangaHQController {
 				return "redirect:/mangahq/user/" + id + "/noticias/cadastro";
 			}
 			
-			Integer idMangahq = mangahqService.cadastrarMangaHq(mangahq);
-			
+			mangahqService.cadastrarMangaHq(mangahq);
+			LOGGER.info("Fim do método de validação de cadastro de manga/hq.");
 			return "redirect:/mangahq/user/" + id + "/mangashqs";
 		}catch (Exception e) {
-			e.printStackTrace();
-			return "redirect:/mangahq/user/" + id + "/mangashqs/cadastro";
+			LOGGER.error(e.getMessage());
+			model.addAttribute("errormsg", "Ocorreu um erro, tente mais tarde");
+			return "error/error";
 		}
 	}
 }
