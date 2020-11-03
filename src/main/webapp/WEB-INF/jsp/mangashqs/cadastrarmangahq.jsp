@@ -107,7 +107,7 @@ prefix = "c" %> <%@ taglib uri = "http://java.sun.com/jsp/jstl/fmt" prefix =
 			</fieldset>
 		    <div class="form-group col-md-4">
 		      <label for="volumes">Volumes</label>
-		      <input name="volumes" type="text" class="form-control" id="volumes">
+		      <input name="volumes" type="number" class="form-control" id="volumes">
 		    </div>
 		  </div>
 		  <div class="form-group">
