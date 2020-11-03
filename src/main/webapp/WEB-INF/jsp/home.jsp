@@ -67,7 +67,7 @@ prefix = "c" %> <%@ taglib uri = "http://java.sun.com/jsp/jstl/fmt" prefix =
       <div class="container">
         <section class="shadow mt-3 p-3">
           <div class="h2 bg-primary pl-2 pr-2 d-inline rounded text-light">
-            Mais lidas da semana
+            Ultimos mangás e HQs adicionados
           </div>
           <div class="row">
             <c:forEach var="noticia" items="${ maisLidas }">
@@ -75,20 +75,22 @@ prefix = "c" %> <%@ taglib uri = "http://java.sun.com/jsp/jstl/fmt" prefix =
                 class="section-maislidas-content col-xl-2 col-md-4 col-sm-6 col-12 mt-1 mb-1"
               >
                 <img
-                  id="${ noticia.id_noticia }"
-                  onmouseenter="showTitle(this)"
                   class="mt-1"
                   src="${ noticia.urlImagem }"
                   width="100%"
-                  height="100%"
+                  height="300px"
                 />
-                <div
+                <div style="height: 200px">
+                	<h5> ${ noticia.titulo } </h5>
+                </div>
+                
+                <!--<div
                   id="title-${ noticia.id_noticia }"
                   onmouseleave="hideTitle(this)"
                   class="hover-titulo align-middle justify-content-center mt-1 h-100"
                 >
                   <div class="m-auto text-center">${ noticia.titulo }</div>
-                </div>
+                </div> -->
               </div>
             </c:forEach>
           </div>
@@ -156,12 +158,6 @@ prefix = "c" %> <%@ taglib uri = "http://java.sun.com/jsp/jstl/fmt" prefix =
           <c:forEach var="noticia" items="${ principaisNoticias }">
             <div class="col-md-4 col-sm-6 col-12 p-3">
               <div class="card h-100">
-                <div class="acessos">
-                  <p class="mb-0 mr-1 ml-1">
-                    <i class="fas fa-eye mr-2"></i
-                    ><c:out value="${ noticia.acessos }"></c:out>
-                  </p>
-                </div>
                 <img
                   class="card-img-top"
                   src="${ noticia.urlImagem }"
@@ -176,7 +172,7 @@ prefix = "c" %> <%@ taglib uri = "http://java.sun.com/jsp/jstl/fmt" prefix =
                   <p class="card-text">
                     <c:out value="${ noticia.textoConteudo }"></c:out>
                   </p>
-                  <a href="" class="btn btn-dark w-100">Saiba mais</a>
+                  <a href="noticias" class="btn btn-dark w-100">Saiba mais</a>
                 </div>
               </div>
             </div>
@@ -234,7 +230,7 @@ prefix = "c" %> <%@ taglib uri = "http://java.sun.com/jsp/jstl/fmt" prefix =
       src="https://kit.fontawesome.com/c2a97b9eb3.js"
       crossorigin="anonymous"
     ></script>
-    <script>
+    <!--<script>
       function showTitle(img) {
         document.getElementById("title-" + img.id).style.display = "flex";
       }
@@ -242,6 +238,6 @@ prefix = "c" %> <%@ taglib uri = "http://java.sun.com/jsp/jstl/fmt" prefix =
       function hideTitle(img) {
         document.getElementById(img.id).style.display = "none";
       }
-    </script>
+    </script>  -->
   </body>
 </html>

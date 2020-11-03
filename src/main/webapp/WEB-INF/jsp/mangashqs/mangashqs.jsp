@@ -14,7 +14,7 @@ prefix = "c" %> <%@ taglib uri = "http://java.sun.com/jsp/jstl/fmt" prefix =
       integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" type="text/css" href="/styles/home.css" />
+    <link rel="stylesheet" type="text/css" href="/styles/mangashqs.css" />
     <link rel="stylesheet" type="text/css" href="/styles/navbar.css" />
     <link rel="stylesheet" type="text/css" href="/styles/footer.css" />
   </head>
@@ -37,16 +37,16 @@ prefix = "c" %> <%@ taglib uri = "http://java.sun.com/jsp/jstl/fmt" prefix =
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
        
-	            <li class="nav-item active">
+	            <li class="nav-item">
 	              <a class="nav-link" href="home">
-	              	Home<span class="sr-only">(current)</span>
+	              	Home
 	              </a>
 	            </li>
 	            <li class="nav-item">
-	              <a class="nav-link" href="noticias">Noticias</a>
+	              <a class="nav-link" href="noticias">Notícias</a>
 	            </li>
-	            <li class="nav-item">
-	              <a class="nav-link" href="mangashqs">Gerenciar Meus Mangas e HQs</a>
+	            <li class="nav-item active">
+	              <a class="nav-link" href="mangashqs">Gerenciar Meus Mangas e HQs<span class="sr-only">(current)</span></a>
 	            </li>
 	            
             
@@ -65,23 +65,39 @@ prefix = "c" %> <%@ taglib uri = "http://java.sun.com/jsp/jstl/fmt" prefix =
     <!-- Main -->
     <main>
       <div class="container pt-3">
-        <h1>Meus Mangas</h1>
+        <h1 class="text-sm-left text-center">Meus Mangas</h1>
         <ul class="list-group list-group-flush my-3">
 	      	<c:forEach var="mangahq" items="${ listmangahq }">
-	      		<li class="list-group-item"><c:out value="${ mangahq.titulo }"></c:out></li>
+	      		<li class="list-group-item">
+		      		<div class="row">
+						<div class="col-sm-6 col-12">
+							<h5><c:out value="${ mangahq.titulo }"></c:out></h5>
+							<p><c:out value="${ mangahq.resumo }"></c:out></p>
+						</div>
+						<div class="col-sm-6 col-12 d-flex justify-content-center">
+							<img src="${ mangahq.urlCapa }" height="250px" />
+						</div>
+		      		</div>
+      			</li>
 	      	</c:forEach>
       	</ul>
       	
       	<c:if test="${ naoAdquiridos.size() != 0 }">
-      		<h1 >Ainda não adquiridos:</h1>
+      		<h1 class="text-sm-left text-center" >Ainda não adquiridos:</h1>
       	</c:if>
       	<ul class="list-group list-group-flush my-3">
       	<c:forEach var="mangahq" items="${ naoAdquiridos }">
       		<li class="list-group-item">
 	      		<form class="row" action="/mangahq/user/${ id }/mangashqs/adquirir/${ mangashq.id_mangahq }" method="get">
-					<p class="col-4"><c:out value="${ mangahq.titulo }"></c:out></p>
-	      			<input type="hidden" name="id_manga_hq" value="${ mangahq.id_mangahq }">
-	      			<button class="btn btn-primary px-4" type="submit">Adquirir</button>
+					<div class="col-sm-6 col-12">
+						<h5><c:out value="${ mangahq.titulo }"></c:out></h5>
+						<p><c:out value="${ mangahq.resumo }"></c:out></p>
+					</div>
+					<div class="col-sm-6 col-12 d-flex justify-content-center">
+						<img src="${ mangahq.urlCapa }" height="250px" />
+						<input type="hidden" name="id_manga_hq" value="${ mangahq.id_mangahq }">
+	      				<button class="btn btn-primary px-3" style="height: 250px; position: relative; right: 5px; border-bottom-left-radius: 0px; border-top-left-radius: 0px" type="submit">Adquirir</button>
+					</div>
 	      		</form>
       		</li>
       	</c:forEach>

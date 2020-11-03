@@ -13,6 +13,22 @@
 	<link rel="stylesheet" type="text/css" href="/styles/footer.css">
 </head>
 <body>
+	<!-- Modal -->
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">Faça login para continuar</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 	<!-- Navbar  -->
 	<header>
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -22,29 +38,30 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<ul class="navbar-nav">
+					<li class="nav-item">
+						<a class="nav-link" data-toggle="modal" data-target="#exampleModal">Home</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" data-toggle="modal" data-target="#exampleModal">Sobre</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" data-toggle="modal" data-target="#exampleModal">Notícias</a>
+					</li>
 					<li class="nav-item active">
-						<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+						<a class="nav-link"> Login <span class="sr-only">(current)</span></a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">Sobre</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">Noticias</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">Login</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">Contato</a>
+						<a class="nav-link" data-toggle="modal" data-target="#exampleModal">Contato</a>
 					</li>
 				</ul>
 			</div>
 		</nav>
 	</header>
 	<!-- Main  -->
-	<main class="container mt-5">
+	<main class="container py-5">
+		<h1>Faça login para acessar nosso site!</h1>
 		<c:if test="${ mensagem != null }">
-				<div class="alert alert-danger" role="alert">
+				<div class="alert alert-danger my-2" role="alert">
 		 	 		<c:out value="${ mensagem }" />
 				</div>
 			</c:if>

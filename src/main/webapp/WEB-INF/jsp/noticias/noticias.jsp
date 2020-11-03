@@ -14,7 +14,7 @@ prefix = "c" %> <%@ taglib uri = "http://java.sun.com/jsp/jstl/fmt" prefix =
       integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" type="text/css" href="/styles/home.css" />
+    <link rel="stylesheet" type="text/css" href="/styles/noticias.css" />
     <link rel="stylesheet" type="text/css" href="/styles/navbar.css" />
     <link rel="stylesheet" type="text/css" href="/styles/footer.css" />
   </head>
@@ -37,13 +37,13 @@ prefix = "c" %> <%@ taglib uri = "http://java.sun.com/jsp/jstl/fmt" prefix =
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
        
-	            <li class="nav-item active">
+	            <li class="nav-item">
 	              <a class="nav-link" href="home">
-	              	Home<span class="sr-only">(current)</span>
+	              	Home
 	              </a>
 	            </li>
-	            <li class="nav-item">
-	              <a class="nav-link" href="noticias">Noticias</a>
+	            <li class="nav-item active">
+	              <a class="nav-link" href="noticias">Notícias<span class="sr-only">(current)</span></a>
 	            </li>
 	            <li class="nav-item">
 	              <a class="nav-link" href="mangashqs">Gerenciar Meus Mangas e HQs</a>
@@ -68,21 +68,15 @@ prefix = "c" %> <%@ taglib uri = "http://java.sun.com/jsp/jstl/fmt" prefix =
         <h1 class="text-center mt-4 mb-4">Últimas notícias</h1>
         <div class="row card-custom">
           <c:forEach var="noticia" items="${ principaisNoticias }">
-            <div class="col-md-4 col-sm-6 col-12 p-3">
+            <div class="col-lg-4 col-md-6 col-sm-12 col-12 p-3">
               <div class="card h-100">
-                <div class="acessos">
-                  <p class="mb-0 mr-1 ml-1">
-                    <i class="fas fa-eye mr-2"></i
-                    ><c:out value="${ noticia.acessos }"></c:out>
-                  </p>
-                </div>
                 <img
                   class="card-img-top"
                   src="${ noticia.urlImagem }"
                   width="100%"
                 />
                 <div
-                  class="card-body d-flex flex-column justify-content-between"
+                  class="card-body d-flex flex-column"
                 >
                   <h5 class="card-title">
                     <c:out value="${ noticia.titulo }"></c:out>
@@ -90,7 +84,6 @@ prefix = "c" %> <%@ taglib uri = "http://java.sun.com/jsp/jstl/fmt" prefix =
                   <p class="card-text">
                     <c:out value="${ noticia.textoConteudo }"></c:out>
                   </p>
-                  <a href="" class="btn btn-dark w-100">Saiba mais</a>
                 </div>
               </div>
             </div>
@@ -148,14 +141,5 @@ prefix = "c" %> <%@ taglib uri = "http://java.sun.com/jsp/jstl/fmt" prefix =
       src="https://kit.fontawesome.com/c2a97b9eb3.js"
       crossorigin="anonymous"
     ></script>
-    <script>
-      function showTitle(img) {
-        document.getElementById("title-" + img.id).style.display = "flex";
-      }
-
-      function hideTitle(img) {
-        document.getElementById(img.id).style.display = "none";
-      }
-    </script>
   </body>
 </html>

@@ -8,11 +8,27 @@
 	<meta charset="UTF-8">
 	<title>Cadastrar usuario</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" href="/styles/cadastro.css">
+	<link rel="stylesheet" type="text/css" href="/styles/cadastrarusuario.css">
 	<link rel="stylesheet" type="text/css" href="/styles/navbar.css">
 	<link rel="stylesheet" type="text/css" href="/styles/footer.css">
 </head>
 <body>
+	<!-- Modal -->
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">Faça login para continuar</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 	<!-- Navbar  -->
 	<header>
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -22,44 +38,45 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<ul class="navbar-nav">
+					<li class="nav-item">
+						<a class="nav-link" data-toggle="modal" data-target="#exampleModal">Home</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" data-toggle="modal" data-target="#exampleModal">Sobre</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" data-toggle="modal" data-target="#exampleModal">Notícias</a>
+					</li>
 					<li class="nav-item active">
-						<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+						<a class="nav-link"> Login <span class="sr-only">(current)</span></a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">Sobre</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">Noticias</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">Login</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">Contato</a>
+						<a class="nav-link" data-toggle="modal" data-target="#exampleModal">Contato</a>
 					</li>
 				</ul>
 			</div>
 		</nav>
 	</header>
 	<!-- Main -->
-	<main>
-		<div class="container">
-			<form class="mt-5" action="cadastrarusuario" method="post">
-			  <div class="form-group">
+	<main class="container py-5">
+		<h1>Cadastre-se para ter acesso aos nossos conteúdos!</h1>
+		<form class="mt-2" action="cadastrarusuario" method="post">
+			<div class="form-group">
 			    <label for="nome">Nome</label>
-			    <input type="text" class="form-control" id="nome" name="nome">
-			  </div>
-			  <div class="form-group">
+			    <input type="text" placeholder="Nome" class="form-control" id="nome" name="nome">
+			</div>
+			<div class="form-group">
 			    <label for="login">Login</label>
-			    <input type="text" class="form-control" id="login" name="login">
-			  </div>
-			  <div class="form-group">
+			    <input type="text" placeholder="Login" class="form-control" id="login" name="login">
+			</div>
+			<div class="form-group">
 			    <label for="senha">Senha</label>
-			    <input type="password" class="form-control" id="senha" name="senha">
-			  </div>
-			  <button type="submit" class="btn btn-primary">Cadastrar</button>
-			</form>
-		</div>
+			    <input type="password" placeholder="Senha" class="form-control" id="senha" name="senha">
+			</div>
+			<button type="submit" class="btn btn-primary px-5">Cadastrar</button>
+		</form>
+		<p class="my-2">Já tem uma conta?</p>
+		<a href="/mangahq" class="btn btn-outline-secondary mt-1 px-4">Faça login</a>
 	</main>
 	<!-- Footer -->
 	<footer>

@@ -1,0 +1,5 @@
+/* Main */
+.card-custom img{
+	height: 170px;
+	object-fit: cover;
+}

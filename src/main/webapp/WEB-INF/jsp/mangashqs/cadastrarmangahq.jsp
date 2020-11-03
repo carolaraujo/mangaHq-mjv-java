@@ -14,7 +14,7 @@ prefix = "c" %> <%@ taglib uri = "http://java.sun.com/jsp/jstl/fmt" prefix =
       integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" type="text/css" href="/styles/home.css" />
+    <link rel="stylesheet" type="text/css" href="/styles/cadastrarmangahq.css" />
     <link rel="stylesheet" type="text/css" href="/styles/navbar.css" />
     <link rel="stylesheet" type="text/css" href="/styles/footer.css" />
   </head>
@@ -37,9 +37,9 @@ prefix = "c" %> <%@ taglib uri = "http://java.sun.com/jsp/jstl/fmt" prefix =
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
        
-	            <li class="nav-item active">
+	            <li class="nav-item">
 	              <a class="nav-link" href="../home">
-	              	Home<span class="sr-only">(current)</span>
+	              	Home
 	              </a>
 	            </li>
 	            <li class="nav-item">
@@ -54,8 +54,8 @@ prefix = "c" %> <%@ taglib uri = "http://java.sun.com/jsp/jstl/fmt" prefix =
 	            <li class="nav-item">
 	              <a class="nav-link" href="../noticias/cadastro">Nova Notícia</a>
 	            </li>
-	            <li class="nav-item">
-	              <a class="nav-link" href="../mangashqs/cadastro">Novo Manga/HQ</a>
+	            <li class="nav-item active">
+	              <a class="nav-link" href="../mangashqs/cadastro">Novo Manga/HQ<span class="sr-only">(current)</span></a>
 	            </li>
             </c:if>
           </ul>
@@ -82,14 +82,13 @@ prefix = "c" %> <%@ taglib uri = "http://java.sun.com/jsp/jstl/fmt" prefix =
 		    </div>
 		  </div>
 		  <div class="form-row">
-			<div class="form-group col-4">
-			  <label for="urlImagem">URL da Imagem para Capa</label>
-			  <input name="urlCapa" maxlength="500" type="text" class="form-control" id="urlImagem" placeholder="http://www...">
+			<div class="form-group col-md-4 col-6">
+			  <label for="volumes">Volumes</label>
+		      <input name="volumes" type="number" class="form-control" id="volumes">
 			</div>
-			<fieldset class="form-group col-4 pl-5 align-self-end">
-			  <div class="row">
-			    <legend class="col-form-label col-sm-2 pt-0 mr-5">Categoria</legend>
-			    <div class="col-sm-10">
+			<fieldset class="form-group col-6 col-md-4 pl-5 align-self-end">
+			    <legend class="col-form-label">Categoria</legend>
+			    <div>
 			      <div class="form-check">
 			        <input class="form-check-input" type="radio" name="categoria" id="manga" value="MANGA" checked>
 			        <label class="form-check-label" for="manga">
@@ -103,18 +102,16 @@ prefix = "c" %> <%@ taglib uri = "http://java.sun.com/jsp/jstl/fmt" prefix =
 			        </label>
 			      </div>
 			    </div>
-			  </div>
 			</fieldset>
-		    <div class="form-group col-md-4">
-		      <label for="volumes">Volumes</label>
-		      <input name="volumes" type="number" class="form-control" id="volumes">
+		    <div class="form-group col-md-4 col-12">
+		      <label for="urlImagem">URL da Imagem para Capa</label>
+			  <input name="urlCapa" maxlength="500" type="text" class="form-control" id="urlImagem" placeholder="http://www...">
 		    </div>
 		  </div>
 		  <div class="form-group">
 		    <label for="resumo">Resumo do mangá</label>
 		    <textarea maxlength="800" name="resumo" class="form-control" id="resumo" rows="10"></textarea>
 		  </div>
-		   
 		  <button type="submit" class="btn btn-primary btn-block">Cadastrar</button>
 		</form>
     </main>
