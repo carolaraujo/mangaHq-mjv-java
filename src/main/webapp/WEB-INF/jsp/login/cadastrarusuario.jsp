@@ -43,26 +43,23 @@
 	</header>
 	<!-- Main -->
 	<main>
-		<form>
-			<div class="form-group">
-			  <label for="login">Login</label>
-			  <input type="login" class="form-control" id="login">
-			</div>
-			<div class="form-group">
-			  <label for="senha">Senha</label>
-			  <input type="password" class="form-control" id="senha">
-			</div>
-			<!-- Fazer um for Each -->
-			<div class="row">
-				<div class="form-check col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12">
-			  		<input class="form-check-input" type="checkbox" value="" id="checkbox">
-			  		<label class="form-check-label" for="checkbox">
-			    		MangaHQ #1
-			  		</label>
-				</div>
-			</div>
-		    <button type="submit" class="btn btn-primary">Cadastrar</button>
-		</form>
+		<div class="container">
+			<form class="mt-5" action="cadastrarusuario" method="post">
+			  <div class="form-group">
+			    <label for="nome">Nome</label>
+			    <input type="text" class="form-control" id="nome" name="nome">
+			  </div>
+			  <div class="form-group">
+			    <label for="login">Login</label>
+			    <input type="text" class="form-control" id="login" name="login">
+			  </div>
+			  <div class="form-group">
+			    <label for="senha">Senha</label>
+			    <input type="password" class="form-control" id="senha" name="senha">
+			  </div>
+			  <button type="submit" class="btn btn-primary">Cadastrar</button>
+			</form>
+		</div>
 	</main>
 	<!-- Footer -->
 	<footer>

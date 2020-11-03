@@ -34,7 +34,7 @@ pageEncoding="UTF-8"%>
           <ul class="navbar-nav">
        
 	            <li class="nav-item active">
-	              <a class="nav-link" href="home">
+	              <a class="nav-link" href="../home">
 	              	Home<span class="sr-only">(current)</span>
 	              </a>
 	            </li>
@@ -42,16 +42,16 @@ pageEncoding="UTF-8"%>
 	              <a class="nav-link" href="../noticias">Noticias</a>
 	            </li>
 	            <li class="nav-item">
-	              <a class="nav-link" href="mangashqs">Gerenciar Meus Mangas e HQs</a>
+	              <a class="nav-link" href="../mangashqs">Gerenciar Meus Mangas e HQs</a>
 	            </li>
 	            
             
             <c:if test="${ usuario.tipoUsuario == 'ADMIN' }">
 	            <li class="nav-item">
-	              <a class="nav-link" href="noticias/cadastro">Nova Notícia</a>
+	              <a class="nav-link" href="cadastro">Nova Notícia</a>
 	            </li>
 	            <li class="nav-item">
-	              <a class="nav-link" href="mangashqs/cadastro">Novo Manga/HQ</a>
+	              <a class="nav-link" href="../mangashqs/cadastro">Novo Manga/HQ</a>
 	            </li>
             </c:if>
           </ul>

@@ -66,7 +66,6 @@ public class NoticiaDaoImpl implements NoticiaDao {
 
 		MapSqlParameterSource params = new MapSqlParameterSource();
 
-		// Map<String, Object> params = new HashMap<>();
 
 		params.addValue("titulo", noticia.getTitulo());
 		params.addValue("textoConteudo", noticia.getTextoConteudo());

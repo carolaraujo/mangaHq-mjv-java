@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -36,22 +37,40 @@ public class MangaHQController {
 	public ModelAndView exibirMangasHqs(@PathVariable(value="id") Integer id) {
 		Usuario usuario = usuarioService.buscarPorId(id);
 		ModelAndView mv = new ModelAndView("/mangashqs/mangashqs");
-		mv.addObject("maisLidas", noticiaService.buscarNoticias(6));
-		mv.addObject("principaisNoticias", noticiaService.buscarNoticias(6, 20));
 		mv.addObject("usuario", usuario);
+		
+		List<MangaHQ> list = mangahqService.listarMeusMangasHqs(usuario);
+		mv.addObject("listmangahq", list);
+		
+		List<MangaHQ> naoAdquiridos = mangahqService.mangasHqsNaoAdquiridos(usuario);
+		mv.addObject("naoAdquiridos", naoAdquiridos);
 		
 		return mv;
 	}
 	
-	@GetMapping("mangahq/user/{id}/mangashqs/cadastro")
-	public ModelAndView cadastrarMangasHqs(@PathVariable(value="id") Integer id) {
-		Usuario usuario = usuarioService.buscarPorId(id);
-		ModelAndView mv = new ModelAndView("/mangashqs/cadastrarmangahq");
-		mv.addObject("maisLidas", noticiaService.buscarNoticias(6));
-		mv.addObject("principaisNoticias", noticiaService.buscarNoticias(6, 20));
-		mv.addObject("usuario", usuario);
+	@GetMapping("mangahq/user/{id}/mangashqs/adquirir")
+	public String adquirirManga(
+			@PathVariable(value="id") Integer id,
+			@RequestParam("id_manga_hq") String id_mangahq,
+			RedirectAttributes attributes) {
 		
-		return mv;
+		MangaHQ mangahq = mangahqService.buscarPorId(Integer.parseInt(id_mangahq));
+		Usuario usuario = usuarioService.buscarPorId(id);
+		
+		Integer id_cadastro = usuarioService.cadastrarMangaHqParaUsuario(usuario, mangahq);
+		
+		
+		System.out.println(id_cadastro);
+		
+		return "redirect:/mangahq/user/{id}/mangashqs";
+	}
+	
+	@GetMapping("mangahq/user/{id}/mangashqs/cadastro")
+	public String cadastrarMangasHqs(@PathVariable(value="id") Integer id, RedirectAttributes attributes) {
+		Usuario usuario = usuarioService.buscarPorId(id);
+		attributes.addFlashAttribute("usuario", usuario);
+		
+		return "/mangashqs/cadastrarmangahq";
 	}
 	
 	@PostMapping("mangahq/user/{id}/mangashqs/cadastro")
@@ -85,8 +104,6 @@ public class MangaHQController {
 			}
 			
 			Integer idMangahq = mangahqService.cadastrarMangaHq(mangahq);
-			
-			System.out.println(idMangahq);
 			
 			return "redirect:/mangahq/user/" + id + "/mangashqs";
 		}catch (Exception e) {

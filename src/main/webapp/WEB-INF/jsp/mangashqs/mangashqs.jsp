@@ -66,6 +66,17 @@ prefix = "c" %> <%@ taglib uri = "http://java.sun.com/jsp/jstl/fmt" prefix =
     <main>
       <div class="container">
         <h1>Meus Mangas</h1>
+      	<c:forEach var="mangahq" items="${ listmangahq }">
+      		<p><c:out value="${ mangahq.titulo }"></c:out></p>
+      	</c:forEach>
+      	<h1>Ainda não adquiridos:</h1>
+      	<c:forEach var="mangahq" items="${ naoAdquiridos }">
+      		<p><c:out value="${ mangahq.id_mangahq }"></c:out></p>
+      		<form action="/mangahq/user/${ id }/mangashqs/adquirir/${ mangashq.id_mangahq }" method="get">
+      			<input type="hidden" name="id_manga_hq" value="${ mangahq.id_mangahq }">
+      			<button class="btn btn-primary" type="submit">Adquirir</button>
+      		</form>
+      	</c:forEach>
       </div>
     </main>
     <!-- Footer -->

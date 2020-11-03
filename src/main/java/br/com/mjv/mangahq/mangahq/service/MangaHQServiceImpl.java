@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.mjv.mangahq.mangahq.dao.MangaHQDao;
 import br.com.mjv.mangahq.mangahq.model.MangaHQ;
+import br.com.mjv.mangahq.usuario.model.Usuario;
 
 @Service
 public class MangaHQServiceImpl implements MangaHQService {
@@ -22,15 +23,31 @@ public class MangaHQServiceImpl implements MangaHQService {
 	}
 
 	@Override
-	public List<MangaHQ> listarMeusMangasHqs() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<MangaHQ> listarMeusMangasHqs(Usuario usuario) {
+		List<MangaHQ> list = dao.listarMeusMangasHqs(usuario);
+		return list;
 	}
 
 	@Override
-	public List<MangaHQ> mangasHqsNaoAdquiridos() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<MangaHQ> mangasHqsNaoAdquiridos(Usuario usuario) {
+		List<MangaHQ> minhaLista = listarMeusMangasHqs(usuario);
+		List<MangaHQ> list = todosMangasHqs();
+		
+		list.removeAll(minhaLista);
+		
+		return list;
+	}
+
+	@Override
+	public List<MangaHQ> todosMangasHqs() {
+		List<MangaHQ> list = dao.todosMangasHqs();
+		return list;
+	}
+
+	@Override
+	public MangaHQ buscarPorId(Integer id) {
+		MangaHQ mangahq = dao.buscarPorId(id);
+		return mangahq;
 	}
 
 }

@@ -83,6 +83,9 @@ public class NoticiaController {
 			String msg = "Cadastrado!";
 			atributos.addFlashAttribute("msg", msg);
 		
+			Usuario usuario = usuarioService.buscarPorId(id);
+			atributos.addFlashAttribute("usuario", usuario);
+			
 			Integer i = noticiaService.cadastrarNoticia(noticia);
 			
 			System.out.println(i);
