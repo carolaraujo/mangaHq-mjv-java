@@ -32,23 +32,27 @@ public class HomeController {
 	
 	/**
 	 * Controller para a rota /{id}/home
-	 * Retorna as notícias para a página requisitada
-	 * {@link TODO} Retornar a lista dos ultimos mangás/hqs cadastrados
-	 * {@link TODO} Acesso ao usuario pelo id
-	 * @return
+	 * Caso ocorra um erro, retorna uma página personalizada de erros.
+	 * @return uma página inicial, exibida após um login bem sucedido.
 	 */
 	@GetMapping("mangahq/user/{id}/home")
 	public ModelAndView home(@PathVariable(value="id") Integer id) {
-		
-		LOGGER.info("Inicio do método Controller de acesso a página Home");
-		Usuario usuario = usuarioService.buscarPorId(id);
-				
-		ModelAndView mv = new ModelAndView("home");
-		mv.addObject("maisLidas", noticiaService.buscarNoticias(6));
-		mv.addObject("principaisNoticias", noticiaService.buscarNoticias(6, 20));
-		mv.addObject("usuario", usuario);
-		
-		LOGGER.info("Fim do método Controller de acesso a página Home");
-		return mv;
+		ModelAndView mv = null;
+		try {
+			mv = new ModelAndView("home");
+			LOGGER.info("Inicio do método Controller de acesso a página Home");
+			Usuario usuario = usuarioService.buscarPorId(id);
+			mv.addObject("maisLidas", noticiaService.buscarNoticias(6));
+			mv.addObject("principaisNoticias", noticiaService.buscarNoticias(6, 20));
+			mv.addObject("usuario", usuario);
+			
+			LOGGER.info("Fim do método Controller de acesso a página Home");
+			return mv;
+		}catch(Exception e) {
+			LOGGER.error(e.getMessage());
+			mv = new ModelAndView("error/error");
+			mv.addObject("errormsg", "Ocorreu um erro, tente mais tarde.");
+			return mv;
+		}
 	}
 }
