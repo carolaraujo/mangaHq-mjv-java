@@ -17,6 +17,7 @@ import org.springframework.stereotype.Repository;
 
 import br.com.mjv.mangahq.home.controller.HomeController;
 import br.com.mjv.mangahq.noticia.model.Noticia;
+import br.com.mjv.mangahq.usuario.model.Usuario;
 
 /**
  * Implementação da interface DAO usando H2
@@ -54,17 +55,16 @@ public class NoticiaDaoImpl implements NoticiaDao {
 	}
 
 	@Override
-	public Integer cadastrarNoticia(Noticia noticia) {
+	public Integer cadastrarNoticia(Noticia noticia, Usuario usuario) {
 		SimpleJdbcInsert insert = new SimpleJdbcInsert(ds);
 		insert.withTableName("TB_NOTICIAS").usingGeneratedKeyColumns("id_noticia");
-
+		insert.usingColumns("titulo","textoConteudo","urlImagem","autor","categoria");
 		MapSqlParameterSource params = new MapSqlParameterSource();
-
 
 		params.addValue("titulo", noticia.getTitulo());
 		params.addValue("textoConteudo", noticia.getTextoConteudo());
 		params.addValue("urlImagem", noticia.getUrlImagem());
-		params.addValue("autor", "usuario");
+		params.addValue("autor", usuario.getNome() + " - " + usuario.getLogin());
 		params.addValue("categoria", noticia.getCategoria());
 
 		Integer result = (Integer) insert.executeAndReturnKey(params);

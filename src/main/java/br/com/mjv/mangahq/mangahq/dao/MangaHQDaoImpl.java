@@ -1,7 +1,5 @@
 package br.com.mjv.mangahq.mangahq.dao;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,16 +41,12 @@ public class MangaHQDaoImpl implements MangaHQDao {
 	public Integer cadastrarNovoMangaHq(MangaHQ mangahq) {
 		SimpleJdbcInsert insertMangahq = new SimpleJdbcInsert(ds).usingGeneratedKeyColumns("id_mangahq");
 		insertMangahq.withTableName("TB_MANGAS_HQS");
-		
-		LocalDate date = LocalDate.now();
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-		
+		insertMangahq.usingColumns("titulo","autor","urlCapa","categoria","volumes","resumo");
 		Map<String, Object> params = new HashMap<>();
 		
 		params.put("titulo", mangahq.getTitulo());
 		params.put("autor", mangahq.getAutor());
 		params.put("urlCapa", mangahq.getUrlCapa());
-		params.put("dataAdicao", date.format(formatter));
 		params.put("categoria", mangahq.getCategoria());
 		params.put("volumes", mangahq.getVolumes());
 		params.put("resumo", mangahq.getResumo());

@@ -56,6 +56,9 @@ pageEncoding="UTF-8"%>
 	              <a class="nav-link" href="../mangashqs/cadastro">Novo Manga/HQ</a>
 	            </li>
             </c:if>
+            <li class="nav-item">
+              	<a class="nav-link" href="/mangahq/logout">Logout</a>
+            </li>
           </ul>
         </div>
       </nav>

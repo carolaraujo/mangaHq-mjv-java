@@ -155,4 +155,9 @@ public class LoginController {
 			return "error/error";
 		}
 	}
+	
+	@GetMapping("/logout")
+	public String logout(RedirectAttributes atributos) {
+		return "redirect:/mangahq";
+	}
 }

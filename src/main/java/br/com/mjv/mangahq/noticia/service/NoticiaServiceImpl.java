@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import br.com.mjv.mangahq.home.controller.HomeController;
 import br.com.mjv.mangahq.noticia.dao.NoticiaDao;
 import br.com.mjv.mangahq.noticia.model.Noticia;
+import br.com.mjv.mangahq.usuario.model.Usuario;
 
 /**
  * Implementação da interface de serviço referente a notícias
@@ -85,8 +86,8 @@ public class NoticiaServiceImpl implements NoticiaService{
 
 
 	@Override
-	public Integer cadastrarNoticia(Noticia noticia) {
-		Integer id = dao.cadastrarNoticia(noticia);
+	public Integer cadastrarNoticia(Noticia noticia, Usuario usuario) {
+		Integer id = dao.cadastrarNoticia(noticia, usuario);
 		return id;
 	}
 }

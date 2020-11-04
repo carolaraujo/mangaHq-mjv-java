@@ -127,7 +127,7 @@ public class NoticiaController {
 			Usuario usuario = usuarioService.buscarPorId(id);
 			atributos.addFlashAttribute("usuario", usuario);
 			
-			noticiaService.cadastrarNoticia(noticia);
+			noticiaService.cadastrarNoticia(noticia, usuario);
 			
 			LOGGER.info("Fim do método Controller para validação de cadastro de notícias");
 			return "redirect:/mangahq/user/" + id + "/noticias";

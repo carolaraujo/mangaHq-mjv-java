@@ -3,6 +3,7 @@ package br.com.mjv.mangahq.noticia.dao;
 import java.util.List;
 
 import br.com.mjv.mangahq.noticia.model.Noticia;
+import br.com.mjv.mangahq.usuario.model.Usuario;
 
 /**
  * Interface com métodos padrão para acesso a dados
@@ -21,5 +22,5 @@ public interface NoticiaDao {
 	 * @param noticia
 	 * @return o id da notícia cadastrada.
 	 */
-	Integer cadastrarNoticia(Noticia noticia);
+	Integer cadastrarNoticia(Noticia noticia, Usuario usuario);
 }

@@ -3,6 +3,7 @@ package br.com.mjv.mangahq.noticia.service;
 import java.util.List;
 
 import br.com.mjv.mangahq.noticia.model.Noticia;
+import br.com.mjv.mangahq.usuario.model.Usuario;
 
 /**
  * Interface com serviços usados pelo controller referente a noticias
@@ -33,6 +34,6 @@ public interface NoticiaService {
 	 */
 	List<Noticia> buscarNoticias(Integer quantidadeNoticias, Integer quantidadePalavras);
 	
-	Integer cadastrarNoticia(Noticia noticia);
+	Integer cadastrarNoticia(Noticia noticia, Usuario usuario);
 	
 }
