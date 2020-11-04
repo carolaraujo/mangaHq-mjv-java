@@ -35,13 +35,4 @@ public class UsuarioServiceImpl implements UsuarioService {
 		
 		return id;
 	}
-
-	@Override
-	public Integer cadastrarMangaHqParaUsuario(Usuario usuario, MangaHQ mangahq) {
-		Integer id = dao.cadastrarMangaHqParaUsuario(usuario, mangahq);
-		
-		return id;
-	}
-
-
 }

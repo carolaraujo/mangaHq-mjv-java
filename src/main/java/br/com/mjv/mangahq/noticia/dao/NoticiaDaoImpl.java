@@ -1,7 +1,5 @@
 package br.com.mjv.mangahq.noticia.dao;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -35,8 +33,8 @@ public class NoticiaDaoImpl implements NoticiaDao {
 	@Autowired
 	private DataSource ds;
 
-	@Value("${sql.findAll.descBy.acessos}")
-	private String SQL_FIND_ALL_DESC_BY_ACESSOS;
+	@Value("${sql.findAll}")
+	private String SQL_FIND_ALL;
 
 	@Autowired
 	private NamedParameterJdbcTemplate template;
@@ -45,7 +43,7 @@ public class NoticiaDaoImpl implements NoticiaDao {
 	public List<Noticia> buscarTodasNoticias() {
 		try {
 			LOGGER.info("Inicio do método buscarTodasNoticias em NoticiaDaoImpl.");
-			List<Noticia> noticias = template.query(SQL_FIND_ALL_DESC_BY_ACESSOS, new NoticiaRowMapper());
+			List<Noticia> noticias = template.query(SQL_FIND_ALL, new NoticiaRowMapper());
 			return noticias;
 		} catch (EmptyResultDataAccessException e) {
 			LOGGER.info("Não foi encontrado nenhum registro na tabela.");
@@ -57,10 +55,6 @@ public class NoticiaDaoImpl implements NoticiaDao {
 
 	@Override
 	public Integer cadastrarNoticia(Noticia noticia) {
-
-		LocalDate date = LocalDate.now();
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
 		SimpleJdbcInsert insert = new SimpleJdbcInsert(ds);
 		insert.withTableName("TB_NOTICIAS").usingGeneratedKeyColumns("id_noticia");
 
@@ -70,9 +64,7 @@ public class NoticiaDaoImpl implements NoticiaDao {
 		params.addValue("titulo", noticia.getTitulo());
 		params.addValue("textoConteudo", noticia.getTextoConteudo());
 		params.addValue("urlImagem", noticia.getUrlImagem());
-		params.addValue("dataPublicacao", date.format(formatter));
 		params.addValue("autor", "usuario");
-		params.addValue("acessos", 0);
 		params.addValue("categoria", noticia.getCategoria());
 
 		Integer result = (Integer) insert.executeAndReturnKey(params);

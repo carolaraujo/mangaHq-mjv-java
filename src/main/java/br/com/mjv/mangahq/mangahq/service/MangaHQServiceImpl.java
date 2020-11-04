@@ -16,22 +16,22 @@ public class MangaHQServiceImpl implements MangaHQService {
 	private MangaHQDao dao;
 	
 	@Override
-	public Integer cadastrarMangaHq(MangaHQ mangahq) {
-		Integer id = dao.cadastrarMangaHq(mangahq);
+	public Integer cadastrarNovoMangaHq(MangaHQ mangahq) {
+		Integer id = dao.cadastrarNovoMangaHq(mangahq);
 		return id;
 		
 	}
 
 	@Override
-	public List<MangaHQ> listarMeusMangasHqs(Usuario usuario) {
-		List<MangaHQ> list = dao.listarMeusMangasHqs(usuario);
+	public List<MangaHQ> listarMangasHqsUsuario(Usuario usuario) {
+		List<MangaHQ> list = dao.listarMangasHqsUsuario(usuario);
 		return list;
 	}
 
 	@Override
 	public List<MangaHQ> mangasHqsNaoAdquiridos(Usuario usuario) {
-		List<MangaHQ> minhaLista = listarMeusMangasHqs(usuario);
-		List<MangaHQ> list = todosMangasHqs();
+		List<MangaHQ> minhaLista = listarMangasHqsUsuario(usuario);
+		List<MangaHQ> list = todosMangasHqsCadastrados();
 		
 		list.removeAll(minhaLista);
 		
@@ -39,8 +39,8 @@ public class MangaHQServiceImpl implements MangaHQService {
 	}
 
 	@Override
-	public List<MangaHQ> todosMangasHqs() {
-		List<MangaHQ> list = dao.todosMangasHqs();
+	public List<MangaHQ> todosMangasHqsCadastrados() {
+		List<MangaHQ> list = dao.todosMangasHqsCadastrados();
 		return list;
 	}
 
@@ -48,6 +48,11 @@ public class MangaHQServiceImpl implements MangaHQService {
 	public MangaHQ buscarPorId(Integer id) {
 		MangaHQ mangahq = dao.buscarPorId(id);
 		return mangahq;
+	}
+
+	@Override
+	public void adquirirMangaHq(Usuario usuario, MangaHQ mangahq) {
+		dao.adquirirMangaHq(usuario, mangahq);
 	}
 
 }

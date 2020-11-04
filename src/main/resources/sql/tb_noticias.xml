@@ -4,9 +4,7 @@
 <properties>
 	<comment>SQL TABELA NOTICIAS</comment>
 	
-	<entry key="sql.findAll.descBy.acessos">
-		SELECT * FROM TB_NOTICIAS ORDER BY acessos DESC
+	<entry key="sql.findAll">
+		SELECT * FROM TB_NOTICIAS
 	</entry>
-	
-	
 </properties>
