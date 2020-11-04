@@ -1,7 +1,7 @@
 package br.com.mjv.mangahq.noticia.controller;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,8 +22,15 @@ import br.com.mjv.mangahq.noticia.service.NoticiaService;
 import br.com.mjv.mangahq.usuario.model.Usuario;
 import br.com.mjv.mangahq.usuario.service.UsuarioService;
 
+/**
+ * Classe de mapeamento para rotas referentes a Notícias
+ * @author kaique
+ *GET /mangahq/user/{id}/noticias - Página com todas as notícias
+ *GET /mangahq/user/{id}/noticias/cadastro - Página de cadastro de notícias
+ *POST /mangahq/user/{id}/noticias/cadastro - Validação de cadastro de notícia e postagem
+ */
 @Controller
-@RequestMapping
+@RequestMapping("mangahq/user/{id}/noticias")
 public class NoticiaController {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(HomeController.class);
@@ -39,7 +46,7 @@ public class NoticiaController {
 	 * @param id
 	 * @return uma ModelAndView para página de notícias
 	 */
-	@GetMapping("mangahq/user/{id}/noticias")
+	@GetMapping
 	public ModelAndView exibirNoticias(@PathVariable(value="id") Integer id) {
 		ModelAndView mv = null;
 		try {
@@ -65,7 +72,7 @@ public class NoticiaController {
 	 * @param id
 	 * @return uma página de cadastro de notícia
 	 */
-	@GetMapping("mangahq/user/{id}/noticias/cadastro")
+	@GetMapping("/cadastro")
 	public ModelAndView cadastroNoticias(@PathVariable(value="id") Integer id) {
 		ModelAndView mv = null;
 		try {
@@ -92,28 +99,26 @@ public class NoticiaController {
 	 * @param model
 	 * @return para a página de notícias caso o cadastro seja bem sucedido.
 	 */
-	@PostMapping("mangahq/user/{id}/noticias/cadastro")
+	@PostMapping("/cadastro")
 	public String validarCadastroNoticias(@PathVariable(value="id") Integer id, Noticia noticia, RedirectAttributes atributos, Model model) {
 		try {
 			LOGGER.info("Inicio do método Controller para validação de cadastro de notícias");
-			Map<String, String> errorMsg = new HashMap<>();
+			List<String> errormsg = new ArrayList<>();
 			
 			if(StringUtils.isEmpty(noticia.getTitulo())) {
-				errorMsg.put("titulo","O campo de título não pode estar vazio!");
+				errormsg.add("O campo de título não pode estar vazio!");
 			}
 			
 			if(StringUtils.isEmpty(noticia.getUrlImagem())) {
-				errorMsg.put("urlImagem","O campo de URL da Imagem não pode estar vazio!");
+				errormsg.add("O campo de URL da Imagem não pode estar vazio!");
 			}
 			
 			if(StringUtils.isEmpty(noticia.getTextoConteudo())) {
-				errorMsg.put("textoConteudo","O campo de texto da notícia não pode estar vazio!");
+				errormsg.add("O campo de texto da notícia não pode estar vazio!");
 			}
 		
-			if(!errorMsg.isEmpty()) {
-				String msg = "Não Cadastrado!";
-				atributos.addFlashAttribute("msg", msg);
-				atributos.addFlashAttribute("errorMsg", errorMsg);
+			if(!errormsg.isEmpty()) {
+				atributos.addFlashAttribute("errormsg", errormsg);
 				return "redirect:/mangahq/user/" + id + "/noticias/cadastro";
 			}
 			String msg = "Cadastrado!";

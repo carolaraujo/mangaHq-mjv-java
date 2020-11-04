@@ -19,18 +19,22 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.mjv.mangahq.mangahq.model.MangaHQ;
 import br.com.mjv.mangahq.mangahq.service.MangaHQService;
-import br.com.mjv.mangahq.noticia.service.NoticiaService;
 import br.com.mjv.mangahq.usuario.model.Usuario;
 import br.com.mjv.mangahq.usuario.service.UsuarioService;
 
+/**
+ * Classe de mapeamento de rotas referentes a Mangas/HQs
+ * @author kaique
+ *GET /mangahq/user/{id}/mangashqs - Página para exibir e gerenciar mangás/hqs
+ *GET /mangahq/user/{id}/mangashqs/cadastrar - Página para cadastro de mangas/hqs
+ *POST /mangahq/user/{id}/mangashqs/cadastrar - Validação de cadastro de mangas/hqs e postagem
+ *POST /mangahq/user/{id}/mangashqs/adquirir - Rota usada para um usuário adquirir um manga/hq
+ */
 @Controller
-@RequestMapping
+@RequestMapping("/mangahq/user/{id}/mangashqs")
 public class MangaHQController {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(MangaHQController.class);
-	
-	@Autowired
-	private NoticiaService noticiaService;
 	
 	@Autowired
 	private UsuarioService usuarioService;
@@ -43,7 +47,7 @@ public class MangaHQController {
 	 * @param id
 	 * @return uma ModelAndView direcionando para a página adequada.
 	 */
-	@GetMapping("mangahq/user/{id}/mangashqs")
+	@GetMapping
 	public ModelAndView exibirMangasHqs(@PathVariable(value="id") Integer id) {
 		ModelAndView mv = null;
 		try {
@@ -74,7 +78,7 @@ public class MangaHQController {
 	 * @param attributes
 	 * @return o manga clicado para a lista de mangas adquiridos
 	 */
-	@GetMapping("mangahq/user/{id}/mangashqs/adquirir")
+	@GetMapping("/adquirir")
 	public String adquirirMangaHq(
 			@PathVariable(value="id") Integer id,
 			@RequestParam("id_manga_hq") String id_mangahq,
@@ -85,7 +89,7 @@ public class MangaHQController {
 			MangaHQ mangahq = mangahqService.buscarPorId(Integer.parseInt(id_mangahq));
 			Usuario usuario = usuarioService.buscarPorId(id);
 			
-			Integer id_cadastro = usuarioService.cadastrarMangaHqParaUsuario(usuario, mangahq);
+			usuarioService.cadastrarMangaHqParaUsuario(usuario, mangahq);
 						
 			LOGGER.info("Fim do método ativado ao clicar em adquirir um manga/hq.");
 			return "redirect:/mangahq/user/{id}/mangashqs";
@@ -102,7 +106,7 @@ public class MangaHQController {
 	 * @param attributes
 	 * @return a página de cadastro de manga/hq.
 	 */
-	@GetMapping("mangahq/user/{id}/mangashqs/cadastro")
+	@GetMapping("/cadastro")
 	public ModelAndView cadastrarMangasHqs(@PathVariable(value="id") Integer id, RedirectAttributes attributes) {
 		ModelAndView mv = null;
 		try {
@@ -129,35 +133,33 @@ public class MangaHQController {
 	 * @param attributes
 	 * @return para página de mangas/hqs caso seja cadastrado com sucesso.
 	 */
-	@PostMapping("mangahq/user/{id}/mangashqs/cadastro")
+	@PostMapping("/cadastro")
 	public String validarCadastroMangaHq(@PathVariable(value="id") Integer id, MangaHQ mangahq, RedirectAttributes attributes, Model model) {
 		try {
 			LOGGER.info("Início do método de validação de cadastro de manga/hq.");
 			Usuario usuario = usuarioService.buscarPorId(id);
 			attributes.addFlashAttribute("usuario", usuario);
 
-			List<String> errorMsg = new ArrayList<>();
+			List<String> errormsg = new ArrayList<>();
 
 			if(StringUtils.isEmpty(mangahq.getTitulo())) {
-				errorMsg.add("O campo de Título não pode estar vazio!");
+				errormsg.add("O campo de Título não pode estar vazio!");
 			}
 			if(StringUtils.isEmpty(mangahq.getAutor())) {
-				errorMsg.add("O campo Autor não pode estar vazio!");
+				errormsg.add("O campo Autor não pode estar vazio!");
 			}
 			if(StringUtils.isEmpty(mangahq.getUrlCapa())) {
-				errorMsg.add("O campo Url da Imagem não pode estar vazio!");
+				errormsg.add("O campo Url da Imagem não pode estar vazio!");
 			}
 			if(StringUtils.isEmpty(mangahq.getVolumes())) {
-				errorMsg.add("O campo de Volumes não pode estar vazio!");
+				errormsg.add("O campo de Volumes não pode estar vazio!");
 			}
 			if(StringUtils.isEmpty(mangahq.getResumo())) {
-				errorMsg.add("O campo de Resumo não pode estar vazio!");
+				errormsg.add("O campo de Resumo não pode estar vazio!");
 			}
-			if(!errorMsg.isEmpty()) {
-				String msg = "Não foi possível cadastrar:";
-				attributes.addFlashAttribute("msg", msg);
-				attributes.addFlashAttribute("errorMsg",errorMsg);
-				return "redirect:/mangahq/user/" + id + "/noticias/cadastro";
+			if(!errormsg.isEmpty()) {
+				attributes.addFlashAttribute("errormsg", errormsg);
+				return "redirect:/mangahq/user/" + id + "/mangashqs/cadastro";
 			}
 			
 			mangahqService.cadastrarMangaHq(mangahq);

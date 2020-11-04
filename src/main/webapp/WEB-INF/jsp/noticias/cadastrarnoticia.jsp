@@ -63,10 +63,12 @@ pageEncoding="UTF-8"%>
     <!-- MAIN -->	
 	<main class="container my-5">
 		<h1 class="jumbotron text-center">Cadastrar Notícia</h1>
-		<c:if test="${ msg != null }">
-			<div class="alert alert-success" role="alert">
-			  <c:out value="${ msg }"></c:out>
-			</div>
+		<c:if test="${ errormsg != null }">
+			<c:forEach var="msg" items="${ errormsg }">
+				<div class="alert alert-danger" role="alert">
+				  <c:out value="${ msg }"></c:out>
+				</div>
+			</c:forEach>
 		</c:if>
 		<form action="/mangahq/user/${ id }/noticias/cadastro" method="post">
 		  <div class="form-group">
