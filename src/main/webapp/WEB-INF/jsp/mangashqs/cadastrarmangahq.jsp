@@ -58,6 +58,9 @@ prefix = "c" %> <%@ taglib uri = "http://java.sun.com/jsp/jstl/fmt" prefix =
 	              <a class="nav-link" href="../mangashqs/cadastro">Novo Manga/HQ<span class="sr-only">(current)</span></a>
 	            </li>
             </c:if>
+            <li class="nav-item">
+              	<a class="nav-link" href="/mangahq/logout">Logout</a>
+            </li>
           </ul>
         </div>
       </nav>
