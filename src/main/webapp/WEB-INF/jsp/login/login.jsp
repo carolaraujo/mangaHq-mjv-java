@@ -60,11 +60,11 @@
 	<!-- Main  -->
 	<main class="container py-5">
 		<h1>Faça login para acessar nosso site!</h1>
-		<c:if test="${ mensagem != null }">
-				<div class="alert alert-danger my-2" role="alert">
-		 	 		<c:out value="${ mensagem }" />
-				</div>
-			</c:if>
+		<c:if test="${ errormsg != null }">
+			<div class="alert alert-danger" role="alert">
+			  <c:out value="${ errormsg }"></c:out>
+			</div>
+		</c:if>
 		<form class="mb-2" action="mangahq/validarlogin" method="post">
 			  <div class="form-group">
 			    <label for="login">Login</label>

@@ -60,6 +60,13 @@
 	<!-- Main -->
 	<main class="container py-5">
 		<h1>Cadastre-se para ter acesso aos nossos conteúdos!</h1>
+		<c:if test="${ errormsg != null }">
+			<c:forEach var="msg" items="${ errormsg }">
+				<div class="alert alert-danger" role="alert">
+				  <c:out value="${ msg }"></c:out>
+				</div>
+			</c:forEach>
+		</c:if>
 		<form class="mt-2" action="cadastrarusuario" method="post">
 			<div class="form-group">
 			    <label for="nome">Nome</label>

@@ -20,7 +20,11 @@ import br.com.mjv.mangahq.usuario.service.UsuarioService;
 /**
  * Método controller das rotas relacionadas a login
  * @author kaique
- *
+ * @routes
+ * GET /mangahq - Tela inicial, formulário de login
+ * GET /mangahq/cadastrarusuario - Tela para cadastro de usuario
+ * POST /mangahq/cadastrarusuario - Validação do cadastro de usuario
+ * POST /mangahq/validarlogin - valida os campos e realiza login.
  */
 @Controller
 @RequestMapping("/mangahq")
@@ -36,7 +40,7 @@ public class LoginController {
 	 * Primeira página exibida, rota /mangahg
 	 * @return uma página para login
 	 */
-	@GetMapping()
+	@GetMapping
 	public String login(Model model) {
 		try {
 			LOGGER.info("Início do método Controller de acesso a página Login");
@@ -124,7 +128,7 @@ public class LoginController {
 	@PostMapping("/validarlogin")
 	public String validarLogin(Usuario usuario, RedirectAttributes atributos, Model model) {
 		try {
-			LOGGER.info("incio do método Controller de validação de login");
+			LOGGER.info("Inicio do método Controller de validação de login");
 			String msg = null;
 			
 			if(StringUtils.isEmpty(usuario.getLogin())) {
@@ -143,7 +147,7 @@ public class LoginController {
 				return "redirect:/mangahq";
 			}
 			
-			LOGGER.info("fim do método Controller de validação de login");
+			LOGGER.info("Fim do método Controller de validação de login");
 			return "redirect:/mangahq/user/" + usuarioValido.getId_usuario() + "/home";
 		}catch(Exception e) {
 			LOGGER.error(e.getMessage());

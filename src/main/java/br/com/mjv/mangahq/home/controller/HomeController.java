@@ -19,7 +19,7 @@ import br.com.mjv.mangahq.usuario.service.UsuarioService;
  *
  */
 @Controller
-@RequestMapping
+@RequestMapping("/mangahq/user/{id}/home")
 public class HomeController {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(HomeController.class);
@@ -34,8 +34,10 @@ public class HomeController {
 	 * Controller para a rota /{id}/home
 	 * Caso ocorra um erro, retorna uma página personalizada de erros.
 	 * @return uma página inicial, exibida após um login bem sucedido.
+	 * @routes
+	 * GET /mangahq/user/{id}/home - Primeira página exibida ao logar
 	 */
-	@GetMapping("mangahq/user/{id}/home")
+	@GetMapping
 	public ModelAndView home(@PathVariable(value="id") Integer id) {
 		ModelAndView mv = null;
 		try {

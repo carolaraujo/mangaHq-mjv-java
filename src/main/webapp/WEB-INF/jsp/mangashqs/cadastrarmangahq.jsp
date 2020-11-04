@@ -65,10 +65,12 @@ prefix = "c" %> <%@ taglib uri = "http://java.sun.com/jsp/jstl/fmt" prefix =
     <!-- Main -->
     <main class="container my-5">
     	<h1 class="jumbotron text-center">Cadastrar novo Manga ou HQ</h1>
-    	<c:if test="${ msg != null }">
-			<div class="alert alert-success" role="alert">
-			  <c:out value="${ msg }"></c:out>
-			</div>
+    	<c:if test="${ errormsg != null }">
+			<c:forEach var="msg" items="${ errormsg }">
+				<div class="alert alert-danger" role="alert">
+				  <c:out value="${ msg }"></c:out>
+				</div>
+			</c:forEach>
 		</c:if>
         <form action="/mangahq/user/${ id }/mangashqs/cadastro" method="post">
 		  <div class="form-row">
