@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<comment>SQL TABELA USUARIO</comment>
+	
+	<entry key="sql.findUsuario.by.login">
+		SELECT * FROM TB_USUARIO WHERE login = :login
+	</entry>
+	
+	<entry key="sql.findUsuario.by.id">
+		SELECT * FROM TB_USUARIO WHERE id_usuario = :id
+	</entry>
+</properties>

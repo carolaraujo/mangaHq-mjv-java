@@ -6,8 +6,9 @@ import br.com.mjv.mangahq.mangahq.model.MangaHQ;
 import br.com.mjv.mangahq.usuario.model.Usuario;
 
 public interface MangaHQDao {
-	Integer cadastrarMangaHq(MangaHQ mangahq);
-	List<MangaHQ> listarMeusMangasHqs(Usuario usuario);
-	List<MangaHQ> todosMangasHqs();
+	Integer cadastrarNovoMangaHq(MangaHQ mangahq);
+	List<MangaHQ> listarMangasHqsUsuario(Usuario usuario);
+	List<MangaHQ> todosMangasHqsCadastrados();
 	MangaHQ buscarPorId(Integer id);
+	void adquirirMangaHq(Usuario usuario, MangaHQ mangahq);
 }

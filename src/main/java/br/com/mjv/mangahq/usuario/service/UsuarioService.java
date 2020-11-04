@@ -1,6 +1,5 @@
 package br.com.mjv.mangahq.usuario.service;
 
-import br.com.mjv.mangahq.mangahq.model.MangaHQ;
 import br.com.mjv.mangahq.usuario.model.Usuario;
 
 /**
@@ -35,5 +34,4 @@ public interface UsuarioService {
 	 */
 	Usuario buscarPorId(Integer id);
 	
-	Integer cadastrarMangaHqParaUsuario(Usuario usuario, MangaHQ mangahq);
 }

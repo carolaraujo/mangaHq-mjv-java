@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<comment>SQL TABELA MANGAS_HQS</comment>
+	
+	<entry key="sql.findAll.mangashqs.userHave.by.id">
+		SELECT u.login, mh.*, umh.fk_id_usuario, umh.fk_id_mangahq 
+		FROM TB_USUARIO u, TB_MANGAS_HQS mh, TB_USUARIO_MANGASHQS umh
+		WHERE fk_id_mangahq = id_mangahq 
+		AND fk_id_usuario = id_usuario 
+		AND id_usuario = :id_usuario;
+	</entry>
+	<entry key="sql.findAll.mangashqs">
+		SELECT * FROM TB_MANGAS_HQS
+	</entry>
+	<entry key="sql.find.mangashqs.by.id">
+		SELECT * FROM TB_MANGAS_HQS WHERE id_mangahq = :id_mangahq
+	</entry>
+	
+</properties>

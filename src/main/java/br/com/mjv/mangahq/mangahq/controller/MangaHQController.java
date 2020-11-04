@@ -56,7 +56,7 @@ public class MangaHQController {
 			Usuario usuario = usuarioService.buscarPorId(id);
 			mv.addObject("usuario", usuario);
 			
-			List<MangaHQ> list = mangahqService.listarMeusMangasHqs(usuario);
+			List<MangaHQ> list = mangahqService.listarMangasHqsUsuario(usuario);
 			mv.addObject("listmangahq", list);
 			
 			List<MangaHQ> naoAdquiridos = mangahqService.mangasHqsNaoAdquiridos(usuario);
@@ -89,7 +89,7 @@ public class MangaHQController {
 			MangaHQ mangahq = mangahqService.buscarPorId(Integer.parseInt(id_mangahq));
 			Usuario usuario = usuarioService.buscarPorId(id);
 			
-			usuarioService.cadastrarMangaHqParaUsuario(usuario, mangahq);
+			mangahqService.adquirirMangaHq(usuario, mangahq);
 						
 			LOGGER.info("Fim do método ativado ao clicar em adquirir um manga/hq.");
 			return "redirect:/mangahq/user/{id}/mangashqs";
@@ -162,7 +162,7 @@ public class MangaHQController {
 				return "redirect:/mangahq/user/" + id + "/mangashqs/cadastro";
 			}
 			
-			mangahqService.cadastrarMangaHq(mangahq);
+			mangahqService.cadastrarNovoMangaHq(mangahq);
 			LOGGER.info("Fim do método de validação de cadastro de manga/hq.");
 			return "redirect:/mangahq/user/" + id + "/mangashqs";
 		}catch (Exception e) {

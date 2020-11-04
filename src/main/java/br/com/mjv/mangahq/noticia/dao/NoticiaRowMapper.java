@@ -13,7 +13,6 @@ import br.com.mjv.mangahq.noticia.model.Noticia;
  * @author kaique
  *
  */
-
 public class NoticiaRowMapper implements RowMapper<Noticia>{
 
 	@Override
@@ -25,7 +24,6 @@ public class NoticiaRowMapper implements RowMapper<Noticia>{
 		noticia.setUrlImagem(rs.getString("urlImagem"));
 		noticia.setDataPublicacao(rs.getDate("dataPublicacao"));
 		noticia.setAutor(rs.getString("autor"));
-		noticia.setAcessos(rs.getLong("acessos"));
 		noticia.setCategoria(Categoria.valueOf(rs.getString("categoria")));
 		return noticia;
 	}

@@ -9,6 +9,8 @@ import java.util.Map;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -19,6 +21,7 @@ import br.com.mjv.mangahq.mangahq.model.MangaHQ;
 import br.com.mjv.mangahq.usuario.model.Usuario;
 
 @Repository
+@PropertySource("classpath:sql/tb_mangas_hqs.xml")
 public class MangaHQDaoImpl implements MangaHQDao {
 	
 	@Autowired
@@ -26,9 +29,18 @@ public class MangaHQDaoImpl implements MangaHQDao {
 	
 	@Autowired
 	private NamedParameterJdbcTemplate template;
+	
+	@Value("${sql.findAll.mangashqs.userHave.by.id}")
+	private String SQL_FINDALL_MANGASHQS_USERHAVE_BY_ID;
+	
+	@Value("${sql.findAll.mangashqs}")
+	private String SQL_FINDALL_MANGASHQS;
+	
+	@Value("${sql.find.mangashqs.by.id}")
+	private String SQL_FIND_MANGASHQS_BY_ID;
 
 	@Override
-	public Integer cadastrarMangaHq(MangaHQ mangahq) {
+	public Integer cadastrarNovoMangaHq(MangaHQ mangahq) {
 		SimpleJdbcInsert insertMangahq = new SimpleJdbcInsert(ds).usingGeneratedKeyColumns("id_mangahq");
 		insertMangahq.withTableName("TB_MANGAS_HQS");
 		
@@ -50,13 +62,12 @@ public class MangaHQDaoImpl implements MangaHQDao {
 	}
 
 	@Override
-	public List<MangaHQ> listarMeusMangasHqs(Usuario usuario) {
+	public List<MangaHQ> listarMangasHqsUsuario(Usuario usuario) {
 		try {
-			String sql = "SELECT u.login, m.* FROM TB_USUARIO u, TB_MANGAS_HQS m  WHERE login = :login AND fk_id_mangahq = id_mangahq";
 			MapSqlParameterSource params = new MapSqlParameterSource();
-			params.addValue("login", usuario.getLogin());
+			params.addValue("id_usuario", usuario.getId_usuario());
 			
-			List<MangaHQ> list = template.query(sql, params, new MangaHQRowMapper());
+			List<MangaHQ> list = template.query(SQL_FINDALL_MANGASHQS_USERHAVE_BY_ID, params, new MangaHQRowMapper());
 			return list;
 		}catch(EmptyResultDataAccessException e) {
 			e.printStackTrace();
@@ -65,10 +76,9 @@ public class MangaHQDaoImpl implements MangaHQDao {
 	}
 
 	@Override
-	public List<MangaHQ> todosMangasHqs() {
+	public List<MangaHQ> todosMangasHqsCadastrados() {
 		try {
-			String sql = "SELECT * FROM TB_MANGAS_HQS";	
-			List<MangaHQ> list = template.query(sql, new MangaHQRowMapper());
+			List<MangaHQ> list = template.query(SQL_FINDALL_MANGASHQS, new MangaHQRowMapper());
 			return list;
 		}catch(EmptyResultDataAccessException e) {
 			e.printStackTrace();
@@ -79,10 +89,9 @@ public class MangaHQDaoImpl implements MangaHQDao {
 	@Override
 	public MangaHQ buscarPorId(Integer id) {
 		try {
-			String sql = "SELECT * FROM TB_MANGAS_HQS WHERE id_mangahq = :id_mangahq";
 			MapSqlParameterSource params = new MapSqlParameterSource();
 			params.addValue("id_mangahq", id);
-			MangaHQ mangahq = template.queryForObject(sql, params, new MangaHQRowMapper());
+			MangaHQ mangahq = template.queryForObject(SQL_FIND_MANGASHQS_BY_ID, params, new MangaHQRowMapper());
 			return mangahq;
 		}catch(EmptyResultDataAccessException e) {
 			e.printStackTrace();
@@ -90,6 +99,17 @@ public class MangaHQDaoImpl implements MangaHQDao {
 		}
 	}
 
-	
+	@Override
+	public void adquirirMangaHq(Usuario usuario, MangaHQ mangahq) {
+		SimpleJdbcInsert insert = new SimpleJdbcInsert(ds);
+		insert.withTableName("TB_USUARIO_MANGASHQS");
+		insert.usingColumns("fk_id_usuario", "fk_id_mangahq");
 
+		MapSqlParameterSource params = new MapSqlParameterSource();
+
+		params.addValue("fk_id_usuario", usuario.getId_usuario());
+		params.addValue("fk_id_mangahq", mangahq.getId_mangahq());
+
+		insert.execute(params);
+	}
 }
