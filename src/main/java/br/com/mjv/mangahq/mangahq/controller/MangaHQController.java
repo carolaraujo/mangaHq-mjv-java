@@ -48,12 +48,18 @@ public class MangaHQController {
 	 * @return uma ModelAndView direcionando para a página adequada.
 	 */
 	@GetMapping
-	public ModelAndView exibirMangasHqs(@PathVariable(value="id") Integer id) {
+	public ModelAndView exibirMangasHqs(@PathVariable(value="id") Integer id, RedirectAttributes atributos) {
 		ModelAndView mv = null;
 		try {
 			LOGGER.info("Início do método de acesso a página de lista de Mangas/HQs");
-			mv = new ModelAndView("/mangashqs/mangashqs");
 			Usuario usuario = usuarioService.buscarPorId(id);
+			
+			if(usuario == null) {
+				LOGGER.warn("Uma tentativa de acesso inapropriada foi verificada: um id inválido foi inserido na URL");
+				mv = new ModelAndView("redirect:/mangahq");
+				return mv;
+			}
+			mv = new ModelAndView("/mangashqs/mangashqs");
 			mv.addObject("usuario", usuario);
 			
 			List<MangaHQ> list = mangahqService.listarMangasHqsUsuario(usuario);
@@ -89,6 +95,11 @@ public class MangaHQController {
 			MangaHQ mangahq = mangahqService.buscarPorId(Integer.parseInt(id_mangahq));
 			Usuario usuario = usuarioService.buscarPorId(id);
 			
+			if(usuario == null) {
+				LOGGER.warn("Uma tentativa de acesso inapropriada foi verificada: um id inválido foi inserido na URL");
+				return "redirect:/mangahq";
+			}
+			
 			mangahqService.adquirirMangaHq(usuario, mangahq);
 						
 			LOGGER.info("Fim do método ativado ao clicar em adquirir um manga/hq.");
@@ -111,8 +122,15 @@ public class MangaHQController {
 		ModelAndView mv = null;
 		try {
 			LOGGER.info("Início do método de acesso a página de cadastro de manga/hq.");
-			mv = new ModelAndView("mangashqs/cadastrarmangahq");
 			Usuario usuario = usuarioService.buscarPorId(id);
+			
+			if(usuario == null) {
+				LOGGER.warn("Uma tentativa de acesso inapropriada foi verificada: um id inválido foi inserido na URL");
+				mv = new ModelAndView("redirect:/mangahq");
+				return mv;
+			}
+			
+			mv = new ModelAndView("mangashqs/cadastrarmangahq");
 			mv.addObject("usuario", usuario);
 			System.out.println(usuario.getTipoUsuario());
 			LOGGER.info("Fim do método de acesso a página de cadastro de manga/hq.");
@@ -138,6 +156,12 @@ public class MangaHQController {
 		try {
 			LOGGER.info("Início do método de validação de cadastro de manga/hq.");
 			Usuario usuario = usuarioService.buscarPorId(id);
+			 
+			if(usuario == null) {
+				LOGGER.warn("Uma tentativa de acesso inapropriada foi verificada: um id inválido foi inserido na URL");
+				return "redirect:/mangahq";
+			}
+			
 			attributes.addFlashAttribute("usuario", usuario);
 
 			List<String> errormsg = new ArrayList<>();

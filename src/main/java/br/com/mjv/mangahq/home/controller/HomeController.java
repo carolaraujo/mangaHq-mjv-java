@@ -4,10 +4,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.mjv.mangahq.noticia.service.NoticiaService;
 import br.com.mjv.mangahq.usuario.model.Usuario;
@@ -38,23 +39,25 @@ public class HomeController {
 	 * GET /mangahq/user/{id}/home - Primeira página exibida ao logar
 	 */
 	@GetMapping
-	public ModelAndView home(@PathVariable(value="id") Integer id) {
-		ModelAndView mv = null;
+	public String home(@PathVariable(value="id") Integer id, RedirectAttributes attributes, Model model) {
 		try {
 			LOGGER.info("Inicio do método Controller de acesso a página Home");
-			mv = new ModelAndView("home");
 			Usuario usuario = usuarioService.buscarPorId(id);
-			mv.addObject("maisLidas", noticiaService.buscarNoticias(6));
-			mv.addObject("principaisNoticias", noticiaService.buscarNoticias(6, 20));
-			mv.addObject("usuario", usuario);
+			
+			if(usuario == null) {
+				LOGGER.warn("Uma tentativa de acesso inapropriada foi verificada: um id inválido foi inserido na URL");
+				return "redirect:/mangahq";
+			}
+			model.addAttribute("maisLidas", noticiaService.buscarNoticias(6));
+			model.addAttribute("principaisNoticias", noticiaService.buscarNoticias(6, 20));
+			model.addAttribute("usuario", usuario);
 			
 			LOGGER.info("Fim do método Controller de acesso a página Home");
-			return mv;
+			return "home";
 		}catch(Exception e) {
 			LOGGER.error(e.getMessage());
-			mv = new ModelAndView("error/error");
-			mv.addObject("errormsg", "Ocorreu um erro, tente mais tarde.");
-			return mv;
+			model.addAttribute("errormsg", "Ocorreu um erro, tente mais tarde.");
+			return "error/error";
 		}
 	}
 }

@@ -51,9 +51,15 @@ public class NoticiaController {
 		ModelAndView mv = null;
 		try {
 			LOGGER.info("Inicio do método Controller de acesso a página de noticias");
-			mv = new ModelAndView("noticias/noticias");
 			Usuario usuario = usuarioService.buscarPorId(id);
-					
+
+			if(usuario == null) {
+				LOGGER.warn("Uma tentativa de acesso inapropriada foi verificada: um id inválido foi inserido na URL");
+				mv = new ModelAndView("redirect:/mangahq");
+				return mv;
+			}
+			
+			mv = new ModelAndView("noticias/noticias");
 			mv.addObject("principaisNoticias", noticiaService.buscarNoticias(99));
 			mv.addObject("usuario", usuario);
 			
@@ -77,8 +83,15 @@ public class NoticiaController {
 		ModelAndView mv = null;
 		try {
 			LOGGER.info("Inicio do método Controller de acesso a página de cadastro de notícias");
-			mv = new ModelAndView("noticias/cadastrarnoticia");
 			Usuario usuario = usuarioService.buscarPorId(id);
+			
+			if(usuario == null) {
+				LOGGER.warn("Uma tentativa de acesso inapropriada foi verificada: um id inválido foi inserido na URL");
+				mv = new ModelAndView("redirect:/mangahq");
+				return mv;
+			}
+			
+			mv = new ModelAndView("noticias/cadastrarnoticia");
 			mv.addObject("usuario", usuario);
 			mv.addObject("id", id);
 			LOGGER.info("Fim do método Controller de acesso a página de cadastro de notícias");
@@ -103,6 +116,13 @@ public class NoticiaController {
 	public String validarCadastroNoticias(@PathVariable(value="id") Integer id, Noticia noticia, RedirectAttributes atributos, Model model) {
 		try {
 			LOGGER.info("Inicio do método Controller para validação de cadastro de notícias");
+			Usuario usuario = usuarioService.buscarPorId(id);
+			
+			if(usuario == null) {
+				LOGGER.warn("Uma tentativa de acesso inapropriada foi verificada: um id inválido foi inserido na URL");
+				return "redirect:/mangahq";
+			}
+			
 			List<String> errormsg = new ArrayList<>();
 			
 			if(StringUtils.isEmpty(noticia.getTitulo())) {
@@ -123,10 +143,8 @@ public class NoticiaController {
 			}
 			String msg = "Cadastrado!";
 			atributos.addFlashAttribute("msg", msg);
-		
-			Usuario usuario = usuarioService.buscarPorId(id);
 			atributos.addFlashAttribute("usuario", usuario);
-			
+					
 			noticiaService.cadastrarNoticia(noticia, usuario);
 			
 			LOGGER.info("Fim do método Controller para validação de cadastro de notícias");

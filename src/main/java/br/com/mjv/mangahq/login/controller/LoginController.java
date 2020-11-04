@@ -30,7 +30,6 @@ import br.com.mjv.mangahq.usuario.service.UsuarioService;
 @RequestMapping("/mangahq")
 public class LoginController {
 	
-	
 	private static final Logger LOGGER = LoggerFactory.getLogger(LoginController.class);
 	
 	@Autowired
