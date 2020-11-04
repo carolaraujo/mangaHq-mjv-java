@@ -34,32 +34,68 @@ public class NoticiaController {
 	@Autowired
 	private UsuarioService usuarioService;
 	
-	
+	/**
+	 * Método para página de notícias
+	 * @param id
+	 * @return uma ModelAndView para página de notícias
+	 */
 	@GetMapping("mangahq/user/{id}/noticias")
 	public ModelAndView exibirNoticias(@PathVariable(value="id") Integer id) {
-		LOGGER.info("Inicio do método Controller de acesso a página Home");
-		Usuario usuario = usuarioService.buscarPorId(id);
-				
-		ModelAndView mv = new ModelAndView("noticias/noticias");
-		mv.addObject("principaisNoticias", noticiaService.buscarNoticias(99));
-		mv.addObject("usuario", usuario);
-		
-		LOGGER.info("Fim do método Controller de acesso a página Home");
-		return mv;
+		ModelAndView mv = null;
+		try {
+			LOGGER.info("Inicio do método Controller de acesso a página de noticias");
+			mv = new ModelAndView("noticias/noticias");
+			Usuario usuario = usuarioService.buscarPorId(id);
+					
+			mv.addObject("principaisNoticias", noticiaService.buscarNoticias(99));
+			mv.addObject("usuario", usuario);
+			
+			LOGGER.info("Fim do método Controller de acesso a página de notícias");
+			return mv;
+		}catch(Exception e) {
+			LOGGER.error(e.getMessage());
+			mv = new ModelAndView("error/error");
+			mv.addObject("errormsg", "Ocorreu um erro, tente mais tarde.");
+			return mv;
+		}
 	}
 	
+	/**
+	 * Método para exibir página de cadastro de notícia
+	 * @param id
+	 * @return uma página de cadastro de notícia
+	 */
 	@GetMapping("mangahq/user/{id}/noticias/cadastro")
 	public ModelAndView cadastroNoticias(@PathVariable(value="id") Integer id) {
-		ModelAndView mv = new ModelAndView("noticias/cadastrarnoticia");
-		Usuario usuario = usuarioService.buscarPorId(id);
-		mv.addObject("usuario", usuario);
-		mv.addObject("id", id);
-		return mv;
+		ModelAndView mv = null;
+		try {
+			LOGGER.info("Inicio do método Controller de acesso a página de cadastro de notícias");
+			mv = new ModelAndView("noticias/cadastrarnoticia");
+			Usuario usuario = usuarioService.buscarPorId(id);
+			mv.addObject("usuario", usuario);
+			mv.addObject("id", id);
+			LOGGER.info("Fim do método Controller de acesso a página de cadastro de notícias");
+			return mv;
+		}catch(Exception e) {
+			LOGGER.error(e.getMessage());
+			mv = new ModelAndView("error/error");
+			mv.addObject("errormsg", "Ocorreu um erro, tente mais tarde.");
+			return mv;
+		}
 	}
 	
+	/**
+	 * Método para validar o cadastro de uma notícia
+	 * @param id
+	 * @param noticia
+	 * @param atributos
+	 * @param model
+	 * @return para a página de notícias caso o cadastro seja bem sucedido.
+	 */
 	@PostMapping("mangahq/user/{id}/noticias/cadastro")
-	public String enviarCadastroNoticias(@PathVariable(value="id") Integer id, Noticia noticia, RedirectAttributes atributos, Model model) {
+	public String validarCadastroNoticias(@PathVariable(value="id") Integer id, Noticia noticia, RedirectAttributes atributos, Model model) {
 		try {
+			LOGGER.info("Inicio do método Controller para validação de cadastro de notícias");
 			Map<String, String> errorMsg = new HashMap<>();
 			
 			if(StringUtils.isEmpty(noticia.getTitulo())) {
@@ -86,14 +122,14 @@ public class NoticiaController {
 			Usuario usuario = usuarioService.buscarPorId(id);
 			atributos.addFlashAttribute("usuario", usuario);
 			
-			Integer i = noticiaService.cadastrarNoticia(noticia);
+			noticiaService.cadastrarNoticia(noticia);
 			
-			System.out.println(i);
-			
+			LOGGER.info("Fim do método Controller para validação de cadastro de notícias");
 			return "redirect:/mangahq/user/" + id + "/noticias";
 		}catch(Exception e) {
-			e.printStackTrace();
-			return "redirect:/mangahq/user/" + id + "/noticias/cadastro";			
+			LOGGER.error(e.getMessage());
+			model.addAttribute("errormsg", "Ocorreu um erro, tente mais tarde");
+			return "error/error";		
 		}
 	}
 }
