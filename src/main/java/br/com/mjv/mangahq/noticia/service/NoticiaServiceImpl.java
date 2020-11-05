@@ -21,7 +21,7 @@ import br.com.mjv.mangahq.usuario.model.Usuario;
 @Service
 public class NoticiaServiceImpl implements NoticiaService{
 	
-	private static final Logger LOGGER = LoggerFactory.getLogger(HomeController.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(NoticiaServiceImpl.class);
 
 	@Autowired
 	private NoticiaDao dao;
@@ -29,8 +29,8 @@ public class NoticiaServiceImpl implements NoticiaService{
 	
 	@Override
 	public List<Noticia> buscarTodasNoticias() {
-		LOGGER.info("Inicio do método buscarTodasNoticias em NoticiaServiceImpl");
-		LOGGER.info("Fim do método buscarTodasNoticias em NoticiaServiceImpl");
+		LOGGER.info("NoticiaServiceImpl - Inicio do método buscarTodasNoticias");
+		LOGGER.info("NoticiaServiceImpl - Fim do método buscarTodasNoticias");
 		return dao.buscarTodasNoticias();
 	}
 
@@ -38,7 +38,7 @@ public class NoticiaServiceImpl implements NoticiaService{
 	@Override
 	public List<Noticia> buscarNoticias(Integer quantidadeNoticias) {
 		try {
-			LOGGER.info("Inicio do método buscarTodasNoticias por quantidadeNoticias em NoticiaServiceImpl");
+			LOGGER.info("NoticiaServiceImpl - Inicio do método buscarNoticias @params quantidadeNoticias");
 			List<Noticia> noticias = buscarTodasNoticias();
 			Noticia noticiasMaisLidas[] = new Noticia[quantidadeNoticias];
 			
@@ -48,10 +48,10 @@ public class NoticiaServiceImpl implements NoticiaService{
 			noticias = Arrays.asList(noticiasMaisLidas);
 			return noticias;
 		}catch(IndexOutOfBoundsException e) {
-			LOGGER.warn("ATENÇÃO: O numero indicado para busca nos parâmetros é maior do que a quantidade de noticias no banco de dados. Retornando todas as notícias...");
+			LOGGER.error("NoticiaServiceImpl - " + e.getMessage());
 			return buscarTodasNoticias();
 		}finally {
-			LOGGER.info("Fim do método buscarTodasNoticias por quantidadeNoticias em NoticiaServiceImpl");
+			LOGGER.info("NoticiaServiceImpl - Fim do método buscarNoticias @params quantidadeNoticias");
 		}
 		
 	}
@@ -59,7 +59,7 @@ public class NoticiaServiceImpl implements NoticiaService{
 	@Override
 	public List<Noticia> buscarNoticias(Integer quantidadeNoticias, Integer quantidadePalavras) {
 		try {
-			LOGGER.info("Inicio do método buscarTodasNoticias por quantidadeNoticias e quantidadePalavras em NoticiaServiceImpl");
+			LOGGER.info("NoticiaServiceImpl - Inicio do método buscarNoticias @params quantidadeNoticias, quantidadePalavras");
 			List<Noticia> noticias = buscarTodasNoticias();
 			Noticia noticiasMaisLidas[] = new Noticia[quantidadeNoticias];
 			
@@ -78,21 +78,22 @@ public class NoticiaServiceImpl implements NoticiaService{
 			}
 			return noticias;
 		}catch (IndexOutOfBoundsException e) {
-			LOGGER.warn("ATENÇÃO: O numero indicado para busca nos parâmetros é maior do que a quantidade de noticias no banco de dados, ou maior que a quantidade de palavras cadastradas como descrição. Retornando todas as notícias com o texto completo...");
-			return buscarTodasNoticias();
+			LOGGER.error("NoticiaServiceImpl - " + e.getMessage());
+			return buscarNoticias(quantidadeNoticias);
 		}finally {
-			LOGGER.info("Fim do método buscarTodasNoticias por quantidadeNoticias e quantidadePalavras em NoticiaServiceImpl");
+			LOGGER.info("NoticiaServiceImpl - Fim do método buscarNoticias @params quantidadeNoticias, quantidadePalavras");
 		}
 	}
 
 
 	@Override
 	public Integer cadastrarNoticia(Noticia noticia, Usuario usuario) throws ImpossibleInsertException {
-		LOGGER.info("Inicio do método buscarTodasNoticias por quantidadeNoticias e quantidadePalavras em NoticiaServiceImpl");
+		LOGGER.info("NoticiaServiceImpl - Inicio do método cadastrarNoticia");
 		Integer id = dao.cadastrarNoticia(noticia, usuario);
 		if(id == 0) {
 			throw new ImpossibleInsertException("Não foi possível inserir a notícia. Tente mais tarde.");
 		}
+		LOGGER.info("NoticiaServiceImpl - Fim do método cadastrarNoticia");
 		return id;
 	}
 }
