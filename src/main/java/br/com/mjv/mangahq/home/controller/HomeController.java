@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.mjv.mangahq.exceptions.UserNotFoundException;
+import br.com.mjv.mangahq.mangahq.service.MangaHQService;
 import br.com.mjv.mangahq.noticia.service.NoticiaService;
 import br.com.mjv.mangahq.usuario.model.Usuario;
 import br.com.mjv.mangahq.usuario.service.UsuarioService;
@@ -32,6 +33,9 @@ public class HomeController {
 	@Autowired
 	private UsuarioService usuarioService;
 	
+	@Autowired
+	private MangaHQService mangahqService;
+	
 	/**
 	 * Controller para a rota /{id}/home
 	 * Caso ocorra um erro, retorna uma página personalizada de erros.
@@ -47,7 +51,6 @@ public class HomeController {
 			model.addAttribute("maisLidas", noticiaService.buscarNoticias(6));
 			model.addAttribute("principaisNoticias", noticiaService.buscarNoticias(6, 20));
 			model.addAttribute("usuario", usuario);
-			LOGGER.info("Fim do método Controller de acesso a página Home");
 			return "home";
 		}catch(UserNotFoundException e) {
 			LOGGER.error(e.getMessage());
@@ -57,6 +60,8 @@ public class HomeController {
 			LOGGER.error(e.getMessage());
 			model.addAttribute("errormsg", "Ocorreu um erro, tente mais tarde.");
 			return "error/error";
+		}finally {
+			LOGGER.info("Fim do método Controller de acesso a página Home");			
 		}
 	}
 }
