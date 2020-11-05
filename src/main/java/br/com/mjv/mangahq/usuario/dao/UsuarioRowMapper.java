@@ -8,6 +8,11 @@ import org.springframework.jdbc.core.RowMapper;
 import br.com.mjv.mangahq.enums.TipoUsuario;
 import br.com.mjv.mangahq.usuario.model.Usuario;
 
+/**
+ * Classe RowMapper referente a tabela TB_USUARIO
+ * @author kaique
+ *
+ */
 public class UsuarioRowMapper implements RowMapper<Usuario>{
 
 	@Override

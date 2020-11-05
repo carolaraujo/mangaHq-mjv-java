@@ -36,19 +36,20 @@ public class LoginController {
 	private UsuarioService service;
 	
 	/**
-	 * Primeira página exibida, rota /mangahg
+	 * Primeira página exibida
 	 * @return uma página para login
 	 */
 	@GetMapping
 	public String login(Model model) {
 		try {
-			LOGGER.info("Início do método Controller de acesso a página Login");
-			LOGGER.info("Fim do método Controller de acesso a página Login");
+			LOGGER.info("LoginController - Início do método @Get login");
 			return "login/login";
 		}catch (Exception e) {
-			LOGGER.error(e.getMessage());
+			LOGGER.error("LoginController - " + e.getMessage());
 			model.addAttribute("errormsg", "Ocorreu um erro, tente mais tarde");
 			return "error/error";
+		}finally {
+			LOGGER.info("LoginController - Fim do método @Get login");			
 		}
 	}
 	
@@ -59,13 +60,14 @@ public class LoginController {
 	@GetMapping("/cadastrarusuario")
 	public String cadastrarUsuario(Model model) {
 		try {
-			LOGGER.info("Início do método Controller de acesso a página de cadastro.");
-			LOGGER.info("Fim do método Controller de acesso a página de cadastro.");
+			LOGGER.info("LoginController - Início do método @Get cadastrarUsuario");
 			return "/login/cadastrarusuario";
 		}catch(Exception e) {
-			LOGGER.error(e.getMessage());
+			LOGGER.error("LoginController - " + e.getMessage());
 			model.addAttribute("errormsg", "Ocorreu um erro, tente mais tarde");
 			return "error/error";
+		}finally {
+			LOGGER.info("LoginController - Fim do método @Get cadastrarUsuario");
 		}
 	}
 	
@@ -81,7 +83,7 @@ public class LoginController {
 	@PostMapping("/cadastrarusuario")
 	public String validarCadastroUsuario(Usuario usuario, RedirectAttributes atributos, Model model) {
 		try {
-			LOGGER.info("Início do método de cadastro de usuário.");
+			LOGGER.info("LoginController - Início do método @Post ValidarCadastroUsuario");
 			List<String> list = new ArrayList<>();
 			
 			if(StringUtils.isEmpty(usuario.getLogin())) {
@@ -98,22 +100,23 @@ public class LoginController {
 				return "redirect:/mangahq/cadastrarusuario";
 			}
 			
-			Usuario verificarExistente = service.buscarPorLogin(usuario.getLogin());
+			Boolean verificarExistente = service.verificarSeUsuarioExiste(usuario);
 			
-			if(verificarExistente != null) {
-				LOGGER.warn("Já existe um usuário com o login " + usuario.getLogin());
+			if(verificarExistente == true) {
+				LOGGER.warn("LoginController - Já existe um usuário com o login " + usuario.getLogin());
 				list.add("Já existe um usuário com o login informado");
 				atributos.addFlashAttribute("errormsg", list);
 				return "redirect:/mangahq/cadastrarusuario";
 			}
 			
 			Integer id = service.cadastrarUsuario(usuario);
-			LOGGER.info("Fim do método de cadastro de usuário.");
 			return "redirect:/mangahq/user/"+id+"/home";
 		}catch(Exception e) {
-			LOGGER.error(e.getMessage());
+			LOGGER.error("LoginController - " + e.getMessage());
 			model.addAttribute("errormsg", "Ocorreu um erro, tente mais tarde");
 			return "error/error";
+		}finally {
+			LOGGER.info("LoginController - Fim do método @Post ValidarCadastroUsuario");
 		}
 	}
 	
@@ -127,13 +130,13 @@ public class LoginController {
 	@PostMapping("/validarlogin")
 	public String validarLogin(Usuario usuario, RedirectAttributes atributos, Model model) {
 		try {
-			LOGGER.info("Inicio do método Controller de validação de login");
+			LOGGER.info("LoginController - Início do método @Post validarLogin");
 			String msg = null;
 			
 			if(StringUtils.isEmpty(usuario.getLogin())) {
 				msg = "Os campos devem ser preenchidos";
 				atributos.addFlashAttribute("errormsg", msg);
-				LOGGER.warn("O campo login não pode estar vazio");
+				LOGGER.warn("LoginController - O campo login não pode estar vazio");
 				return "redirect:/mangahq";
 			}
 			
@@ -142,21 +145,28 @@ public class LoginController {
 			if(usuarioValido == null){
 				msg = "Login ou senha inválidos";
 				atributos.addFlashAttribute("errormsg", msg);
-				LOGGER.warn("Login ou senha inválidos");
+				LOGGER.warn("LoginController - Login ou senha inválidos");
 				return "redirect:/mangahq";
 			}
-			
-			LOGGER.info("Fim do método Controller de validação de login");
 			return "redirect:/mangahq/user/" + usuarioValido.getId_usuario() + "/home";
 		}catch(Exception e) {
-			LOGGER.error(e.getMessage());
+			LOGGER.error("LoginController - " + e.getMessage());
 			model.addAttribute("errormsg", "Ocorreu um erro, tente mais tarde");
 			return "error/error";
+		}finally {
+			LOGGER.info("LoginController - Fim do método @Post validarLogin");
 		}
 	}
 	
+	/**
+	 * Método para logout
+	 * @param atributos
+	 * @return
+	 */
 	@GetMapping("/logout")
 	public String logout(RedirectAttributes atributos) {
+		LOGGER.info("LoginController - Início do método @Get logout");
+		LOGGER.info("LoginController - Fim do método @Get logout");
 		return "redirect:/mangahq";
 	}
 }

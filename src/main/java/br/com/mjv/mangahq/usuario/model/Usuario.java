@@ -1,17 +1,13 @@
 package br.com.mjv.mangahq.usuario.model;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import br.com.mjv.mangahq.enums.TipoUsuario;
-import br.com.mjv.mangahq.mangahq.model.MangaHQ;
 
 /**
  * Classe representando a tabela TB_USUARIO
  * @author renan
  */
-
 public class Usuario {
 
 	private Integer id_usuario;
@@ -19,7 +15,6 @@ public class Usuario {
 	private String login;
 	private TipoUsuario tipoUsuario;
 	private Date dataCriacao;
-	private List<MangaHQ> mangasqhs = new ArrayList<>();
 	
 	public Integer getId_usuario() {
 		return id_usuario;
@@ -51,10 +46,5 @@ public class Usuario {
 	public void setDataCriacao(Date dataCriacao) {
 		this.dataCriacao = dataCriacao;
 	}
-	public List<MangaHQ> getMangasqhs() {
-		return mangasqhs;
-	}
-	
-	
 	
 }

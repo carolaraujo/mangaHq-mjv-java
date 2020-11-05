@@ -11,23 +11,13 @@ import br.com.mjv.mangahq.enums.Categoria;
  */
 public class Noticia {
 	
-
-	
 	private Long id_noticia;
 	private String titulo;
 	private String textoConteudo;
 	private String urlImagem;
 	private Date dataPublicacao;
 	private String autor;
-	private Long acessos;
 	private Categoria categoria;
-	
-	public Long getAcessos() {
-		return acessos;
-	}
-	public void setAcessos(Long acessos) {
-		this.acessos = acessos;
-	}
 	
 	public String getTitulo() {
 		return titulo;
@@ -70,12 +60,5 @@ public class Noticia {
 	}
 	public void setId_noticia(Long id_noticia) {
 		this.id_noticia = id_noticia;
-	}
-	
-	@Override
-	public String toString() {
-		return "Noticia [id_noticia=" + id_noticia + ", titulo=" + titulo + ", textoConteudo=" + textoConteudo
-				+ ", urlImagem=" + urlImagem + ", dataPublicacao=" + dataPublicacao + ", autor=" + autor + ", acessos="
-				+ acessos + ", categoria=" + categoria + "]";
 	}
 }

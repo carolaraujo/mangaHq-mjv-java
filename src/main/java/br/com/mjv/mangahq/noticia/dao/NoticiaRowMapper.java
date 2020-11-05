@@ -9,7 +9,7 @@ import br.com.mjv.mangahq.enums.Categoria;
 import br.com.mjv.mangahq.noticia.model.Noticia;
 
 /**
- * Classe rowMapper para resultados do banco de dados
+ * Classe rowMapper representando a tabela TB_NOTICIA
  * @author kaique
  *
  */

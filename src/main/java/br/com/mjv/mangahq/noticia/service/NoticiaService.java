@@ -2,6 +2,7 @@ package br.com.mjv.mangahq.noticia.service;
 
 import java.util.List;
 
+import br.com.mjv.mangahq.exceptions.ImpossibleInsertException;
 import br.com.mjv.mangahq.noticia.model.Noticia;
 import br.com.mjv.mangahq.usuario.model.Usuario;
 
@@ -34,6 +35,13 @@ public interface NoticiaService {
 	 */
 	List<Noticia> buscarNoticias(Integer quantidadeNoticias, Integer quantidadePalavras);
 	
-	Integer cadastrarNoticia(Noticia noticia, Usuario usuario);
+	/**
+	 * Método para cadastrar uma nova notícia no banco de dados
+	 * @param noticia
+	 * @param usuario
+	 * @return um numero correspondente ao id da notícia
+	 * @throws ImpossibleInsertException 
+	 */
+	Integer cadastrarNoticia(Noticia noticia, Usuario usuario) throws ImpossibleInsertException;
 	
 }

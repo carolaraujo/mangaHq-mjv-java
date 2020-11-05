@@ -7,6 +7,11 @@ import org.springframework.jdbc.core.RowMapper;
 
 import br.com.mjv.mangahq.mangahq.model.MangaHQ;
 
+/**
+ * RowMapper para a tabela TB_MangaHQ
+ * @author kaique
+ *
+ */
 public class MangaHQRowMapper implements RowMapper<MangaHQ> {
 
 	@Override
