@@ -14,15 +14,18 @@ import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
 import br.com.mjv.mangahq.enums.TipoUsuario;
-import br.com.mjv.mangahq.home.controller.HomeController;
 import br.com.mjv.mangahq.usuario.model.Usuario;
 
-
+/**
+ * Classe de implementação da interface {@link UsuarioDao}
+ * @author kaique
+ *
+ */
 @Repository
 @PropertySource("classpath:sql/tb_usuario.xml")
 public class UsuarioDaoImpl implements UsuarioDao {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(HomeController.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(UsuarioDaoImpl.class);
 	
 	@Autowired
 	private NamedParameterJdbcTemplate template;
@@ -39,23 +42,23 @@ public class UsuarioDaoImpl implements UsuarioDao {
 	@Override
 	public Usuario buscarPorLogin(String login) {
 		try {
-			LOGGER.info("Inicio do método buscarPorLogin em UsuarioDaoImpl.");
+			LOGGER.info("UsuarioDaoImpl - Inicio do método buscarPorLogin");
 			MapSqlParameterSource params = new MapSqlParameterSource();
 			params.addValue("login", login);
 			
 			Usuario usuario = template.queryForObject(SQL_FINDUSUARIO_BY_LOGIN, params, new UsuarioRowMapper());
 			return usuario;
 		} catch (EmptyResultDataAccessException e) {
-			LOGGER.info("Não foi encontrado nenhum registro na tabela com o nome " + login);
+			LOGGER.error("UsuarioDaoImpl - " + e.getMessage());
 			return null;
 		} finally {
-			LOGGER.info("Fim do método buscarPorLogin em UsuarioDaoImpl.");
+			LOGGER.info("UsuarioDaoImpl - Inicio do método buscarPorLogin");
 		}
 	}
 
 	@Override
 	public Integer cadastrarUsuario(Usuario usuario) {
-		
+		LOGGER.info("UsuarioDaoImpl - Inicio do método cadastrarUsuario");
 		SimpleJdbcInsert insert = new SimpleJdbcInsert(ds);
 		insert.withTableName("TB_USUARIO").usingGeneratedKeyColumns("id_usuario");
 		
@@ -65,24 +68,24 @@ public class UsuarioDaoImpl implements UsuarioDao {
 		params.addValue("tipoUsuario", TipoUsuario.NORMAL.name());
 		
 		Integer id = (Integer) insert.executeAndReturnKey(params);
-		
+		LOGGER.info("UsuarioDaoImpl - Fim do método cadastrarUsuario");
 		return id;
 	}
 
 	@Override
 	public Usuario buscarPorId(Integer id) {
 		try {
-			LOGGER.info("Inicio do método buscarPorId em UsuarioDaoImpl.");
+			LOGGER.info("UsuarioDaoImpl - Inicio do método buscarPorId");
 			MapSqlParameterSource params = new MapSqlParameterSource();
 			params.addValue("id", id);
 			
 			Usuario usuario = template.queryForObject(SQL_FINDUSUARIO_BY_ID, params, new UsuarioRowMapper());
 			return usuario;
 		} catch (EmptyResultDataAccessException e) {
-			LOGGER.info("Não foi encontrado nenhum registro na tabela com o id " + id);
+			LOGGER.error("UsuarioDaoImpl - " + e.getMessage());
 			return null;
 		} finally {
-			LOGGER.info("Fim do método buscarPorId em UsuarioDaoImpl.");
+			LOGGER.info("UsuarioDaoImpl - Inicio do método buscarPorId");
 		}
 	}
 }

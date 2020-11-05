@@ -15,7 +15,6 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
-import br.com.mjv.mangahq.home.controller.HomeController;
 import br.com.mjv.mangahq.noticia.model.Noticia;
 import br.com.mjv.mangahq.usuario.model.Usuario;
 
@@ -47,7 +46,7 @@ public class NoticiaDaoImpl implements NoticiaDao {
 			List<Noticia> noticias = template.query(SQL_FIND_ALL, new NoticiaRowMapper());
 			return noticias;
 		} catch (EmptyResultDataAccessException e) {
-			LOGGER.info("Não foi encontrado nenhum registro na tabela.");
+			LOGGER.error("NoticiaDaoImpl - " + e.getMessage());
 			return null;
 		} finally {
 			LOGGER.info("NoticiaDaoImpl - Fim do método buscarTodasNoticias");
