@@ -58,27 +58,28 @@
 		</nav>
 	</header>
 	<!-- Main  -->
-	<main class="container py-5">
-		<h1>Faça login para acessar nosso site!</h1>
-		<c:if test="${ errormsg != null }">
-			<div class="alert alert-danger" role="alert">
-			  <c:out value="${ errormsg }"></c:out>
-			</div>
-		</c:if>
-		<form class="mb-2" action="mangahq/validarlogin" method="post">
-			  <div class="form-group">
-			    <label for="login">Login</label>
-			    <input type="login" placeholder="Login" class="form-control" id="login" name="login">
-			  </div>
-			  <div class="form-group">
-			    <label for="senha">Senha</label>
-			    <input type="password" placeholder="Senha" class="form-control" id="senha" name="senha">
-			  </div>
-			  <button type="submit" class="btn btn-primary px-5">Entrar</button>
-		</form>
-		<p class="mb-2">Ainda não tem uma conta?</p>
-		<a href="mangahq/cadastrarusuario" class="btn btn-outline-secondary mt-1 px-4">Cadastre-se</a>
-		
+	<main>
+	<div class="container py-5 text-center">
+			<h1>Faça login para acessar nosso site!</h1>
+			<c:if test="${ errormsg != null }">
+				<div class="alert alert-danger" role="alert">
+				  <c:out value="${ errormsg }"></c:out>
+				</div>
+			</c:if>
+			<form class="mb-2" action="mangahq/validarlogin" method="post">
+				  <div class="form-group w-25 p-3 col-md-6 offset-md-4">
+				    <label for="login">Login</label>
+				    <input type="login" placeholder="Login" class="form-control" id="login" name="login">
+				  </div>
+				  <div class="form-group w-25 p-3 col-md-6 offset-md-4">
+				    <label for="senha">Senha</label>
+				    <input type="password" placeholder="Senha" class="form-control" id="senha" name="senha">
+				  </div>
+				  <button type="submit" class="btn btn-primary px-4">Entrar</button>
+				</form>
+				<p class="mb-2">Ainda não tem uma conta?</p>
+				<a href="mangahq/cadastrarusuario" class="btn btn-outline-secondary mt-1 px-4">Cadastre-se</a>
+	</div>
 	</main>
 	<!-- Footer -->
 	<footer>
