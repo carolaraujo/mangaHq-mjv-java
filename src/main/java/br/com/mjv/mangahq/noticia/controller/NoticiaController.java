@@ -52,23 +52,24 @@ public class NoticiaController {
 	public ModelAndView exibirNoticias(@PathVariable(value="id") Integer id) {
 		ModelAndView mv = null;
 		try {
-			LOGGER.info("Inicio do método Controller de acesso a página de noticias");
+			LOGGER.info("NoticiaController - Início do método @Get exibirNoticias");
 			Usuario usuario = usuarioService.buscarPorId(id);
 			mv = new ModelAndView("noticias/noticias");
 			mv.addObject("principaisNoticias", noticiaService.buscarNoticias(99));
 			mv.addObject("usuario", usuario);
-			LOGGER.info("Fim do método Controller de acesso a página de notícias");
 			return mv;
 		}catch(UserNotFoundException e) {
-			LOGGER.error(e.getMessage());
+			LOGGER.error("NoticiaController - " + e.getMessage());
 			mv = new ModelAndView("redirect:/mangahq");
 			mv.addObject("errormsg", e.getMessage());
 			return mv;
 		}catch(Exception e) {
-			LOGGER.error(e.getMessage());
+			LOGGER.error("NoticiaController - " + e.getMessage());
 			mv = new ModelAndView("error/error");
 			mv.addObject("errormsg", "Ocorreu um erro, tente mais tarde.");
 			return mv;
+		}finally {
+			LOGGER.info("NoticiaController - Fim do método @Get exibirNoticias");
 		}
 	}
 	
@@ -81,23 +82,24 @@ public class NoticiaController {
 	public ModelAndView cadastroNoticias(@PathVariable(value="id") Integer id) {
 		ModelAndView mv = null;
 		try {
-			LOGGER.info("Inicio do método Controller de acesso a página de cadastro de notícias");
+			LOGGER.info("NoticiaController - Início do método @Get cadastroNoticias");
 			Usuario usuario = usuarioService.buscarPorId(id);			
 			mv = new ModelAndView("noticias/cadastrarnoticia");
 			mv.addObject("usuario", usuario);
 			mv.addObject("id", id);
-			LOGGER.info("Fim do método Controller de acesso a página de cadastro de notícias");
 			return mv;
 		}catch(UserNotFoundException e) {
-			LOGGER.error(e.getMessage());
+			LOGGER.error("NoticiaController - " + e.getMessage());
 			mv = new ModelAndView("redirect:/mangahq");
 			mv.addObject("errormsg", e.getMessage());
 			return mv;
 		}catch(Exception e) {
-			LOGGER.error(e.getMessage());
+			LOGGER.error("NoticiaController - " + e.getMessage());
 			mv = new ModelAndView("error/error");
 			mv.addObject("errormsg", "Ocorreu um erro, tente mais tarde.");
 			return mv;
+		}finally {
+			LOGGER.info("NoticiaController - Fim do método @Get cadastroNoticias");
 		}
 	}
 	
@@ -112,11 +114,11 @@ public class NoticiaController {
 	@PostMapping("/cadastro")
 	public String validarCadastroNoticias(@PathVariable(value="id") Integer id, Noticia noticia, RedirectAttributes atributos, Model model) {
 		try {
-			LOGGER.info("Inicio do método Controller para validação de cadastro de notícias");
+			LOGGER.info("NoticiaController - Inicio do método @Post validarCadastroNoticias");
 			Usuario usuario = usuarioService.buscarPorId(id);
 			
 			if(usuario == null) {
-				LOGGER.warn("Uma tentativa de acesso inapropriada foi verificada: um id inválido foi inserido na URL");
+				LOGGER.warn("NoticiaController - Uma tentativa de acesso inapropriada foi verificada: um id inválido foi inserido na URL");
 				return "redirect:/mangahq";
 			}
 			
@@ -144,16 +146,17 @@ public class NoticiaController {
 			
 			noticiaService.cadastrarNoticia(noticia, usuario);
 			
-			LOGGER.info("Fim do método Controller para validação de cadastro de notícias");
 			return "redirect:/mangahq/user/" + id + "/noticias";
 		}catch(ImpossibleInsertException e) {
-			LOGGER.error(e.getMessage());
+			LOGGER.error("NoticiaController - " + e.getMessage());
 			model.addAttribute("errormsg", e.getMessage());
 			return "error/error";
 		}catch(Exception e) {
-			LOGGER.error(e.getMessage());
+			LOGGER.error("NoticiaController - " + e.getMessage());
 			model.addAttribute("errormsg", "Ocorreu um erro, tente mais tarde");
 			return "error/error";		
+		}finally {
+			LOGGER.info("NoticiaController - Fim do método @Post validarCadastroNoticias");
 		}
 	}
 }
