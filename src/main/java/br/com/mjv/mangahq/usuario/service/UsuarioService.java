@@ -1,5 +1,7 @@
 package br.com.mjv.mangahq.usuario.service;
 
+import br.com.mjv.mangahq.exceptions.ImpossibleInsertException;
+import br.com.mjv.mangahq.exceptions.UserNotFoundException;
 import br.com.mjv.mangahq.usuario.model.Usuario;
 
 /**
@@ -14,8 +16,9 @@ public interface UsuarioService {
 	 * 
 	 * @param login
 	 * @return um objeto Usuario
+	 * @throws UserNotFoundException 
 	 */
-	Usuario buscarPorLogin(String login);
+	Usuario buscarPorLogin(String login) throws UserNotFoundException;
 	
 	
 	/**
@@ -23,15 +26,17 @@ public interface UsuarioService {
 	 * 
 	 * @param usuario
 	 * @return um inteiro correspondente ao id do usuario cadastrado
+	 * @throws ImpossibleInsertException 
 	 */
-	Integer cadastrarUsuario(Usuario usuario);
+	Integer cadastrarUsuario(Usuario usuario) throws ImpossibleInsertException;
 	
 
 	/**
 	 * Busca um usuario baseado no ID
 	 * @param id
 	 * @return um objeto do tipo Usuario
+	 * @throws UserNotFoundException 
 	 */
-	Usuario buscarPorId(Integer id);
+	Usuario buscarPorId(Integer id) throws UserNotFoundException;
 	
 }

@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.mjv.mangahq.exceptions.ImpossibleInsertException;
 import br.com.mjv.mangahq.home.controller.HomeController;
 import br.com.mjv.mangahq.noticia.dao.NoticiaDao;
 import br.com.mjv.mangahq.noticia.model.Noticia;
@@ -47,7 +48,7 @@ public class NoticiaServiceImpl implements NoticiaService{
 			noticias = Arrays.asList(noticiasMaisLidas);
 			return noticias;
 		}catch(IndexOutOfBoundsException e) {
-			LOGGER.warn("ATENÇÃO: Algum numero indicado para busca nos parâmetros é maior do que a quantidade de noticias no banco de dados. Retornando todas as notícias...");
+			LOGGER.warn("ATENÇÃO: O numero indicado para busca nos parâmetros é maior do que a quantidade de noticias no banco de dados. Retornando todas as notícias...");
 			return buscarTodasNoticias();
 		}finally {
 			LOGGER.info("Fim do método buscarTodasNoticias por quantidadeNoticias em NoticiaServiceImpl");
@@ -77,7 +78,7 @@ public class NoticiaServiceImpl implements NoticiaService{
 			}
 			return noticias;
 		}catch (IndexOutOfBoundsException e) {
-			LOGGER.warn("ATENÇÃO: Algum numero indicado para busca nos parâmetros é maior do que a quantidade de noticias no banco de dados, ou maior que a quantidade de palavras cadastradas como descrição. Retornando todas as notícias com o texto completo...");
+			LOGGER.warn("ATENÇÃO: O numero indicado para busca nos parâmetros é maior do que a quantidade de noticias no banco de dados, ou maior que a quantidade de palavras cadastradas como descrição. Retornando todas as notícias com o texto completo...");
 			return buscarTodasNoticias();
 		}finally {
 			LOGGER.info("Fim do método buscarTodasNoticias por quantidadeNoticias e quantidadePalavras em NoticiaServiceImpl");
@@ -86,8 +87,12 @@ public class NoticiaServiceImpl implements NoticiaService{
 
 
 	@Override
-	public Integer cadastrarNoticia(Noticia noticia, Usuario usuario) {
+	public Integer cadastrarNoticia(Noticia noticia, Usuario usuario) throws ImpossibleInsertException {
+		LOGGER.info("Inicio do método buscarTodasNoticias por quantidadeNoticias e quantidadePalavras em NoticiaServiceImpl");
 		Integer id = dao.cadastrarNoticia(noticia, usuario);
+		if(id == 0) {
+			throw new ImpossibleInsertException("Não foi possível inserir a notícia. Tente mais tarde.");
+		}
 		return id;
 	}
 }

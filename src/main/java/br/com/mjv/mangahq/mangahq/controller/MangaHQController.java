@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.com.mjv.mangahq.exceptions.UserNotFoundException;
 import br.com.mjv.mangahq.mangahq.model.MangaHQ;
 import br.com.mjv.mangahq.mangahq.service.MangaHQService;
 import br.com.mjv.mangahq.usuario.model.Usuario;
@@ -69,6 +70,12 @@ public class MangaHQController {
 			mv.addObject("naoAdquiridos", naoAdquiridos);
 			LOGGER.info("Início do método de acesso a página de lista de Mangas/HQs");
 			return mv;
+			
+		}catch(UserNotFoundException e) {
+			LOGGER.error(e.getMessage());
+			mv = new ModelAndView("redirect:/mangahq");
+			mv.addObject("errormsg", e.getMessage());
+			return mv;
 		}catch(Exception e) {
 			LOGGER.error(e.getMessage());
 			mv = new ModelAndView("error/error");
@@ -93,17 +100,14 @@ public class MangaHQController {
 		try {
 			LOGGER.info("Início do método ativado ao clicar em adquirir um manga/hq.");
 			MangaHQ mangahq = mangahqService.buscarPorId(Integer.parseInt(id_mangahq));
-			Usuario usuario = usuarioService.buscarPorId(id);
-			
-			if(usuario == null) {
-				LOGGER.warn("Uma tentativa de acesso inapropriada foi verificada: um id inválido foi inserido na URL");
-				return "redirect:/mangahq";
-			}
-			
+			Usuario usuario = usuarioService.buscarPorId(id);			
 			mangahqService.adquirirMangaHq(usuario, mangahq);
-						
 			LOGGER.info("Fim do método ativado ao clicar em adquirir um manga/hq.");
 			return "redirect:/mangahq/user/{id}/mangashqs";
+		}catch(UserNotFoundException e) {
+			LOGGER.error(e.getMessage());
+			model.addAttribute("errormsg", e.getMessage());
+			return "redirect:/mangahq";	
 		}catch(Exception e) {
 			LOGGER.error(e.getMessage());
 			model.addAttribute("errormsg", "Ocorreu um erro, tente mais tarde");
@@ -122,18 +126,15 @@ public class MangaHQController {
 		ModelAndView mv = null;
 		try {
 			LOGGER.info("Início do método de acesso a página de cadastro de manga/hq.");
-			Usuario usuario = usuarioService.buscarPorId(id);
-			
-			if(usuario == null) {
-				LOGGER.warn("Uma tentativa de acesso inapropriada foi verificada: um id inválido foi inserido na URL");
-				mv = new ModelAndView("redirect:/mangahq");
-				return mv;
-			}
-			
+			Usuario usuario = usuarioService.buscarPorId(id);		
 			mv = new ModelAndView("mangashqs/cadastrarmangahq");
 			mv.addObject("usuario", usuario);
-			System.out.println(usuario.getTipoUsuario());
 			LOGGER.info("Fim do método de acesso a página de cadastro de manga/hq.");
+			return mv;
+		}catch(UserNotFoundException e) {
+			LOGGER.error(e.getMessage());
+			mv = new ModelAndView("redirect:/mangahq");
+			mv.addObject("errormsg", e.getMessage());
 			return mv;
 		}catch(Exception e) {
 			LOGGER.error(e.getMessage());
@@ -156,11 +157,6 @@ public class MangaHQController {
 		try {
 			LOGGER.info("Início do método de validação de cadastro de manga/hq.");
 			Usuario usuario = usuarioService.buscarPorId(id);
-			 
-			if(usuario == null) {
-				LOGGER.warn("Uma tentativa de acesso inapropriada foi verificada: um id inválido foi inserido na URL");
-				return "redirect:/mangahq";
-			}
 			
 			attributes.addFlashAttribute("usuario", usuario);
 
@@ -189,6 +185,10 @@ public class MangaHQController {
 			mangahqService.cadastrarNovoMangaHq(mangahq);
 			LOGGER.info("Fim do método de validação de cadastro de manga/hq.");
 			return "redirect:/mangahq/user/" + id + "/mangashqs";
+		}catch(UserNotFoundException e) {
+			LOGGER.error(e.getMessage());
+			model.addAttribute("errormsg", e.getMessage());
+			return "redirect:/mangahq";	
 		}catch (Exception e) {
 			LOGGER.error(e.getMessage());
 			model.addAttribute("errormsg", "Ocorreu um erro, tente mais tarde");

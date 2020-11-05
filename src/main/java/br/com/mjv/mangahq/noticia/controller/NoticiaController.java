@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.com.mjv.mangahq.exceptions.ImpossibleInsertException;
+import br.com.mjv.mangahq.exceptions.UserNotFoundException;
 import br.com.mjv.mangahq.home.controller.HomeController;
 import br.com.mjv.mangahq.noticia.model.Noticia;
 import br.com.mjv.mangahq.noticia.service.NoticiaService;
@@ -52,18 +54,15 @@ public class NoticiaController {
 		try {
 			LOGGER.info("Inicio do método Controller de acesso a página de noticias");
 			Usuario usuario = usuarioService.buscarPorId(id);
-
-			if(usuario == null) {
-				LOGGER.warn("Uma tentativa de acesso inapropriada foi verificada: um id inválido foi inserido na URL");
-				mv = new ModelAndView("redirect:/mangahq");
-				return mv;
-			}
-			
 			mv = new ModelAndView("noticias/noticias");
 			mv.addObject("principaisNoticias", noticiaService.buscarNoticias(99));
 			mv.addObject("usuario", usuario);
-			
 			LOGGER.info("Fim do método Controller de acesso a página de notícias");
+			return mv;
+		}catch(UserNotFoundException e) {
+			LOGGER.error(e.getMessage());
+			mv = new ModelAndView("redirect:/mangahq");
+			mv.addObject("errormsg", e.getMessage());
 			return mv;
 		}catch(Exception e) {
 			LOGGER.error(e.getMessage());
@@ -83,18 +82,16 @@ public class NoticiaController {
 		ModelAndView mv = null;
 		try {
 			LOGGER.info("Inicio do método Controller de acesso a página de cadastro de notícias");
-			Usuario usuario = usuarioService.buscarPorId(id);
-			
-			if(usuario == null) {
-				LOGGER.warn("Uma tentativa de acesso inapropriada foi verificada: um id inválido foi inserido na URL");
-				mv = new ModelAndView("redirect:/mangahq");
-				return mv;
-			}
-			
+			Usuario usuario = usuarioService.buscarPorId(id);			
 			mv = new ModelAndView("noticias/cadastrarnoticia");
 			mv.addObject("usuario", usuario);
 			mv.addObject("id", id);
 			LOGGER.info("Fim do método Controller de acesso a página de cadastro de notícias");
+			return mv;
+		}catch(UserNotFoundException e) {
+			LOGGER.error(e.getMessage());
+			mv = new ModelAndView("redirect:/mangahq");
+			mv.addObject("errormsg", e.getMessage());
 			return mv;
 		}catch(Exception e) {
 			LOGGER.error(e.getMessage());
@@ -144,11 +141,15 @@ public class NoticiaController {
 			String msg = "Cadastrado!";
 			atributos.addFlashAttribute("msg", msg);
 			atributos.addFlashAttribute("usuario", usuario);
-					
+			
 			noticiaService.cadastrarNoticia(noticia, usuario);
 			
 			LOGGER.info("Fim do método Controller para validação de cadastro de notícias");
 			return "redirect:/mangahq/user/" + id + "/noticias";
+		}catch(ImpossibleInsertException e) {
+			LOGGER.error(e.getMessage());
+			model.addAttribute("errormsg", e.getMessage());
+			return "error/error";
 		}catch(Exception e) {
 			LOGGER.error(e.getMessage());
 			model.addAttribute("errormsg", "Ocorreu um erro, tente mais tarde");
