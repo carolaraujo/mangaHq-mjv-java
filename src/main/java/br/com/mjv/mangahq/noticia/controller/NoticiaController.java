@@ -35,7 +35,7 @@ import br.com.mjv.mangahq.usuario.service.UsuarioService;
 @RequestMapping("mangahq/user/{id}/noticias")
 public class NoticiaController {
 	
-	private static final Logger LOGGER = LoggerFactory.getLogger(HomeController.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(NoticiaController.class);
 	
 	@Autowired
 	private NoticiaService noticiaService;

@@ -9,7 +9,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class RedirectController {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(LoginController.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(RedirectController.class);
 	
 	/**
 	 * Método para redirecionar rota / para página inicial
