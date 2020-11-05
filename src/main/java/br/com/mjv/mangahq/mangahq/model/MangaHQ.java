@@ -7,7 +7,6 @@ import java.util.Date;
  * @author renan
  *
  */
-
 public class MangaHQ {
 
 	private Integer id_mangahq;

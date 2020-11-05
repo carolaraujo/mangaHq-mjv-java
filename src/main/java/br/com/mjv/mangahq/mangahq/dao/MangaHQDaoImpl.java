@@ -17,7 +17,6 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
-import br.com.mjv.mangahq.mangahq.controller.MangaHQController;
 import br.com.mjv.mangahq.mangahq.model.MangaHQ;
 import br.com.mjv.mangahq.usuario.model.Usuario;
 

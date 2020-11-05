@@ -18,7 +18,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.mjv.mangahq.exceptions.ImpossibleInsertException;
 import br.com.mjv.mangahq.exceptions.UserNotFoundException;
-import br.com.mjv.mangahq.home.controller.HomeController;
 import br.com.mjv.mangahq.noticia.model.Noticia;
 import br.com.mjv.mangahq.noticia.service.NoticiaService;
 import br.com.mjv.mangahq.usuario.model.Usuario;
