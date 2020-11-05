@@ -52,11 +52,11 @@ public class MangaHQController {
 	public ModelAndView exibirMangasHqs(@PathVariable(value="id") Integer id, RedirectAttributes atributos) {
 		ModelAndView mv = null;
 		try {
-			LOGGER.info("Início do método de acesso a página de lista de Mangas/HQs");
+			LOGGER.info("MangaHQController - Início do método @Get exibirMangasHqs");
 			Usuario usuario = usuarioService.buscarPorId(id);
 			
 			if(usuario == null) {
-				LOGGER.warn("Uma tentativa de acesso inapropriada foi verificada: um id inválido foi inserido na URL");
+				LOGGER.warn("MangaHQController - Uma tentativa de acesso inapropriada foi verificada: um id inválido foi inserido na URL");
 				mv = new ModelAndView("redirect:/mangahq");
 				return mv;
 			}
@@ -68,19 +68,19 @@ public class MangaHQController {
 			
 			List<MangaHQ> naoAdquiridos = mangahqService.mangasHqsNaoAdquiridos(usuario);
 			mv.addObject("naoAdquiridos", naoAdquiridos);
-			LOGGER.info("Início do método de acesso a página de lista de Mangas/HQs");
 			return mv;
-			
 		}catch(UserNotFoundException e) {
-			LOGGER.error(e.getMessage());
+			LOGGER.error("MangaHQController - " + e.getMessage());
 			mv = new ModelAndView("redirect:/mangahq");
 			mv.addObject("errormsg", e.getMessage());
 			return mv;
 		}catch(Exception e) {
-			LOGGER.error(e.getMessage());
+			LOGGER.error("MangaHQController - " + e.getMessage());
 			mv = new ModelAndView("error/error");
 			mv.addObject("errormsg", "Ocorreu um erro, tente mais tarde");
 			return mv;
+		}finally {
+			LOGGER.info("MangaHQController - Fim do método @Get exibirMangasHqs");
 		}
 	}
 	
@@ -98,20 +98,21 @@ public class MangaHQController {
 			RedirectAttributes attributes,
 			Model model) {
 		try {
-			LOGGER.info("Início do método ativado ao clicar em adquirir um manga/hq.");
+			LOGGER.info("MangaHQController - Início do método @Get adquirirMangaHq");
 			MangaHQ mangahq = mangahqService.buscarPorId(Integer.parseInt(id_mangahq));
 			Usuario usuario = usuarioService.buscarPorId(id);			
 			mangahqService.adquirirMangaHq(usuario, mangahq);
-			LOGGER.info("Fim do método ativado ao clicar em adquirir um manga/hq.");
 			return "redirect:/mangahq/user/{id}/mangashqs";
 		}catch(UserNotFoundException e) {
-			LOGGER.error(e.getMessage());
+			LOGGER.error("MangaHQController - " + e.getMessage());
 			model.addAttribute("errormsg", e.getMessage());
 			return "redirect:/mangahq";	
 		}catch(Exception e) {
-			LOGGER.error(e.getMessage());
+			LOGGER.error("MangaHQController - " + e.getMessage());
 			model.addAttribute("errormsg", "Ocorreu um erro, tente mais tarde");
 			return "error/error";
+		}finally {
+			LOGGER.info("MangaHQController - Fim do método @Get adquirirMangaHq");
 		}
 	}
 	
@@ -125,22 +126,23 @@ public class MangaHQController {
 	public ModelAndView cadastrarMangasHqs(@PathVariable(value="id") Integer id, RedirectAttributes attributes) {
 		ModelAndView mv = null;
 		try {
-			LOGGER.info("Início do método de acesso a página de cadastro de manga/hq.");
+			LOGGER.info("MangaHQController - Início do método @Get cadastrarMangasHqs");
 			Usuario usuario = usuarioService.buscarPorId(id);		
 			mv = new ModelAndView("mangashqs/cadastrarmangahq");
 			mv.addObject("usuario", usuario);
-			LOGGER.info("Fim do método de acesso a página de cadastro de manga/hq.");
 			return mv;
 		}catch(UserNotFoundException e) {
-			LOGGER.error(e.getMessage());
+			LOGGER.error("MangaHQController - " + e.getMessage());
 			mv = new ModelAndView("redirect:/mangahq");
 			mv.addObject("errormsg", e.getMessage());
 			return mv;
 		}catch(Exception e) {
-			LOGGER.error(e.getMessage());
+			LOGGER.error("MangaHQController - " + e.getMessage());
 			mv = new ModelAndView("error/error");
 			mv.addObject("errormsg", "Ocorreu um erro, tente mais tarde");
 			return mv;
+		}finally {
+			LOGGER.info("MangaHQController - Fim do método @Get cadastrarMangasHqs");
 		}
 	}
 	
@@ -155,7 +157,7 @@ public class MangaHQController {
 	@PostMapping("/cadastro")
 	public String validarCadastroMangaHq(@PathVariable(value="id") Integer id, MangaHQ mangahq, RedirectAttributes attributes, Model model) {
 		try {
-			LOGGER.info("Início do método de validação de cadastro de manga/hq.");
+			LOGGER.info("MangaHQController - Início do método @Post validarCadastroMangasHqs");
 			Usuario usuario = usuarioService.buscarPorId(id);
 			
 			attributes.addFlashAttribute("usuario", usuario);
@@ -183,16 +185,17 @@ public class MangaHQController {
 			}
 			
 			mangahqService.cadastrarNovoMangaHq(mangahq);
-			LOGGER.info("Fim do método de validação de cadastro de manga/hq.");
 			return "redirect:/mangahq/user/" + id + "/mangashqs";
 		}catch(UserNotFoundException e) {
-			LOGGER.error(e.getMessage());
+			LOGGER.error("MangaHQController - " + e.getMessage());
 			model.addAttribute("errormsg", e.getMessage());
 			return "redirect:/mangahq";	
 		}catch (Exception e) {
-			LOGGER.error(e.getMessage());
+			LOGGER.error("MangaHQController - " + e.getMessage());
 			model.addAttribute("errormsg", "Ocorreu um erro, tente mais tarde");
 			return "error/error";
+		}finally {
+			LOGGER.info("MangaHQController - Fim do método @Post validarCadastroMangasHqs");
 		}
 	}
 }
