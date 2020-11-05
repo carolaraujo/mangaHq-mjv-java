@@ -46,7 +46,7 @@ public class HomeController {
 	@GetMapping
 	public String home(@PathVariable(value="id") Integer id, RedirectAttributes attributes, Model model) {
 		try {
-			LOGGER.info("Inicio do método Controller de acesso a página Home");
+			LOGGER.info("HomeController - Início do método home");
 			Usuario usuario = usuarioService.buscarPorId(id);
 			model.addAttribute("maisLidas", noticiaService.buscarNoticias(6));
 			model.addAttribute("principaisNoticias", noticiaService.buscarNoticias(6, 20));
@@ -61,7 +61,7 @@ public class HomeController {
 			model.addAttribute("errormsg", "Ocorreu um erro, tente mais tarde.");
 			return "error/error";
 		}finally {
-			LOGGER.info("Fim do método Controller de acesso a página Home");			
+			LOGGER.info("HomeController - Fim do método home");			
 		}
 	}
 }
