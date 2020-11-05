@@ -39,4 +39,10 @@ public interface UsuarioService {
 	 */
 	Usuario buscarPorId(Integer id) throws UserNotFoundException;
 	
+	/**
+	 * Método para verificar se um usuário já existe ao realizar um cadastro
+	 * @param usuario
+	 * @return
+	 */
+	Boolean verificarSeUsuarioExiste(Usuario usuario);
 }

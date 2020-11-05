@@ -53,4 +53,18 @@ public class UsuarioServiceImpl implements UsuarioService {
 		LOGGER.info("UsuarioServiceImpl - Fim do método cadastrarUsuario");
 		return id;
 	}
+
+	@Override
+	public Boolean verificarSeUsuarioExiste(Usuario usuario) {
+		try {
+			LOGGER.info("UsuarioServiceImpl - Inicio do método verificarSeUsuarioExiste");
+			buscarPorLogin(usuario.getLogin());
+			return true;
+		} catch (UserNotFoundException e) {
+			LOGGER.info("UsuarioServiceImpl - Usuário não encontrado, realizando cadastro...");
+			return false;
+		}finally {
+			LOGGER.info("UsuarioServiceImpl - Fim do método verificarSeUsuarioExiste");
+		}
+	}
 }

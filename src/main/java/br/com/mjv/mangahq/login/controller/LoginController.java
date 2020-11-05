@@ -100,9 +100,9 @@ public class LoginController {
 				return "redirect:/mangahq/cadastrarusuario";
 			}
 			
-			Usuario verificarExistente = service.buscarPorLogin(usuario.getLogin());
+			Boolean verificarExistente = service.verificarSeUsuarioExiste(usuario);
 			
-			if(verificarExistente != null) {
+			if(verificarExistente == true) {
 				LOGGER.warn("LoginController - Já existe um usuário com o login " + usuario.getLogin());
 				list.add("Já existe um usuário com o login informado");
 				atributos.addFlashAttribute("errormsg", list);

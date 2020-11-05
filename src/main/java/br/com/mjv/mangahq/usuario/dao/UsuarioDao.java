@@ -28,5 +28,5 @@ public interface UsuarioDao {
 	 * @param usuario
 	 * @return
 	 */
-	Integer cadastrarUsuario(Usuario usuario);	
+	Integer cadastrarUsuario(Usuario usuario);
 }
