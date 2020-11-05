@@ -5,7 +5,7 @@ import br.com.mjv.mangahq.exceptions.UserNotFoundException;
 import br.com.mjv.mangahq.usuario.model.Usuario;
 
 /**
- * Interface com serviços usados pelo controller referente a usuário
+ * Interface service referente a usuário
  * @author renan
  *
  */
