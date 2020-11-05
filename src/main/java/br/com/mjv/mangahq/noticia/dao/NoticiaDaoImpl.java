@@ -29,7 +29,7 @@ import br.com.mjv.mangahq.usuario.model.Usuario;
 @PropertySource("classpath:sql/tb_noticias.xml")
 public class NoticiaDaoImpl implements NoticiaDao {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(HomeController.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(NoticiaDaoImpl.class);
 
 	@Autowired
 	private DataSource ds;
@@ -43,19 +43,20 @@ public class NoticiaDaoImpl implements NoticiaDao {
 	@Override
 	public List<Noticia> buscarTodasNoticias() {
 		try {
-			LOGGER.info("Inicio do método buscarTodasNoticias em NoticiaDaoImpl.");
+			LOGGER.info("NoticiaDaoImpl - Inicio do método buscarTodasNoticias");
 			List<Noticia> noticias = template.query(SQL_FIND_ALL, new NoticiaRowMapper());
 			return noticias;
 		} catch (EmptyResultDataAccessException e) {
 			LOGGER.info("Não foi encontrado nenhum registro na tabela.");
 			return null;
 		} finally {
-			LOGGER.info("Fim do método buscarTodasNoticias em NoticiaDaoImpl.");
+			LOGGER.info("NoticiaDaoImpl - Fim do método buscarTodasNoticias");
 		}
 	}
 
 	@Override
 	public Integer cadastrarNoticia(Noticia noticia, Usuario usuario) {
+		LOGGER.info("NoticiaDaoImpl - Inicio do método cadastrarNoticia");
 		SimpleJdbcInsert insert = new SimpleJdbcInsert(ds);
 		insert.withTableName("TB_NOTICIAS").usingGeneratedKeyColumns("id_noticia");
 		insert.usingColumns("titulo","textoConteudo","urlImagem","autor","categoria");
@@ -68,7 +69,7 @@ public class NoticiaDaoImpl implements NoticiaDao {
 		params.addValue("categoria", noticia.getCategoria());
 
 		Integer result = (Integer) insert.executeAndReturnKey(params);
-
+		LOGGER.info("NoticiaDaoImpl - Fim do método cadastrarNoticia");
 		return result;
 	}
 }
