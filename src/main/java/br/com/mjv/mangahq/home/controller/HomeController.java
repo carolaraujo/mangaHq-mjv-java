@@ -48,8 +48,9 @@ public class HomeController {
 		try {
 			LOGGER.info("HomeController - Início do método home");
 			Usuario usuario = usuarioService.buscarPorId(id);
-			model.addAttribute("maisLidas", noticiaService.buscarNoticias(6));
-			model.addAttribute("principaisNoticias", noticiaService.buscarNoticias(6, 20));
+			model.addAttribute("mangas", mangahqService.todosMangasHqsCadastrados());
+			model.addAttribute("principaisNoticias", noticiaService.buscarNoticias(10, 20));
+			model.addAttribute("carousel",noticiaService.buscarNoticias(3));
 			model.addAttribute("usuario", usuario);
 			return "home";
 		}catch(UserNotFoundException e) {

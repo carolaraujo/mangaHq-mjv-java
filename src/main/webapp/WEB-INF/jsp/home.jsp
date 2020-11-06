@@ -73,18 +73,18 @@ prefix = "c" %> <%@ taglib uri = "http://java.sun.com/jsp/jstl/fmt" prefix =
             Ultimos mangás e HQs adicionados
           </div>
           <div class="row">
-            <c:forEach var="noticia" items="${ maisLidas }">
+            <c:forEach var="manga" varStatus="loop" begin="0" end="5" items="${ mangas }">
               <div
                 class="section-maislidas-content col-xl-2 col-md-4 col-sm-6 col-12 mt-1 mb-1"
               >
                 <img
-                  class="mt-1"
-                  src="${ noticia.urlImagem }"
+                  class="mt-4"
+                  src="${ manga.urlCapa }"
                   width="100%"
-                  height="300px"
+                  height="240px"
                 />
-                <div style="height: 200px">
-                	<h5> ${ noticia.titulo } </h5>
+                <div>
+                	<h5> ${ manga.titulo } </h5>
                 </div>
                 
                 <!--<div
@@ -115,27 +115,24 @@ prefix = "c" %> <%@ taglib uri = "http://java.sun.com/jsp/jstl/fmt" prefix =
             <li data-target="#carouselPrincipal" data-slide-to="2"></li>
           </ol>
           <div class="carousel-inner d-none d-md-block">
-            <div class="carousel-item active">
-              <img
-                src="https://i0.wp.com/sindicatonerd.com.br/wp-content/uploads/2016/04/Superman-BG-versions.jpg"
-                class="d-block w-100"
-                alt="..."
-              />
-            </div>
-            <div class="carousel-item">
-              <img
-                src="https://vingadoresbrasilcom.files.wordpress.com/2020/03/header.jpg?w=1000&h=400&crop=1"
-                class="d-block w-100"
-                alt="..."
-              />
-            </div>
-            <div class="carousel-item">
-              <img
-                src="https://i.pinimg.com/originals/42/d0/aa/42d0aa9293357e3850a50c654c75491f.png"
-                class="d-block w-100"
-                alt="..."
-              />
-            </div>
+	      <c:forEach var="noticia" varStatus="loop" begin="0" end="0" items="${ carousel }">
+           		<div class="carousel-item active">
+		              <img
+		                src="${ noticia.urlImagem }"
+		                class="d-block w-100"
+		                alt="..."
+		              />
+            	</div>
+	        </c:forEach>
+	        <c:forEach var="noticia" varStatus="loop" begin="1" end="2" items="${ carousel }">
+	            <div class="carousel-item">
+	              <img
+	                src="${ noticia.urlImagem }"
+	                class="d-block w-100"
+	                alt="..."
+	              />
+	            </div>
+            </c:forEach>
           </div>
           <a
             class="carousel-control-prev"
@@ -158,7 +155,7 @@ prefix = "c" %> <%@ taglib uri = "http://java.sun.com/jsp/jstl/fmt" prefix =
         </div>
         <h1 class="text-center mt-4 mb-4">Últimas notícias</h1>
         <div class="row card-custom">
-          <c:forEach var="noticia" items="${ principaisNoticias }">
+          <c:forEach var="noticia" varStatus="loop" begin="3" end="9" items="${ principaisNoticias }">
             <div class="col-md-4 col-sm-6 col-12 p-3">
               <div class="card h-100">
                 <img
