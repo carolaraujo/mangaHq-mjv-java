@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.mjv.mangahq.exceptions.ImpossibleInsertException;
-import br.com.mjv.mangahq.home.controller.HomeController;
 import br.com.mjv.mangahq.noticia.dao.NoticiaDao;
 import br.com.mjv.mangahq.noticia.model.Noticia;
 import br.com.mjv.mangahq.usuario.model.Usuario;
