@@ -140,14 +140,14 @@ public class LoginController {
 				return "redirect:/mangahq";
 			}
 			
-			Usuario usuarioValido = service.buscarPorLogin(usuario.getLogin());
-			
-			if(usuarioValido == null){
+			Boolean usuarioExiste = service.verificarSeUsuarioExiste(usuario);
+			if(usuarioExiste == false){
 				msg = "Login ou senha inválidos";
 				atributos.addFlashAttribute("errormsg", msg);
 				LOGGER.warn("LoginController - Login ou senha inválidos");
-				return "redirect:/mangahq";
+				return "/mangahq";
 			}
+			Usuario usuarioValido = service.buscarPorLogin(usuario.getLogin());
 			return "redirect:/mangahq/user/" + usuarioValido.getId_usuario() + "/home";
 		}catch(Exception e) {
 			LOGGER.error("LoginController - " + e.getMessage());

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.com.mjv.mangahq.enums.TipoUsuario;
 import br.com.mjv.mangahq.exceptions.UserNotFoundException;
 import br.com.mjv.mangahq.mangahq.model.MangaHQ;
 import br.com.mjv.mangahq.mangahq.service.MangaHQService;
@@ -127,7 +128,13 @@ public class MangaHQController {
 		ModelAndView mv = null;
 		try {
 			LOGGER.info("MangaHQController - Início do método @Get cadastrarMangasHqs");
-			Usuario usuario = usuarioService.buscarPorId(id);		
+			Usuario usuario = usuarioService.buscarPorId(id);
+			
+			if(usuario.getTipoUsuario() != TipoUsuario.ADMIN.name()) {
+				mv = new ModelAndView("redirect:/mangahq");
+				return mv;
+			}
+			
 			mv = new ModelAndView("mangashqs/cadastrarmangahq");
 			mv.addObject("usuario", usuario);
 			return mv;

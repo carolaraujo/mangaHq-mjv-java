@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.com.mjv.mangahq.enums.TipoUsuario;
 import br.com.mjv.mangahq.exceptions.ImpossibleInsertException;
 import br.com.mjv.mangahq.exceptions.UserNotFoundException;
 import br.com.mjv.mangahq.noticia.model.Noticia;
@@ -82,7 +83,13 @@ public class NoticiaController {
 		ModelAndView mv = null;
 		try {
 			LOGGER.info("NoticiaController - Início do método @Get cadastroNoticias");
-			Usuario usuario = usuarioService.buscarPorId(id);			
+			Usuario usuario = usuarioService.buscarPorId(id);
+			
+			if(usuario.getTipoUsuario() != TipoUsuario.ADMIN.name()) {
+				mv = new ModelAndView("redirect:/mangahq");
+				return mv;
+			}
+			
 			mv = new ModelAndView("noticias/cadastrarnoticia");
 			mv.addObject("usuario", usuario);
 			mv.addObject("id", id);
